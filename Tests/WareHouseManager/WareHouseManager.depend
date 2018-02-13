@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1518501666 source:c:\users\fixe\desktop\warehousemanager\main.cpp
+	<iostream>
+	"article.h"
+
+1518501203 source:c:\users\fixe\desktop\warehousemanager\src\article.cpp
+	"article.h"
+
+1518501211 c:\users\fixe\desktop\warehousemanager\include\article.h
+
+1518501754 source:c:\users\fixe\desktop\warehousemanager\src\utilisateur.cpp
+	"utilisateur.h"
+
+1518501769 c:\users\fixe\desktop\warehousemanager\include\utilisateur.h
+
