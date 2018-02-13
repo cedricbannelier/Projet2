@@ -14,3 +14,13 @@ Article::~Article()
 {
     //dtor
 }
+
+int Article::getCodeArticle()
+{
+    return codeArticle;
+}
+
+int Article::getPoids()
+{
+    return poids;
+}

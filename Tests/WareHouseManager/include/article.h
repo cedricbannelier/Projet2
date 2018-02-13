@@ -9,6 +9,9 @@ class Article
         Article(int codeArticle, int poids);
         virtual ~Article();
 
+        int getCodeArticle();
+        int getPoids();
+
     protected:
 
 
