@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "menuwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,10 +16,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_bEntrer_clicked()
 {
-    hide();
-}
-
-void MainWindow::login()
-{
-
+    this->hide();
+    af = new menuwindow();
+    af->
 }

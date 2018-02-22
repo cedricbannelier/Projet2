@@ -13,13 +13,12 @@ class menuwindow : public QMainWindow
 
 public:
     explicit menuwindow(QWidget *parent = 0);
-
-    main_fen();
-
     ~menuwindow();
 
 private:
     Ui::menuwindow *ui;
+
+
 };
 
 #endif // MENUWINDOW_H

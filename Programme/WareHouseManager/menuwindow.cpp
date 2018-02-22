@@ -6,9 +6,11 @@ menuwindow::menuwindow(QWidget *parent) :
     ui(new Ui::menuwindow)
 {
     ui->setupUi(this);
+    setFixedSize(500,500);
 }
 
 menuwindow::~menuwindow()
 {
     delete ui;
 }
+

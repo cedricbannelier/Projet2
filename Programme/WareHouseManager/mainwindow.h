@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
+#include "menuwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -14,15 +15,16 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    void login();
     ~MainWindow();
 
 private slots:
-
+    void openMenuWindow();
     void on_bEntrer_clicked();
+
 
 private:
     Ui::MainWindow *ui;
+    menuwindow *fenetre;
 };
 
 #endif // MAINWINDOW_H
