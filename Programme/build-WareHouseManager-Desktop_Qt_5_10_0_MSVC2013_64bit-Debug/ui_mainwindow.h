@@ -140,7 +140,7 @@ public:
         toolBox->addItem(page, QStringLiteral("Page 1"));
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
-        page_2->setGeometry(QRect(0, 0, 341, 69));
+        page_2->setGeometry(QRect(0, 0, 100, 30));
         toolBox->addItem(page_2, QStringLiteral("Page 2"));
         tabWidget->addTab(tab_2, QString());
         tabRechercher = new QWidget();

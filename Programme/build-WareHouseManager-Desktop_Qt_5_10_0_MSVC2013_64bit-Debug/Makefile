@@ -251,6 +251,7 @@ Makefile: ..\WareHouseManager\WareHouseManager.pro C:\Qt\Qt5.10.0\5.10.0\msvc201
 		C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\qtmaind.prl \
 		C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Widgets.prl \
 		C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Gui.prl \
+		C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Sql.prl \
 		C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Core.prl
 	$(QMAKE) -o Makefile ..\WareHouseManager\WareHouseManager.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
 C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\mkspecs\features\spec_pre.prf:
@@ -429,6 +430,7 @@ C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\mkspecs\features\lex.prf:
 C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\qtmaind.prl:
 C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Widgets.prl:
 C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Gui.prl:
+C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Sql.prl:
 C:\Qt\Qt5.10.0\5.10.0\msvc2013_64\lib\Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\WareHouseManager\WareHouseManager.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
