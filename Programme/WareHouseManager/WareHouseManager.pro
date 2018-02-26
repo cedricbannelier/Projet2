@@ -28,11 +28,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    database.cpp
+    database.cpp \
+    produit.cpp
 
 HEADERS += \
         mainwindow.h \
-    database.h
+    database.h \
+    produit.h
 
 FORMS += \
         mainwindow.ui
