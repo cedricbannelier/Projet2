@@ -79,7 +79,7 @@ public:
     QTextEdit *textEdit_6;
     QTextBrowser *afficheCodeArticle;
     QLabel *labelId;
-    QLabel *labelNom;
+    QLabel *labelLibelle;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
@@ -305,9 +305,9 @@ public:
         labelId = new QLabel(tab);
         labelId->setObjectName(QStringLiteral("labelId"));
         labelId->setGeometry(QRect(350, 10, 251, 16));
-        labelNom = new QLabel(tab);
-        labelNom->setObjectName(QStringLiteral("labelNom"));
-        labelNom->setGeometry(QRect(350, 30, 251, 16));
+        labelLibelle = new QLabel(tab);
+        labelLibelle->setObjectName(QStringLiteral("labelLibelle"));
+        labelLibelle->setGeometry(QRect(350, 30, 251, 16));
         tabWidget->addTab(tab, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -372,7 +372,7 @@ public:
         label->setText(QApplication::translate("MainWindow", "Libelle", nullptr));
         label_6->setText(QApplication::translate("MainWindow", "Code article", nullptr));
         labelId->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
-        labelNom->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        labelLibelle->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Consulter fiche produit", nullptr));
     } // retranslateUi
 

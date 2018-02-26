@@ -351,7 +351,7 @@
        <string>TextLabel</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelNom">
+     <widget class="QLabel" name="labelLibelle">
       <property name="geometry">
        <rect>
         <x>350</x>

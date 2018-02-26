@@ -108,28 +108,29 @@ bool database::updateProduit(const QString &nom)
 
 QVector<Produit*>* database::getAllProduits(QString nom)
 {
-    std::cout << "Dans la methode" << std::endl;
+    std::cout << "Dans la methode getAllProduits" << std::endl;
 
     m_bdd.open();
 
     QVector<Produit*>* produits = new QVector<Produit*>;
-    Produit * produit = new Produit();
-
     QSqlQuery query;
-    query.prepare("SELECT rowid, * FROM produits WHERE :nom");
+    query.prepare("SELECT * FROM produits WHERE nom=:nom");
     query.bindValue(":nom", nom);
     query.exec();
 
-    while(query.next())
+   do
     {
- //       int id = query.value(0).toInt();
- //       QString nom = query.value(1).toString();
-        produit->id = query.value(0).toInt();
-        produit->nom = query.value(1).toString();
-
-//        QMessageBox::information(0,QObject::tr("Info recup"), "id : " + QString::number(id) + "\nLibellé : " + nom);
-
-    }
+        if(query.next())
+        {
+            Produit * produit = new Produit();
+            produits->push_back(produit);
+//            int id = query.value(0).toInt();
+//            QString nom = query.value(1).toString();
+//            produit->id = query.value(0).toInt();
+            produit->libelle = query.value(1).toString();
+//            QMessageBox::information(0,QObject::tr("Info recup"), "id : " + QString::number(id) + "\nLibellé : " + nom);
+        }
+    } while(query.next());
 
     m_bdd.close();
     return produits;

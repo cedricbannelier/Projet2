@@ -76,11 +76,12 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     QVector<Produit*>* produits = bdd.getAllProduits(ui->lineEditRechercher->text());
 
-    ui->labelId->setText((QString)(*produits)[1]->id);
+//    ui->labelId->setText((QString)(*produits)[0]->nom);
 
- /*   for (int i = 0; i < produits->size(); i++)
+    for (int i = 0; i < produits->size(); i++)
     {
-        std::cout << (*produits)[i]->nom;
+    ui->labelLibelle->setText((QString)(*produits)[i]->libelle);
+
     }
-*/
+
 }

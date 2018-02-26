@@ -13,6 +13,7 @@ public:
     QString nom;
     float prix;
     int qtevendue;
+    QString libelle;
 };
 
 #endif // PRODUIT_H
