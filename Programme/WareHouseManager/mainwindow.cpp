@@ -61,6 +61,7 @@ void MainWindow::afficheFenetreLogin()
     {
         // handle values from fenetreLogin
         qDebug() << "OK";
+        verificationLogin();
     }
     else
     {
