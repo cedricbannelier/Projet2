@@ -4,6 +4,8 @@
 #include "database.h"
 #include <iostream>
 #include "produit.h"
+#include <string>
+#include <QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -14,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QMenu *menuFichier = menuBar()->addMenu("&Fichier");
         QAction *actionQuitter = new QAction("&Quitter", this);
         menuFichier->addAction(actionQuitter);
+        connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 
         QMenu *menuEdition = menuBar()->addMenu("&Edition");
         QAction *actionCopier = new QAction("&Copier", this);
@@ -32,6 +35,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QMenu *menuAide = menuBar()->addMenu("&Aide");
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
+
+        afficheFenetreLogin();
+
 }
 
 MainWindow::~MainWindow()
@@ -39,49 +45,67 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::afficheFenetreLogin()
+{
+    QObject::connect(buttonBox, SIGNAL(accepted()), fenetreLogin, SLOT(accept()));
+    QObject::connect(buttonBox, SIGNAL(rejected()), fenetreLogin, SLOT(reject()));
+
+    vbox->addWidget(login);
+    vbox->addWidget(motDePasse);
+    vbox->addWidget(buttonBox);
+
+    fenetreLogin->setLayout(vbox);
+
+    int result = fenetreLogin->exec();
+    if(result == QDialog::Accepted)
+    {
+        // handle values from fenetreLogin
+        qDebug() << "OK";
+    }
+    else
+    {
+        qDebug() << "Cancel";
+    }
+}
+
+void MainWindow::verificationLogin()
+{
+        bdd.droitUtilisateur("cedric", "cedric");
+}
+
+
 void MainWindow::on_boutonAjoutProduit_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article" << std::endl;
 
     ui->boutonAjoutProduit->setEnabled(true);
     bdd.insertProduit(ui->lineEditAjoutArticle->text(),ui->lineEditAjoutArticleLibelle->text(), ui->lineEditAjoutArticlePrix->text());
-
-
-
-
-
 }
-/*
-void MainWindow::on_boutonConsulterFicheProduit_clicked()
-{
-    std::cout << "Dans le bouton consulter une fiche produit" << std::endl;
-    bdd.selectProduit("produit2");
-}
-*/
 
 void MainWindow::on_boutonSupprimer_clicked()
 {
     std::cout << "Dans le bouton supprimer d'un article" << std::endl;
+
     bdd.deleteProduit(ui->lineEditSupprimerArticle->text());
 }
-
+//En cours de dev
+/*
 void MainWindow::on_boutonModifier_clicked()
 {
     std::cout << "Dans le bouton modifier d'un article" << std::endl;
+    QVector<Produit*>* produits;
+    (*produits)[0]->nom = "toto";
     bdd.updateProduit(ui->lineEditModifierArticle->text());
 }
-
-
+*/
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     QVector<Produit*>* produits = bdd.getAllProduits(ui->lineEditRechercher->text());
 
-//    ui->labelId->setText((QString)(*produits)[0]->nom);
-
     for (int i = 0; i < produits->size(); i++)
     {
-    ui->labelLibelle->setText((QString)(*produits)[i]->libelle);
-
+        ui->afficheCodeArticle->setText((*produits)[i]->nom);
+        ui->afficheLibelle ->setText((QString)(*produits)[i]->libelle);
+        ui->affichePrix->setText(QString::number((*produits)[0]->prix));
     }
-
 }

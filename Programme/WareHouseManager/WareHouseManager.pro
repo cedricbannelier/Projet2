@@ -29,12 +29,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     database.cpp \
-    produit.cpp
+    produit.cpp \
+    utilisateur.cpp
 
 HEADERS += \
         mainwindow.h \
     database.h \
-    produit.h
+    produit.h \
+    utilisateur.h
 
 FORMS += \
         mainwindow.ui

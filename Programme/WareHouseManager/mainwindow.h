@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QLineEdit>
 #include "database.h"
+#include <QVBoxLayout>
+#include <QDialog>
+#include <QDialogButtonBox>
 
 namespace Ui {
 class MainWindow;
@@ -23,15 +26,21 @@ private slots:
 
 //    void on_boutonConsulterFicheProduit_clicked();
 
-    void on_boutonModifier_clicked();
-
-
+//    void on_boutonModifier_clicked();
 
     void on_boutonConsulterFicheProduit_clicked();
 
 private:
+    void afficheFenetreLogin();
+    void verificationLogin();
     Ui::MainWindow *ui;
     database bdd;
+
+    QDialog * fenetreLogin = new QDialog();
+    QVBoxLayout * vbox = new QVBoxLayout();
+    QLineEdit * login = new QLineEdit();
+    QLineEdit * motDePasse = new QLineEdit();
+    QDialogButtonBox * buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
 };
 
