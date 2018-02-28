@@ -36,37 +36,32 @@ void database::createDatabase()
     QSqlQuery query;
 
    query.exec("CREATE TABLE IF NOT EXISTS `utilisateur` ("
-               "`idUtilisateur`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                "`login`	TEXT NOT NULL,"
                "`motDePasseUtilisateur`TEXT NOT NULL,"
                "'droitUtilisateur' INTEGER NOT NULL"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `article` ("
-               "`idArticle` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "
                "`codeArticle` TEXT NOT NULL,"
                "`designationArticle` TEXT NOT NULL,"
                "`poidsArticle` REAL NOT NULL,"
                "`emplacementArticle` TEXT NOT NULL,"
-               "`idEmballage`	INTEGER NOT NULL,"
+               "`idEmballage` INTEGER,"
                "FOREIGN KEY(`idEmballage`) REFERENCES `emballage`(`idEmballage`)"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `emballage` ("
-               "idEmballage INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "hauteurEmballage REAL NOT NULL,"
                "largeurEmballage REAL NOT NULL,"
                "profondeurEmballage REAL NOT NULL"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `constructeur` ("
-               "idConstructeur INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "nomConstructeur TEXT NOT NULL,"
                "referenceConstructeur TEXT NOT NULL"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `consulter` ("
-               "idConsulter INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "qteStock TEXT NOT NULL,"
                "`idUtilisateur` INTEGER NOT NULL,"
                "`idArticle` INTEGER NOT NULL,"
@@ -75,7 +70,6 @@ void database::createDatabase()
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `livrer` ("
-               "idLivrer INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "qteLivree TEXT NOT NULL,"
                "`idArticle` INTEGER NOT NULL,"
                "`idConstructeur` INTEGER NOT NULL,"
@@ -86,53 +80,48 @@ void database::createDatabase()
     closeDatabase();
 }
 
-bool database::insertProduit(const QString& nom, const QString& libelle, const QString &prix)
+void database::insertProduit(const QString& codeArticle, const QString& designationArticle, const QString& poidsArticle, const QString& emplacementArticle)
 {
     std::cout << "dans insertproduit" << std::endl;
     m_bdd.open();
     QSqlQuery query;
-    query.prepare("INSERT INTO produits (nom, libelle, prix) VALUES(:name, :libelle, :prix)");
-    query.bindValue(":name", nom);
-    query.bindValue(":libelle", libelle);
-    query.bindValue(":prix", prix);
+    query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle)"
+                      "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle);");
+    query.bindValue(":codeArticle", codeArticle);
+    query.bindValue(":designationArticle", designationArticle);
+    query.bindValue(":poisArticle", poidsArticle);
+    query.bindValue(":emplacementArticle", emplacementArticle);
     query.exec();
-/*    if(query.exec())
-       {
-           return true;
-       }
-       else
-       {
-            qDebug() << "add product error !"
-                     << query.lastError();
-       }
-*/
-       return false;
+    m_bdd.close();
 }
 
 //Permet de supprimer un produit
 //En paramètre le nom du produit//
 
-bool database::deleteProduit(const QString& nom)
+bool database::deleteProduit(const QString& codeArticle)
 {
     std::cout << "dans deleteproduit" << std::endl;
     m_bdd.open();
 
     QSqlQuery query;
-    query.prepare("DELETE FROM produits WHERE nom=:nom");
-    query.bindValue(":nom", nom);
-    query.exec();
-/*    if(query.exec())
-       {
-           return true;
-       }
-       else
-       {
-            qDebug() << "add product error !"
-                     << query.lastError();
-       }
-*/
-       m_bdd.close();
-       return true;
+    query.prepare("DELETE FROM article WHERE codeArticle=:codeArticle");
+    query.bindValue(":codeArticle", codeArticle);
+ //   query.exec();
+
+
+    if(query.exec())
+           {
+               return true;
+               m_bdd.close();
+           }
+     else
+           {
+                qDebug() << "add product error !"
+                         << query.lastError();
+           }
+    m_bdd.close();
+    return false;
+
 }
 //En cours de dev
 //Permet de faire un update
@@ -159,7 +148,7 @@ bool database::updateProduit(Produit* produit)
 }
 */
 //Permet de récuperer la table des produits
-QVector<Produit*>* database::getAllProduits(QString nom)
+QVector<Produit*>* database::getAllProduits(QString codeArticle)
 {
     std::cout << "Dans la methode getAllProduits" << std::endl;
 
@@ -168,8 +157,8 @@ QVector<Produit*>* database::getAllProduits(QString nom)
     QVector<Produit*>* produits = new QVector<Produit*>;
 
     QSqlQuery query;
-    query.prepare("SELECT rowid, * FROM produits WHERE nom = :nom");
-    query.bindValue(":nom", nom);
+    query.prepare("SELECT rowid, * FROM article WHERE codeArticle = :codeArticle");
+    query.bindValue(":codeArticle", codeArticle);
     query.exec();
 
     do
@@ -179,9 +168,10 @@ QVector<Produit*>* database::getAllProduits(QString nom)
             Produit * produit = new Produit();
             produits->push_back(produit);
             produit->id = query.value(0).toInt();
-            produit->nom = query.value(1).toString();
-            produit->libelle = query.value(2).toString();
-            produit->prix = query.value(3).toFloat();
+            produit->codeArticle = query.value(1).toString();
+            produit->designationArticle = query.value(2).toString();
+            produit->poidsArticle = query.value(3).toFloat();
+            produit->emplacementArticle = query.value(4).toString();
         }
     }while(query.next());
 
@@ -190,31 +180,48 @@ QVector<Produit*>* database::getAllProduits(QString nom)
     return produits;
 }
 
-bool database::droitUtilisateur(const QString &utilisateur, const QString &motDePasse)
+QVector<utilisateur*>* database::getDroitUtilisateur()
 {
     std::cout << "Droit utilisateur" << std::endl;
 
     m_bdd.open();
 
+    QVector<utilisateur*>* users = new QVector<utilisateur*>;
+
     QSqlQuery query;
-    query.prepare("SELECT droitUtilisateur FROM utilisateur WHERE login = :utilisateur and motDePasse = :motDePasse;");
-    query.bindValue(":utilisateur", utilisateur);
+    query.exec("SELECT droitUtilisateur FROM utilisateur WHERE login = ""cedric"" and motDePasseUtilisateur = ""cedric"";");
+/*  query.bindValue(":utilisateur", utilisateur);
     query.bindValue(":motDePasse", motDePasse);
     query.exec();
-
+*/
     do
     {
         if(query.next())
         {
-            user.droit = query.value(3).toInt();
+            utilisateur * user = new utilisateur();
+            users->push_back(user);
+            user->login = query.value(1).toString();
+            user->droit = query.value(3).toInt();
         }
     }while(query.next());
 
     m_bdd.close();
 
-    return user.droit;
+    return users;
 }
 
+void database::ajoutUtilisateur(const QString login, const QString motDePasseUtilisateur)
+{
+    std::cout << "dans ajout utilisateur" << std::endl;
+    m_bdd.open();
+    QSqlQuery query;
+    query.prepare("INSERT INTO utilisateur (login, motDePasseUtilisateur, droitUtilisateur)"
+                      "VALUES(:login, :motDePasseUtilisateur, 1);");
+    query.bindValue(":login", login);
+    query.bindValue(":motDePasseUtilisateur", motDePasseUtilisateur);
+    query.exec();
+    m_bdd.close();
+}
 
 
 

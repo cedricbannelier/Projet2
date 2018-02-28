@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>858</width>
-    <height>539</height>
+    <width>905</width>
+    <height>675</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>30</y>
-      <width>851</width>
-      <height>451</height>
+      <width>731</width>
+      <height>551</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -33,51 +33,6 @@
      <attribute name="title">
       <string>Consulter stock</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>711</width>
-        <height>391</height>
-       </rect>
-      </property>
-      <column>
-       <property name="text">
-        <string>Action</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Code Article</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Libellé</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Emplacement</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Qté Stock</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Qté cmd</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>CJM</string>
-       </property>
-      </column>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -89,19 +44,26 @@
         <x>20</x>
         <y>10</y>
         <width>291</width>
-        <height>103</height>
+        <height>129</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_5">
-       <item row="0" column="0">
-        <widget class="QLineEdit" name="lineEditAjoutArticle">
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="lineEditAjoutDesignationArticle">
          <property name="placeholderText">
-          <string>Article</string>
+          <string>Libelle</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="boutonAjoutProduit">
+       <item row="2" column="0">
+        <widget class="QLineEdit" name="lineEditAjoutPoidsArticle">
+         <property name="placeholderText">
+          <string>Poids</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="boutonAjoutArticle">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -113,17 +75,17 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLineEdit" name="lineEditAjoutArticleLibelle">
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lineEditAjoutCodeArticle">
          <property name="placeholderText">
-          <string>Libelle</string>
+          <string>Article</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLineEdit" name="lineEditAjoutArticlePrix">
+       <item row="3" column="0">
+        <widget class="QLineEdit" name="lineEditAjoutEmplacementArticle">
          <property name="placeholderText">
-          <string>Prix</string>
+          <string>Emplacement</string>
          </property>
         </widget>
        </item>
@@ -259,7 +221,7 @@
         <x>10</x>
         <y>50</y>
         <width>711</width>
-        <height>71</height>
+        <height>150</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
@@ -280,7 +242,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Prix</string>
+          <string>Poids</string>
          </property>
         </widget>
        </item>
@@ -288,10 +250,75 @@
         <widget class="QTextBrowser" name="afficheCodeArticle"/>
        </item>
        <item row="0" column="4">
-        <widget class="QTextBrowser" name="afficheLibelle"/>
+        <widget class="QTextBrowser" name="afficheDesignationArticle"/>
        </item>
        <item row="1" column="1">
-        <widget class="QTextBrowser" name="affichePrix"/>
+        <widget class="QTextBrowser" name="affichePoidsArticle"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Emplacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QTextBrowser" name="afficheEmplacementArticle"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Creation d'utilisateur</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>20</y>
+        <width>160</width>
+        <height>103</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineEditeCreationLogin">
+         <property name="placeholderText">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditeCreationMotDePasse">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Mot de passe</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxChoixDroitUtilisateur">
+         <item>
+          <property name="text">
+           <string>Logisticien</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Administrateur</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonValidationUtilisateur">
+         <property name="text">
+          <string>Validez</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -306,7 +333,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>858</width>
+     <width>905</width>
      <height>21</height>
     </rect>
    </property>

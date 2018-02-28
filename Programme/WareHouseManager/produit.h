@@ -10,10 +10,10 @@ public:
     Produit();
 
     int id;
-    QString nom;
-    float prix;
-    int qtevendue;
-    QString libelle;
+    QString codeArticle;
+    QString designationArticle;
+    float poidsArticle;
+    QString emplacementArticle;
 };
 
 #endif // PRODUIT_H

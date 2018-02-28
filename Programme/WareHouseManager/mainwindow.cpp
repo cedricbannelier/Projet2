@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         menuAide->addAction(aide1);
 
         afficheFenetreLogin();
-
 }
 
 MainWindow::~MainWindow()
@@ -69,25 +68,50 @@ void MainWindow::afficheFenetreLogin()
     }
 }
 
+//Affiche une fenêtre pour savoir si la requete de suppression est bien passé.
+
+void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
+{
+    if(etatQuery)
+    {
+       QMessageBox::warning(this, "Etat de la requete", "La requete n'est pas passée !",QMessageBox::Ok);
+    }
+    else
+    {
+        QMessageBox::information(this, "Etat de la requete", "Article supprimée !",QMessageBox::Ok);
+   }
+}
+
 void MainWindow::verificationLogin()
 {
-        bdd.droitUtilisateur("cedric", "cedric");
+        QVector<utilisateur*>* users = bdd.getDroitUtilisateur();
+        for (int i = 0; i < users->size(); i++)
+        {
+                std::cout << (*users)[i]->droit << std::endl;
+        }
 }
 
 
-void MainWindow::on_boutonAjoutProduit_clicked()
+void MainWindow::on_boutonAjoutArticle_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article" << std::endl;
 
-    ui->boutonAjoutProduit->setEnabled(true);
-    bdd.insertProduit(ui->lineEditAjoutArticle->text(),ui->lineEditAjoutArticleLibelle->text(), ui->lineEditAjoutArticlePrix->text());
-}
+    bdd.insertProduit(ui->lineEditAjoutCodeArticle->text(),
+                      ui->lineEditAjoutDesignationArticle->text(),
+                      ui->lineEditAjoutPoidsArticle->text(),
+                      ui->lineEditAjoutEmplacementArticle->text());
 
+}
+//Supprime un article dans la base de donnée
 void MainWindow::on_boutonSupprimer_clicked()
 {
     std::cout << "Dans le bouton supprimer d'un article" << std::endl;
 
     bdd.deleteProduit(ui->lineEditSupprimerArticle->text());
+
+    popupQueryIsOkOrNot(false);
+
+
 }
 //En cours de dev
 /*
@@ -105,8 +129,16 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
 
     for (int i = 0; i < produits->size(); i++)
     {
-        ui->afficheCodeArticle->setText((*produits)[i]->nom);
-        ui->afficheLibelle ->setText((QString)(*produits)[i]->libelle);
-        ui->affichePrix->setText(QString::number((*produits)[0]->prix));
+        ui->afficheCodeArticle->setText((*produits)[i]->codeArticle);
+        ui->afficheDesignationArticle ->setText((QString)(*produits)[i]->designationArticle);
+        ui->affichePoidsArticle->setText(QString::number((*produits)[i]->poidsArticle));
+        ui->afficheEmplacementArticle->setText((*produits)[i]->emplacementArticle);
     }
 }
+
+void MainWindow::on_pushButtonValidationUtilisateur_clicked()
+{
+     std::cout << "Dans la methode creation utilisateur" << std::endl;
+     bdd.ajoutUtilisateur(ui->lineEditeCreationLogin->text(), ui->lineEditeCreationMotDePasse->text());
+}
+
