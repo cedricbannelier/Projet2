@@ -19,12 +19,12 @@
      <rect>
       <x>0</x>
       <y>30</y>
-      <width>731</width>
-      <height>551</height>
+      <width>901</width>
+      <height>601</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -57,6 +57,9 @@
        </item>
        <item row="2" column="0">
         <widget class="QLineEdit" name="lineEditAjoutPoidsArticle">
+         <property name="inputMask">
+          <string>9999.99</string>
+         </property>
          <property name="placeholderText">
           <string>Poids</string>
          </property>
@@ -148,6 +151,38 @@
         <widget class="QPushButton" name="boutonModifier">
          <property name="text">
           <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_7">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>90</y>
+        <width>251</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_7">
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEditModificationCodeArticle_2"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="ModificationCodeArticle">
+         <property name="text">
+          <string>Code article</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="ModificationEmplacement">
+         <property name="text">
+          <string>Emplacement</string>
          </property>
         </widget>
        </item>
@@ -314,7 +349,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonValidationUtilisateur">
+        <widget class="QPushButton" name="pushButtonCreationUtilisateur">
          <property name="text">
           <string>Validez</string>
          </property>

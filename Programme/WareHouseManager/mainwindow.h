@@ -36,7 +36,9 @@ private slots:
     void on_boutonConsulterFicheProduit_clicked();
 
     //Bouton permettant d'inserer un utilisateur dans la base de donnée
-    void on_pushButtonValidationUtilisateur_clicked();
+    void on_pushButtonCreationUtilisateur_clicked();
+
+    void on_boutonModifier_clicked();
 
 private:
     //Permet d'afficher la fenetre login au démarrage de l'application
@@ -50,7 +52,8 @@ private:
     //En cour de dev
     void creationVuStock();
 
-    //Permet de renvoyer un popup pour avertir l'utilisateur si la query est bien passée ou non.
+    //Permet de renvoyer un popup pour avertir l'utilisateur si
+    //la query est bien passée ou non.
     //Param bool etatQuery
     void popupQueryIsOkOrNot(bool etatQuery);
 
@@ -65,7 +68,9 @@ private:
     QVBoxLayout * vbox = new QVBoxLayout();
     QLineEdit * login = new QLineEdit();
     QLineEdit * motDePasse = new QLineEdit();
-    QDialogButtonBox * buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    QDialogButtonBox * buttonBox = new QDialogButtonBox(
+                QDialogButtonBox::Ok | QDialogButtonBox::Cancel
+                );
 
 };
 

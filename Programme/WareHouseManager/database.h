@@ -23,7 +23,7 @@ public:
 
     //Permet d'inserer un produit
     //Param codeArticle, designationArticle, poidsArticle, emplacementArticle
-    void insertProduit(const QString &codeArticle, const QString &designationArticle, const QString &poidsArticle, const QString &emplacementArticle);
+    void insertProduit(Produit &produitAInserDansLaBdd);
 
     //Permet de supprimer un produit
     //Param codeArticle
@@ -32,18 +32,18 @@ public:
     int droitUtilisateur();
 
     //Permet de mettre à jour un produit (en cours de dev)
-//    bool updateProduit(Produit* produit);
+    bool updateProduit(Produit* produit);
 
     //Création d'un vecteur de vecteur de produit
     //Param nom
-    QVector<Produit*>* getAllProduits(QString nom);
+    QVector<Produit*>* getAllProduits(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
-    QVector<utilisateur*>* getDroitUtilisateur();
+    QVector<Utilisateur*>* getDroitUtilisateur();
 
     //Permet d'ajouter un utilistateur
     //En cours de dev il manque les droits !!
-    void ajoutUtilisateur(const QString loginUtilisateur, const QString motDePasseUtilisateur);
+    void ajoutUtilisateur(Utilisateur& user);
 
 
 private:
@@ -52,7 +52,7 @@ private:
     QSqlDatabase m_bdd;
 
     //Création d'un user
-    utilisateur user;
+    Utilisateur user;
 
 };
 

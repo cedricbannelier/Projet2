@@ -1,8 +1,9 @@
-#include "database.h"
 #include <QtSql/QtSql>
 #include <iostream>
 #include <vector>
 #include <QMessageBox>
+
+#include "database.h"
 
 //Constructeur
 database::database()
@@ -80,17 +81,17 @@ void database::createDatabase()
     closeDatabase();
 }
 
-void database::insertProduit(const QString& codeArticle, const QString& designationArticle, const QString& poidsArticle, const QString& emplacementArticle)
+void database::insertProduit(Produit& produitAInserDansLaBdd)
 {
     std::cout << "dans insertproduit" << std::endl;
     m_bdd.open();
     QSqlQuery query;
     query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle)"
-                      "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle);");
-    query.bindValue(":codeArticle", codeArticle);
-    query.bindValue(":designationArticle", designationArticle);
-    query.bindValue(":poisArticle", poidsArticle);
-    query.bindValue(":emplacementArticle", emplacementArticle);
+                  "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle);");
+    query.bindValue(":codeArticle", produitAInserDansLaBdd.GetCodeArticle());
+    query.bindValue(":designationArticle", produitAInserDansLaBdd.GetDesignationArticle());
+    query.bindValue(":poisArticle", produitAInserDansLaBdd.GetPoidsArticle());
+    query.bindValue(":emplacementArticle", produitAInserDansLaBdd.GetEmplacementArticle());
     query.exec();
     m_bdd.close();
 }
@@ -100,14 +101,13 @@ void database::insertProduit(const QString& codeArticle, const QString& designat
 
 bool database::deleteProduit(const QString& codeArticle)
 {
-    std::cout << "dans deleteproduit" << std::endl;
+    std::cout << "MODE DEBUG : Dans Delete Produit dans database.cpp" << std::endl;
     m_bdd.open();
 
     QSqlQuery query;
-    query.prepare("DELETE FROM article WHERE codeArticle=:codeArticle");
+    query.prepare("DELETE FROM article "
+                  "WHERE codeArticle=:codeArticle");
     query.bindValue(":codeArticle", codeArticle);
- //   query.exec();
-
 
     if(query.exec())
            {
@@ -125,39 +125,38 @@ bool database::deleteProduit(const QString& codeArticle)
 }
 //En cours de dev
 //Permet de faire un update
-/*
+
 bool database::updateProduit(Produit* produit)
 {
-    std::cout << "dans updateproduit" << std::endl;
+    std::cout << "MODE DEBUG : Dans updateproduit" << std::endl;
     m_bdd.open();
 
     QSqlQuery query;
 
- //   query.exec("UPDATE produits SET nom='pomme' WHERE rowid=1");
+    query.prepare("UPDATE article "
+                  "SET codeArticle=:codeArticle "
+                  "WHERE rowid=1");
 
-    query.prepare("UPDATE produits SET nom=?, libelle=?, prix=? WHERE rowid=?");
-    query.bindValue(":'nom'", produit->nom);
-    query.bindValue(":'libelle'", produit->libelle);
-    query.bindValue(":prix", produit->prix);
-    query.bindValue(":rowid", produit->id);
+ //   query.prepare("UPDATE produits SET nom=?, libelle=?, prix=? WHERE rowid=?");
+    query.bindValue(":'codeArticle'", produit->GetCodeArticle());
     query.exec();
 
     m_bdd.close();
 
     return true;
 }
-*/
+
 //Permet de récuperer la table des produits
 QVector<Produit*>* database::getAllProduits(QString codeArticle)
 {
-    std::cout << "Dans la methode getAllProduits" << std::endl;
+    std::cout << "MODE DEBUG : Dans la methode getAllProduits" << std::endl;
 
     m_bdd.open();
 
     QVector<Produit*>* produits = new QVector<Produit*>;
 
     QSqlQuery query;
-    query.prepare("SELECT rowid, * FROM article WHERE codeArticle = :codeArticle");
+    query.prepare("SELECT * FROM article WHERE codeArticle = :codeArticle");
     query.bindValue(":codeArticle", codeArticle);
     query.exec();
 
@@ -167,11 +166,11 @@ QVector<Produit*>* database::getAllProduits(QString codeArticle)
         {
             Produit * produit = new Produit();
             produits->push_back(produit);
-            produit->id = query.value(0).toInt();
-            produit->codeArticle = query.value(1).toString();
-            produit->designationArticle = query.value(2).toString();
-            produit->poidsArticle = query.value(3).toFloat();
-            produit->emplacementArticle = query.value(4).toString();
+            produit->SetCodeArticle(query.value(0).toString());
+            produit->SetDesignationArticle(query.value(1).toString());
+            produit->SetPoidsArticle(query.value(2).toString());
+            produit->SetEmplacementArticle(query.value(3).toString());
+
         }
     }while(query.next());
 
@@ -180,28 +179,27 @@ QVector<Produit*>* database::getAllProduits(QString codeArticle)
     return produits;
 }
 
-QVector<utilisateur*>* database::getDroitUtilisateur()
+QVector<Utilisateur *> *database::getDroitUtilisateur()
 {
-    std::cout << "Droit utilisateur" << std::endl;
+    std::cout << "MODE DEBUG : Droit utilisateur" << std::endl;
 
     m_bdd.open();
 
-    QVector<utilisateur*>* users = new QVector<utilisateur*>;
-
+    QVector<Utilisateur*>* users = new QVector<Utilisateur*>;
     QSqlQuery query;
-    query.exec("SELECT droitUtilisateur FROM utilisateur WHERE login = ""cedric"" and motDePasseUtilisateur = ""cedric"";");
-/*  query.bindValue(":utilisateur", utilisateur);
-    query.bindValue(":motDePasse", motDePasse);
-    query.exec();
-*/
+    query.exec("SELECT ROWID, * "
+               "FROM utilisateur "
+               "WHERE login = 'cedric1' and motDePasseUtilisateur = 'cedric';");
     do
     {
         if(query.next())
         {
-            utilisateur * user = new utilisateur();
+            Utilisateur * user = new Utilisateur();
             users->push_back(user);
-            user->login = query.value(1).toString();
-            user->droit = query.value(3).toInt();
+            user->SetId(query.value(0).toInt());
+            user->SetLogin (query.value(1).toString());
+            user->SetMotDePasse(query.value(2).toString());
+            user->SetDroit(query.value(3).toInt());
         }
     }while(query.next());
 
@@ -210,15 +208,21 @@ QVector<utilisateur*>* database::getDroitUtilisateur()
     return users;
 }
 
-void database::ajoutUtilisateur(const QString login, const QString motDePasseUtilisateur)
+void database::ajoutUtilisateur(Utilisateur &user)
 {
-    std::cout << "dans ajout utilisateur" << std::endl;
+    std::cout << "MODE DEBUG : Dans ajout utilisateur" << std::endl;
+
+    /* //Hach du mot de passe
+    QString chaine=user.GetMotDePasse();
+    QByteArray motDePasseHache = QCryptographicHash::hash(chaine.toUtf8(), QCryptographicHash::Sha1);
+    */
+
     m_bdd.open();
     QSqlQuery query;
     query.prepare("INSERT INTO utilisateur (login, motDePasseUtilisateur, droitUtilisateur)"
-                      "VALUES(:login, :motDePasseUtilisateur, 1);");
-    query.bindValue(":login", login);
-    query.bindValue(":motDePasseUtilisateur", motDePasseUtilisateur);
+                  "VALUES(:login, :motDePasseUtilisateur, 1);");
+    query.bindValue(":login", user.GetLogin());
+    query.bindValue(":motDePasseUtilisateur", user.GetMotDePasse());
     query.exec();
     m_bdd.close();
 }
