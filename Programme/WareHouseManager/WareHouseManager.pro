@@ -30,13 +30,16 @@ SOURCES += \
         mainwindow.cpp \
     database.cpp \
     produit.cpp \
-    utilisateur.cpp
+    utilisateur.cpp \
+    login.cpp
 
 HEADERS += \
         mainwindow.h \
     database.h \
     produit.h \
-    utilisateur.h
+    utilisateur.h \
+    login.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    login.ui

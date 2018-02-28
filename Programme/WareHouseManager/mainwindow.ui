@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -162,15 +162,22 @@
         <x>70</x>
         <y>90</y>
         <width>251</width>
-        <height>80</height>
+        <height>119</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_7">
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEditModificationCodeArticle_2"/>
+       <item row="2" column="0">
+        <widget class="QLabel" name="ModificationEmplacement_2">
+         <property name="text">
+          <string>Désignation</string>
+         </property>
+        </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEditModificationPoidsArticle"/>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="ModificationCodeArticle">
@@ -179,10 +186,23 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
+       </item>
+       <item row="5" column="0">
         <widget class="QLabel" name="ModificationEmplacement">
          <property name="text">
           <string>Emplacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="ModificationEmplacement_3">
+         <property name="text">
+          <string>Poids</string>
          </property>
         </widget>
        </item>
@@ -253,24 +273,17 @@
      <widget class="QWidget" name="gridLayoutWidget_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>711</width>
-        <height>150</height>
+        <x>70</x>
+        <y>60</y>
+        <width>652</width>
+        <height>91</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="codeArticle">
-         <property name="text">
-          <string>Code article</string>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="2">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Libelle</string>
+          <string>Désignation</string>
          </property>
         </widget>
        </item>
@@ -281,15 +294,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QTextBrowser" name="afficheCodeArticle"/>
-       </item>
-       <item row="0" column="4">
-        <widget class="QTextBrowser" name="afficheDesignationArticle"/>
-       </item>
-       <item row="1" column="1">
-        <widget class="QTextBrowser" name="affichePoidsArticle"/>
-       </item>
        <item row="1" column="2">
         <widget class="QLabel" name="label_5">
          <property name="text">
@@ -297,8 +301,24 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="4">
+       <item row="1" column="3">
         <widget class="QTextBrowser" name="afficheEmplacementArticle"/>
+       </item>
+       <item row="0" column="3">
+        <widget class="QTextBrowser" name="afficheDesignationArticle"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QTextBrowser" name="affichePoidsArticle"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="codeArticle">
+         <property name="text">
+          <string>Code article</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QTextBrowser" name="afficheCodeArticle"/>
        </item>
       </layout>
      </widget>

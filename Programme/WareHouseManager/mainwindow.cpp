@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMenu>
-#include "database.h"
+#include "Database.h"
 #include <iostream>
 #include "produit.h"
 #include <string>
@@ -10,7 +10,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    bdd.createDatabase();
+    bdd.CreateDatabase();
 
     ui->setupUi(this);
         QMenu *menuFichier = menuBar()->addMenu("&Fichier");
@@ -36,14 +36,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
 
-        afficheFenetreLogin();
+//        afficheFenetreLogin();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/*
 void MainWindow::afficheFenetreLogin()
 {
     QObject::connect(buttonBox, SIGNAL(accepted()), fenetreLogin, SLOT(accept()));
@@ -66,7 +66,7 @@ void MainWindow::afficheFenetreLogin()
         qDebug() << "Cancel";
     }
 }
-
+*/
 //Affiche une fenêtre pour savoir si la requete de suppression est bien passé.
 void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
 {
@@ -84,12 +84,13 @@ void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
 
 void MainWindow::verificationLogin()
 {
-        QVector<Utilisateur*>* users = bdd.getDroitUtilisateur();
+        QVector<Utilisateur*>* users = bdd.GetDroitUtilisateur();
         for (int i = 0; i < users->size(); i++)
         {
             std::cout << (*users)[i]->GetId() << std::endl;
             std::cout << (*users)[i]->GetDroit() << std::endl;
         }
+
 }
 
 //Ajout d'un article utilisation du constructeur.
@@ -103,7 +104,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
                                    ui->lineEditAjoutPoidsArticle->text(),
                                    ui->lineEditAjoutEmplacementArticle->text());
 
-    bdd.insertProduit(*produit);
+    bdd.InsertProduit(*produit);
 }
 
 //Supprime un article dans la base de donnée
@@ -113,23 +114,42 @@ void MainWindow::on_boutonSupprimer_clicked()
 
 //    bdd.deleteProduit(ui->lineEditSupprimerArticle->text());
 
-    popupQueryIsOkOrNot(bdd.deleteProduit(ui->lineEditSupprimerArticle->text()));
+    popupQueryIsOkOrNot(bdd.DeleteProduit(ui->lineEditSupprimerArticle->text()));
 }
 //En cours de dev
-
+/*
 void MainWindow::on_boutonModifier_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton modifier d'un article" << std::endl;
-//   QVector<Produit*>* produits;
-//   (*produits)[0]->codeArticle = "toto";
-//   ui->lineEditModifierArticle->text()
-//   bdd.updateProduit((*produits));
-}
 
+    QString codeArticle = ui->lineEditModifierArticle->text();
+
+    QVector<Produit*>* produits = bdd.AfficheUnProduit(codeArticle);
+    bdd.AfficheUnProduit(codeArticle);
+
+    for (int i = 0; i < produits->size(); i++)
+    {
+        ui->lineEditModificationCodeArticle->
+                setText((*produits)[i]->GetCodeArticle());
+        ui->lineEditModificationDesignationArticle->
+                setText((*produits)[i]->GetDesignationArticle());
+        ui->lineEditModificationPoidsArticle->
+                setText((*produits)[i]->GetPoidsArticle());
+        ui->lineEditModificationEmplacementArticle->
+                setText((*produits)[i]->GetEmplacementArticle());
+    }
+    Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text(),
+                                   ui->lineEditModificationDesignationArticle->text(),
+                                   ui->lineEditModificationPoidsArticle->text(),
+                                   ui->lineEditModificationEmplacementArticle->text());
+
+    bdd.UpdateProduit(*produit);
+}
+*/
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     QString codeArticle = ui->lineEditRechercher->text();
-    QVector<Produit*>* produits = bdd.getAllProduits(codeArticle);
+    QVector<Produit*>* produits = bdd.AfficheUnProduit(codeArticle);
 
     for (int i = 0; i < produits->size(); i++)
     {
@@ -147,5 +167,5 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
      Utilisateur* nouvelUtilistateur = new Utilisateur(ui->lineEditeCreationLogin->text(),
                                                        ui->lineEditeCreationMotDePasse->text());
 
-     bdd.ajoutUtilisateur(*nouvelUtilistateur);
+     bdd.AjoutUtilisateur(*nouvelUtilistateur);
 }

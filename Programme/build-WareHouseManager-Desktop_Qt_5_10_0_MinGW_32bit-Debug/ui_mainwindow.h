@@ -55,10 +55,14 @@ public:
     QPushButton *boutonModifier;
     QWidget *gridLayoutWidget_7;
     QGridLayout *gridLayout_7;
-    QLineEdit *lineEditModificationCodeArticle_2;
-    QLineEdit *lineEditModificationCodeArticle;
+    QLabel *ModificationEmplacement_2;
+    QLineEdit *lineEditModificationDesignationArticle;
+    QLineEdit *lineEditModificationPoidsArticle;
     QLabel *ModificationCodeArticle;
+    QLineEdit *lineEditModificationEmplacementArticle;
+    QLineEdit *lineEditModificationCodeArticle;
     QLabel *ModificationEmplacement;
+    QLabel *ModificationEmplacement_3;
     QWidget *tabRechercher;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
@@ -71,14 +75,14 @@ public:
     QPushButton *boutonConsulterFicheProduit;
     QWidget *gridLayoutWidget_4;
     QGridLayout *gridLayout_4;
-    QLabel *codeArticle;
     QLabel *label_4;
     QLabel *label;
-    QTextBrowser *afficheCodeArticle;
-    QTextBrowser *afficheDesignationArticle;
-    QTextBrowser *affichePoidsArticle;
     QLabel *label_5;
     QTextBrowser *afficheEmplacementArticle;
+    QTextBrowser *afficheDesignationArticle;
+    QTextBrowser *affichePoidsArticle;
+    QLabel *codeArticle;
+    QTextBrowser *afficheCodeArticle;
     QWidget *tab_3;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayout;
@@ -183,31 +187,51 @@ public:
 
         gridLayoutWidget_7 = new QWidget(tabModifier);
         gridLayoutWidget_7->setObjectName(QStringLiteral("gridLayoutWidget_7"));
-        gridLayoutWidget_7->setGeometry(QRect(70, 90, 251, 80));
+        gridLayoutWidget_7->setGeometry(QRect(70, 90, 251, 119));
         gridLayout_7 = new QGridLayout(gridLayoutWidget_7);
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
         gridLayout_7->setContentsMargins(0, 0, 0, 0);
-        lineEditModificationCodeArticle_2 = new QLineEdit(gridLayoutWidget_7);
-        lineEditModificationCodeArticle_2->setObjectName(QStringLiteral("lineEditModificationCodeArticle_2"));
+        ModificationEmplacement_2 = new QLabel(gridLayoutWidget_7);
+        ModificationEmplacement_2->setObjectName(QStringLiteral("ModificationEmplacement_2"));
 
-        gridLayout_7->addWidget(lineEditModificationCodeArticle_2, 1, 1, 1, 1);
+        gridLayout_7->addWidget(ModificationEmplacement_2, 2, 0, 1, 1);
 
-        lineEditModificationCodeArticle = new QLineEdit(gridLayoutWidget_7);
-        lineEditModificationCodeArticle->setObjectName(QStringLiteral("lineEditModificationCodeArticle"));
+        lineEditModificationDesignationArticle = new QLineEdit(gridLayoutWidget_7);
+        lineEditModificationDesignationArticle->setObjectName(QStringLiteral("lineEditModificationDesignationArticle"));
 
-        gridLayout_7->addWidget(lineEditModificationCodeArticle, 0, 1, 1, 1);
+        gridLayout_7->addWidget(lineEditModificationDesignationArticle, 2, 1, 1, 1);
+
+        lineEditModificationPoidsArticle = new QLineEdit(gridLayoutWidget_7);
+        lineEditModificationPoidsArticle->setObjectName(QStringLiteral("lineEditModificationPoidsArticle"));
+
+        gridLayout_7->addWidget(lineEditModificationPoidsArticle, 4, 1, 1, 1);
 
         ModificationCodeArticle = new QLabel(gridLayoutWidget_7);
         ModificationCodeArticle->setObjectName(QStringLiteral("ModificationCodeArticle"));
 
         gridLayout_7->addWidget(ModificationCodeArticle, 0, 0, 1, 1);
 
+        lineEditModificationEmplacementArticle = new QLineEdit(gridLayoutWidget_7);
+        lineEditModificationEmplacementArticle->setObjectName(QStringLiteral("lineEditModificationEmplacementArticle"));
+
+        gridLayout_7->addWidget(lineEditModificationEmplacementArticle, 5, 1, 1, 1);
+
+        lineEditModificationCodeArticle = new QLineEdit(gridLayoutWidget_7);
+        lineEditModificationCodeArticle->setObjectName(QStringLiteral("lineEditModificationCodeArticle"));
+
+        gridLayout_7->addWidget(lineEditModificationCodeArticle, 0, 1, 1, 1);
+
         ModificationEmplacement = new QLabel(gridLayoutWidget_7);
         ModificationEmplacement->setObjectName(QStringLiteral("ModificationEmplacement"));
 
-        gridLayout_7->addWidget(ModificationEmplacement, 1, 0, 1, 1);
+        gridLayout_7->addWidget(ModificationEmplacement, 5, 0, 1, 1);
+
+        ModificationEmplacement_3 = new QLabel(gridLayoutWidget_7);
+        ModificationEmplacement_3->setObjectName(QStringLiteral("ModificationEmplacement_3"));
+
+        gridLayout_7->addWidget(ModificationEmplacement_3, 4, 0, 1, 1);
 
         tabWidget->addTab(tabModifier, QString());
         tabRechercher = new QWidget();
@@ -253,17 +277,12 @@ public:
 
         gridLayoutWidget_4 = new QWidget(tab);
         gridLayoutWidget_4->setObjectName(QStringLiteral("gridLayoutWidget_4"));
-        gridLayoutWidget_4->setGeometry(QRect(10, 50, 711, 150));
+        gridLayoutWidget_4->setGeometry(QRect(70, 60, 652, 91));
         gridLayout_4 = new QGridLayout(gridLayoutWidget_4);
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);
-        codeArticle = new QLabel(gridLayoutWidget_4);
-        codeArticle->setObjectName(QStringLiteral("codeArticle"));
-
-        gridLayout_4->addWidget(codeArticle, 0, 0, 1, 1);
-
         label_4 = new QLabel(gridLayoutWidget_4);
         label_4->setObjectName(QStringLiteral("label_4"));
 
@@ -274,21 +293,6 @@ public:
 
         gridLayout_4->addWidget(label, 1, 0, 1, 1);
 
-        afficheCodeArticle = new QTextBrowser(gridLayoutWidget_4);
-        afficheCodeArticle->setObjectName(QStringLiteral("afficheCodeArticle"));
-
-        gridLayout_4->addWidget(afficheCodeArticle, 0, 1, 1, 1);
-
-        afficheDesignationArticle = new QTextBrowser(gridLayoutWidget_4);
-        afficheDesignationArticle->setObjectName(QStringLiteral("afficheDesignationArticle"));
-
-        gridLayout_4->addWidget(afficheDesignationArticle, 0, 4, 1, 1);
-
-        affichePoidsArticle = new QTextBrowser(gridLayoutWidget_4);
-        affichePoidsArticle->setObjectName(QStringLiteral("affichePoidsArticle"));
-
-        gridLayout_4->addWidget(affichePoidsArticle, 1, 1, 1, 1);
-
         label_5 = new QLabel(gridLayoutWidget_4);
         label_5->setObjectName(QStringLiteral("label_5"));
 
@@ -297,7 +301,27 @@ public:
         afficheEmplacementArticle = new QTextBrowser(gridLayoutWidget_4);
         afficheEmplacementArticle->setObjectName(QStringLiteral("afficheEmplacementArticle"));
 
-        gridLayout_4->addWidget(afficheEmplacementArticle, 1, 4, 1, 1);
+        gridLayout_4->addWidget(afficheEmplacementArticle, 1, 3, 1, 1);
+
+        afficheDesignationArticle = new QTextBrowser(gridLayoutWidget_4);
+        afficheDesignationArticle->setObjectName(QStringLiteral("afficheDesignationArticle"));
+
+        gridLayout_4->addWidget(afficheDesignationArticle, 0, 3, 1, 1);
+
+        affichePoidsArticle = new QTextBrowser(gridLayoutWidget_4);
+        affichePoidsArticle->setObjectName(QStringLiteral("affichePoidsArticle"));
+
+        gridLayout_4->addWidget(affichePoidsArticle, 1, 1, 1, 1);
+
+        codeArticle = new QLabel(gridLayoutWidget_4);
+        codeArticle->setObjectName(QStringLiteral("codeArticle"));
+
+        gridLayout_4->addWidget(codeArticle, 0, 0, 1, 1);
+
+        afficheCodeArticle = new QTextBrowser(gridLayoutWidget_4);
+        afficheCodeArticle->setObjectName(QStringLiteral("afficheCodeArticle"));
+
+        gridLayout_4->addWidget(afficheCodeArticle, 0, 1, 1, 1);
 
         tabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
@@ -346,7 +370,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -371,18 +395,20 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tabSupprimer), QApplication::translate("MainWindow", "Supprimer", nullptr));
         lineEditModifierArticle->setPlaceholderText(QApplication::translate("MainWindow", "Article", nullptr));
         boutonModifier->setText(QApplication::translate("MainWindow", "Modifier", nullptr));
+        ModificationEmplacement_2->setText(QApplication::translate("MainWindow", "D\303\251signation", nullptr));
         ModificationCodeArticle->setText(QApplication::translate("MainWindow", "Code article", nullptr));
         ModificationEmplacement->setText(QApplication::translate("MainWindow", "Emplacement", nullptr));
+        ModificationEmplacement_3->setText(QApplication::translate("MainWindow", "Poids", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabModifier), QApplication::translate("MainWindow", "Modifier", nullptr));
         lineEdit->setPlaceholderText(QApplication::translate("MainWindow", "Article ou emplacement", nullptr));
         boutonRechercher->setText(QApplication::translate("MainWindow", "Rechercher", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabRechercher), QApplication::translate("MainWindow", "Rechercher", nullptr));
         lineEditRechercher->setPlaceholderText(QApplication::translate("MainWindow", "Article", nullptr));
         boutonConsulterFicheProduit->setText(QApplication::translate("MainWindow", "Rechercher", nullptr));
-        codeArticle->setText(QApplication::translate("MainWindow", "Code article", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "Libelle", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "D\303\251signation", nullptr));
         label->setText(QApplication::translate("MainWindow", "Poids", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Emplacement", nullptr));
+        codeArticle->setText(QApplication::translate("MainWindow", "Code article", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Consulter fiche produit", nullptr));
         lineEditeCreationLogin->setPlaceholderText(QApplication::translate("MainWindow", "Login", nullptr));
         lineEditeCreationMotDePasse->setPlaceholderText(QApplication::translate("MainWindow", "Mot de passe", nullptr));

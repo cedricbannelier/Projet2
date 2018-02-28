@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
-#include "database.h"
+#include "Database.h"
 #include <QVBoxLayout>
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -38,11 +38,11 @@ private slots:
     //Bouton permettant d'inserer un utilisateur dans la base de donnée
     void on_pushButtonCreationUtilisateur_clicked();
 
-    void on_boutonModifier_clicked();
+//    void on_boutonModifier_clicked();
 
 private:
     //Permet d'afficher la fenetre login au démarrage de l'application
-    void afficheFenetreLogin();
+ //   void afficheFenetreLogin();
 
     //Permet de vérifier si le login est bien dans la base de donnée
     //En cours de dev
@@ -60,8 +60,8 @@ private:
     //Création d'un pointeur ui
     Ui::MainWindow *ui;
 
-    //Création de la bdd de type database
-    database bdd;
+    //Création de la bdd de type Database
+    Database bdd;
 
     //Permet de créer la fenetre du login au démarrage de l'application
     QDialog * fenetreLogin = new QDialog();

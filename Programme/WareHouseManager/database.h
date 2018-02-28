@@ -7,43 +7,43 @@
 #include "produit.h"
 #include "utilisateur.h"
 
-class database
+class Database
 {
 public:
-    database();
+    Database();
 
     //Création de la base de donnée
-    void createDatabase();
+    void CreateDatabase();
 
     //Ouverture de la base de donnée
-    bool openDatabase();
+    bool OpenDatabase();
 
     //Fermeture de la base de donnée
-    bool closeDatabase();
+    bool CloseDatabase();
 
     //Permet d'inserer un produit
     //Param codeArticle, designationArticle, poidsArticle, emplacementArticle
-    void insertProduit(Produit &produitAInserDansLaBdd);
+    void InsertProduit(Produit &produitAInserDansLaBdd);
 
     //Permet de supprimer un produit
     //Param codeArticle
-    bool deleteProduit(const QString &codeArticle);
+    bool DeleteProduit(const QString &codeArticle);
 
-    int droitUtilisateur();
+    int DroitUtilisateur();
 
     //Permet de mettre à jour un produit (en cours de dev)
-    bool updateProduit(Produit* produit);
+    bool UpdateProduit(Produit *produit);
 
     //Création d'un vecteur de vecteur de produit
     //Param nom
-    QVector<Produit*>* getAllProduits(QString codeArticle);
+    QVector<Produit*>* AfficheUnProduit(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
-    QVector<Utilisateur*>* getDroitUtilisateur();
+    QVector<Utilisateur*>* GetDroitUtilisateur();
 
     //Permet d'ajouter un utilistateur
     //En cours de dev il manque les droits !!
-    void ajoutUtilisateur(Utilisateur& user);
+    void AjoutUtilisateur(Utilisateur& user);
 
 
 private:

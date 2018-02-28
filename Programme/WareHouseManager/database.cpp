@@ -3,27 +3,27 @@
 #include <vector>
 #include <QMessageBox>
 
-#include "database.h"
+#include "Database.h"
 
 //Constructeur
-database::database()
+Database::Database()
 {
 
 }
 
-bool database::openDatabase()
+bool Database::OpenDatabase()
 {
     m_bdd.open();
     return true;
 }
 
-bool database::closeDatabase()
+bool Database::CloseDatabase()
 {
     m_bdd.close();
     return true;
 }
 
-void database::createDatabase()
+void Database::CreateDatabase()
 {
     //Création du répertoire si non créer pour la base de données
     QString chemin("c:/warehousebd");
@@ -33,7 +33,7 @@ void database::createDatabase()
     //Création de la base de données
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");
     m_bdd.setDatabaseName("c:/warehousebd/warehousedb.db");
-    openDatabase();
+    m_bdd.open();
     QSqlQuery query;
 
    query.exec("CREATE TABLE IF NOT EXISTS `utilisateur` ("
@@ -78,12 +78,12 @@ void database::createDatabase()
                "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
                ");");
 
-    closeDatabase();
+   m_bdd.close();
 }
 
-void database::insertProduit(Produit& produitAInserDansLaBdd)
+void Database::InsertProduit(Produit& produitAInserDansLaBdd)
 {
-    std::cout << "dans insertproduit" << std::endl;
+    std::cout << "MODE DEBUG : Dans insertproduit" << std::endl;
     m_bdd.open();
     QSqlQuery query;
     query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle)"
@@ -99,9 +99,9 @@ void database::insertProduit(Produit& produitAInserDansLaBdd)
 //Permet de supprimer un produit
 //En paramètre le nom du produit//
 
-bool database::deleteProduit(const QString& codeArticle)
+bool Database::DeleteProduit(const QString& codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans Delete Produit dans database.cpp" << std::endl;
+    std::cout << "MODE DEBUG : Dans Delete Produit dans Database.cpp" << std::endl;
     m_bdd.open();
 
     QSqlQuery query;
@@ -126,7 +126,7 @@ bool database::deleteProduit(const QString& codeArticle)
 //En cours de dev
 //Permet de faire un update
 
-bool database::updateProduit(Produit* produit)
+bool Database::UpdateProduit(Produit *produit)
 {
     std::cout << "MODE DEBUG : Dans updateproduit" << std::endl;
     m_bdd.open();
@@ -134,11 +134,16 @@ bool database::updateProduit(Produit* produit)
     QSqlQuery query;
 
     query.prepare("UPDATE article "
-                  "SET codeArticle=:codeArticle "
-                  "WHERE rowid=1");
+                  "SET codeArticle=:codeArticle,"
+                  "designationArtice=:designationArticle,"
+                  "poidsArticle=:poidsArticle,"
+                  "emplacementArticle=:emplacementArticle, "
+                  "WHERE codeArticle=:codeArticle");
 
- //   query.prepare("UPDATE produits SET nom=?, libelle=?, prix=? WHERE rowid=?");
     query.bindValue(":'codeArticle'", produit->GetCodeArticle());
+    query.bindValue(":'designationArticle'", produit->GetDesignationArticle());
+    query.bindValue(":'poidsArticle'", produit->GetPoidsArticle());
+    query.bindValue(":'emplacementArticle'", produit->GetEmplacementArticle());
     query.exec();
 
     m_bdd.close();
@@ -147,9 +152,9 @@ bool database::updateProduit(Produit* produit)
 }
 
 //Permet de récuperer la table des produits
-QVector<Produit*>* database::getAllProduits(QString codeArticle)
+QVector<Produit*>* Database::AfficheUnProduit(QString codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans la methode getAllProduits" << std::endl;
+    std::cout << "MODE DEBUG : Dans la methode AfficheUnProduit" << std::endl;
 
     m_bdd.open();
 
@@ -179,7 +184,7 @@ QVector<Produit*>* database::getAllProduits(QString codeArticle)
     return produits;
 }
 
-QVector<Utilisateur *> *database::getDroitUtilisateur()
+QVector<Utilisateur *> *Database::GetDroitUtilisateur()
 {
     std::cout << "MODE DEBUG : Droit utilisateur" << std::endl;
 
@@ -208,7 +213,7 @@ QVector<Utilisateur *> *database::getDroitUtilisateur()
     return users;
 }
 
-void database::ajoutUtilisateur(Utilisateur &user)
+void Database::AjoutUtilisateur(Utilisateur &user)
 {
     std::cout << "MODE DEBUG : Dans ajout utilisateur" << std::endl;
 
