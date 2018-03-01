@@ -38,7 +38,9 @@ private slots:
     //Bouton permettant d'inserer un utilisateur dans la base de donnée
     void on_pushButtonCreationUtilisateur_clicked();
 
-//    void on_boutonModifier_clicked();
+    void on_boutonModifier_clicked();
+
+    void on_pushButtonValidationModification_clicked();
 
 private:
     //Permet d'afficher la fenetre login au démarrage de l'application

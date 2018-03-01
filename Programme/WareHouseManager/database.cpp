@@ -126,24 +126,24 @@ bool Database::DeleteProduit(const QString& codeArticle)
 //En cours de dev
 //Permet de faire un update
 
-bool Database::UpdateProduit(Produit *produit)
+bool Database::UpdateProduit(Produit &produit)
 {
-    std::cout << "MODE DEBUG : Dans updateproduit" << std::endl;
+    std::cout << "MODE DEBUG : Dans Update un produit" << std::endl;
     m_bdd.open();
 
     QSqlQuery query;
 
-    query.prepare("UPDATE article "
-                  "SET codeArticle=:codeArticle,"
-                  "designationArtice=:designationArticle,"
-                  "poidsArticle=:poidsArticle,"
-                  "emplacementArticle=:emplacementArticle, "
-                  "WHERE codeArticle=:codeArticle");
+//    query.prepare("UPDATE article SET codeArticle='a', designationArticle='rrrrrrr', poidsArticle=10, emplacementArticle='2541' WHERE codeArticle='a';");
 
-    query.bindValue(":'codeArticle'", produit->GetCodeArticle());
-    query.bindValue(":'designationArticle'", produit->GetDesignationArticle());
-    query.bindValue(":'poidsArticle'", produit->GetPoidsArticle());
-    query.bindValue(":'emplacementArticle'", produit->GetEmplacementArticle());
+    query.prepare("UPDATE article"
+                  "SET codeArticle=:codeArticle, designationArticle=:designationArticle, poidsArticle=:poidsArticle, emplacementArticle=:emplacementArticle"
+                  "WHERE codeArticle='a'");
+
+    query.bindValue(":'codeArticle'", produit.GetCodeArticle());
+    query.bindValue(":'designationArticle'", produit.GetDesignationArticle());
+    query.bindValue(":'poidsArticle'", produit.GetPoidsArticle());
+    query.bindValue(":'emplacementArticle'", produit.GetEmplacementArticle());
+//    query.bindValue(":'codeArticleWhere'", produit.GetCodeArticle());
     query.exec();
 
     m_bdd.close();

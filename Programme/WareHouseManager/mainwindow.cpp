@@ -117,7 +117,7 @@ void MainWindow::on_boutonSupprimer_clicked()
     popupQueryIsOkOrNot(bdd.DeleteProduit(ui->lineEditSupprimerArticle->text()));
 }
 //En cours de dev
-/*
+
 void MainWindow::on_boutonModifier_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton modifier d'un article" << std::endl;
@@ -138,14 +138,8 @@ void MainWindow::on_boutonModifier_clicked()
         ui->lineEditModificationEmplacementArticle->
                 setText((*produits)[i]->GetEmplacementArticle());
     }
-    Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text(),
-                                   ui->lineEditModificationDesignationArticle->text(),
-                                   ui->lineEditModificationPoidsArticle->text(),
-                                   ui->lineEditModificationEmplacementArticle->text());
-
-    bdd.UpdateProduit(*produit);
 }
-*/
+
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     QString codeArticle = ui->lineEditRechercher->text();
@@ -168,4 +162,18 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
                                                        ui->lineEditeCreationMotDePasse->text());
 
      bdd.AjoutUtilisateur(*nouvelUtilistateur);
+}
+
+void MainWindow::on_pushButtonValidationModification_clicked()
+{
+    std::cout << "MODE DEBUG : Dans la methode Validation de modification" << std::endl;
+
+    Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text(),
+                                   ui->lineEditModificationDesignationArticle->text(),
+                                   ui->lineEditModificationPoidsArticle->text(),
+                                   ui->lineEditModificationEmplacementArticle->text());
+
+    bdd.UpdateProduit(*produit);
+
+//    bdd.UpdateProduit();
 }

@@ -32,7 +32,7 @@ public:
     int DroitUtilisateur();
 
     //Permet de mettre à jour un produit (en cours de dev)
-    bool UpdateProduit(Produit *produit);
+    bool UpdateProduit(Produit &produit);
 
     //Création d'un vecteur de vecteur de produit
     //Param nom
