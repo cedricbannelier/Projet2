@@ -36,22 +36,32 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
 
-//        afficheFenetreLogin();
+        afficheFenetreLogin();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-/*
+
 void MainWindow::afficheFenetreLogin()
 {
     QObject::connect(buttonBox, SIGNAL(accepted()), fenetreLogin, SLOT(accept()));
     QObject::connect(buttonBox, SIGNAL(rejected()), fenetreLogin, SLOT(reject()));
 
+    vbox->addWidget(labelBienvenue);
     vbox->addWidget(login);
     vbox->addWidget(motDePasse);
     vbox->addWidget(buttonBox);
+
+
+    labelBienvenue->setText("WareHouseManager");
+    labelBienvenue->setFont(QFont( "Helvetica", 24));
+
+    login->setPlaceholderText("Login");
+    motDePasse->setPlaceholderText("Mot de passe");
+
+    login->setFocus();
 
     fenetreLogin->setLayout(vbox);
 
@@ -66,7 +76,7 @@ void MainWindow::afficheFenetreLogin()
         qDebug() << "Cancel";
     }
 }
-*/
+
 //Affiche une fenêtre pour savoir si la requete de suppression est bien passé.
 void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
 {
@@ -174,6 +184,15 @@ void MainWindow::on_pushButtonValidationModification_clicked()
                                    ui->lineEditModificationEmplacementArticle->text());
 
     bdd.UpdateProduit(*produit);
+}
 
-//    bdd.UpdateProduit();
+void MainWindow::on_pushButtonRecupererRowId_clicked()
+{
+    std::cout << "MODE DEBUG : Dans la methode Recuperer RowId" << std::endl;
+
+
+
+int id = bdd.RecupererRowIdTableArticle(/*ui->lineEditCodeArticlePourRowId->text()*/);
+
+        std::cout << id << std::endl;
 }

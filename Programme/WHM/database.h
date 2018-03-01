@@ -1,11 +1,9 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include <QString>
-#include <QtSql/QtSql>
-#include <vector>
 #include "produit.h"
 #include "utilisateur.h"
+#include <QtSql/QtSql>
 
 class Database
 {
@@ -45,18 +43,17 @@ public:
     //En cours de dev il manque les droits !!
     void AjoutUtilisateur(Utilisateur& user);
 
-    int RecupererRowIdTableArticle();
-
+    static Database bdd1;
 
 private:
 
     //Création de m_bdd
     QSqlDatabase m_bdd;
 
+
     //Création d'un user
     Utilisateur user;
 
 };
-
 
 #endif // DATABASE_H

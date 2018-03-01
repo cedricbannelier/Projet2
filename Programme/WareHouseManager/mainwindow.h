@@ -8,6 +8,7 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QMessageBox>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -42,9 +43,11 @@ private slots:
 
     void on_pushButtonValidationModification_clicked();
 
+    void on_pushButtonRecupererRowId_clicked();
+
 private:
     //Permet d'afficher la fenetre login au démarrage de l'application
- //   void afficheFenetreLogin();
+    void afficheFenetreLogin();
 
     //Permet de vérifier si le login est bien dans la base de donnée
     //En cours de dev
@@ -67,6 +70,7 @@ private:
 
     //Permet de créer la fenetre du login au démarrage de l'application
     QDialog * fenetreLogin = new QDialog();
+    QLabel * labelBienvenue = new QLabel();
     QVBoxLayout * vbox = new QVBoxLayout();
     QLineEdit * login = new QLineEdit();
     QLineEdit * motDePasse = new QLineEdit();

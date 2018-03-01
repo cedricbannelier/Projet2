@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -177,7 +177,14 @@
         <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="lineEditModificationPoidsArticle"/>
+        <widget class="QLineEdit" name="lineEditModificationPoidsArticle">
+         <property name="inputMask">
+          <string>9999.99</string>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="ModificationCodeArticle">
@@ -287,13 +294,13 @@
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>60</y>
+        <y>70</y>
         <width>652</width>
-        <height>150</height>
+        <height>121</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="2">
+       <item row="2" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Désignation</string>
@@ -307,21 +314,8 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>Emplacement</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QTextBrowser" name="afficheEmplacementArticle"/>
-       </item>
-       <item row="0" column="3">
+       <item row="2" column="1">
         <widget class="QTextBrowser" name="afficheDesignationArticle"/>
-       </item>
-       <item row="1" column="1">
-        <widget class="QTextBrowser" name="affichePoidsArticle"/>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="codeArticle">
@@ -332,6 +326,19 @@
        </item>
        <item row="0" column="1">
         <widget class="QTextBrowser" name="afficheCodeArticle"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QTextBrowser" name="affichePoidsArticle"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Emplacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QTextBrowser" name="afficheEmplacementArticle"/>
        </item>
       </layout>
      </widget>
@@ -389,6 +396,47 @@
         </widget>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>ROWID</string>
+     </attribute>
+     <widget class="QLabel" name="labelRowId">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>110</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonRecupererRowId">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>100</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>RowId</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditCodeArticlePourRowId">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>60</y>
+        <width>113</width>
+        <height>20</height>
+       </rect>
+      </property>
      </widget>
     </widget>
    </widget>

@@ -1,9 +1,9 @@
+#include "database.h"
+
 #include <QtSql/QtSql>
 #include <iostream>
 #include <vector>
 #include <QMessageBox>
-
-#include "Database.h"
 
 //Constructeur
 Database::Database()
@@ -32,8 +32,11 @@ void Database::CreateDatabase()
 
     //Création de la base de données
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");
+
     m_bdd.setDatabaseName("c:/warehousebd/warehousedb.db");
+
     m_bdd.open();
+
     QSqlQuery query;
 
    query.exec("CREATE TABLE IF NOT EXISTS `utilisateur` ("
@@ -78,9 +81,12 @@ void Database::CreateDatabase()
                "FOREIGN KEY(`idArticle`) REFERENCES `article`(`ROWID`)"
                ");");
 
-   m_bdd.close();
+    m_bdd.close();
+
 }
 
+//Permet d'inserer un produit
+//En paramètre un Produit
 void Database::InsertProduit(Produit& produitAInserDansLaBdd)
 {
     std::cout << "MODE DEBUG : Dans insertproduit" << std::endl;
@@ -133,18 +139,17 @@ bool Database::UpdateProduit(Produit &produit)
 
     QSqlQuery query;
 
-    query.prepare("UPDATE article "
-                  "SET codeArticle=:codeArticle,"
-                  "designationArticle=:designationArticle,"
-                  "poidsArticle=:poidsArticle,"
-                  "emplacementArticle='1234'"
-                  "WHERE codeArticle=:codeArticle;");
+//    query.prepare("UPDATE article SET codeArticle='a', designationArticle='rrrrrrr', poidsArticle=10, emplacementArticle='2541' WHERE codeArticle='a';");
 
-    query.bindValue(":codeArticle", produit.GetCodeArticle());
-    query.bindValue(":designationArticle", produit.GetDesignationArticle());
-    query.bindValue(":poidsArticle", produit.GetPoidsArticle());
-//    query.bindValue(":emplacementArticle", produit.GetEmplacementArticle());
-    query.bindValue(":codeArticle", produit.GetCodeArticle());
+    query.prepare("UPDATE article"
+                  "SET codeArticle=:codeArticle, designationArticle=:designationArticle, poidsArticle=:poidsArticle, emplacementArticle=:emplacementArticle"
+                  "WHERE codeArticle='a'");
+
+    query.bindValue(":'codeArticle'", produit.GetCodeArticle());
+    query.bindValue(":'designationArticle'", produit.GetDesignationArticle());
+    query.bindValue(":'poidsArticle'", produit.GetPoidsArticle());
+    query.bindValue(":'emplacementArticle'", produit.GetEmplacementArticle());
+//    query.bindValue(":'codeArticleWhere'", produit.GetCodeArticle());
     query.exec();
 
     m_bdd.close();
@@ -224,6 +229,7 @@ void Database::AjoutUtilisateur(Utilisateur &user)
     */
 
     m_bdd.open();
+    qDebug() << m_bdd.isValid();
     QSqlQuery query;
     query.prepare("INSERT INTO utilisateur (login, motDePasseUtilisateur, droitUtilisateur)"
                   "VALUES(:login, :motDePasseUtilisateur, 1);");
@@ -232,31 +238,3 @@ void Database::AjoutUtilisateur(Utilisateur &user)
     query.exec();
     m_bdd.close();
 }
-
-int Database::RecupererRowIdTableArticle(/*QString codeArticle*/)
-{
-    std::cout << "MODE DEBUG : Dans Recuperer ROW ID database.CPP" << std::endl;
-
-    m_bdd.open();
-    QSqlQuery query;
-    query.prepare("SELECT rowid FROM article WHERE codeArticle='b';");
-    //query.bindValue(":'codeArticle'", codeArticle);
-    query.exec();
-
-    int rowid = query.value(1).toInt();
-
-    m_bdd.close();
-
-    std::cout << rowid << std::endl;
-
-    return rowid;
-}
-
-
-
-
-
-
-
-
-
