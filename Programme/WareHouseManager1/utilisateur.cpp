@@ -9,14 +9,6 @@ Utilisateur::Utilisateur(QString login, QString motDePasse)
 {
     this->login = login;
     this->motDePasse = motDePasse;
-
-}
-
-Utilisateur::Utilisateur(QString login, QString motDePasse, int droit)
-{
-    this->login = login;
-    this->motDePasse = motDePasse;
-    this->droit = droit;
 }
 
 QString Utilisateur::GetLogin()

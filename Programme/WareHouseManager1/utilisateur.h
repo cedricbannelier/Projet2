@@ -9,7 +9,6 @@ public:
     //Constructeur
     Utilisateur();
     Utilisateur(QString login, QString motDePasse);
-    Utilisateur(QString login, QString motDePasse, int droit);
 
     //Getter
     QString GetLogin();
@@ -22,7 +21,6 @@ public:
     void SetMotDePasse(QString motDePasse);
     int SetDroit(int droit);
     int SetId(int id);
-
 
 private:
     int droit;

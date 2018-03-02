@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>905</width>
-    <height>614</height>
+    <height>675</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,13 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>30</y>
       <width>901</width>
-      <height>571</height>
+      <height>601</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -296,7 +296,7 @@
         <x>40</x>
         <y>60</y>
         <width>652</width>
-        <height>304</height>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">

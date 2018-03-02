@@ -16,10 +16,10 @@ public:
     void CreateDatabase();
 
     //Ouverture de la base de donnée
-    void OpenDatabase();
+    bool OpenDatabase();
 
     //Fermeture de la base de donnée
-    void CloseDatabase();
+    bool CloseDatabase();
 
     //Permet d'inserer un produit
     //Param codeArticle, designationArticle, poidsArticle, emplacementArticle
@@ -39,19 +39,23 @@ public:
     QVector<Produit*>* AfficheUnProduit(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
-    QVector<Utilisateur*>* GetDroitUtilisateur(QString loginEntreParUtilisateur,
-                                               QString motDePasseEntreParUtilisateur);
+    QVector<Utilisateur*>* GetDroitUtilisateur(QString loginEntreParUtilisateur, QString motDePasseEntreParUtilisateur);
 
     //Permet d'ajouter un utilistateur
     //En cours de dev il manque les droits !!
     void AjoutUtilisateur(Utilisateur& user);
 
-    int RecupererRowIdTableArticle(QString codeArticle);
+    int RecupererRowIdTableArticle();
+
 
 private:
 
     //Création de m_bdd
     QSqlDatabase m_bdd;
+
+    //Création d'un user
+    Utilisateur user;
+
 };
 
 
