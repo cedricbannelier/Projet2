@@ -60,6 +60,7 @@ void MainWindow::afficheFenetreLogin()
 
     login->setPlaceholderText("Login");
     motDePasse->setPlaceholderText("Mot de passe");
+    motDePasse->setEchoMode(QLineEdit::Password);
 
     login->setFocus();
 
@@ -94,10 +95,13 @@ void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
 
 void MainWindow::verificationLogin()
 {
-        QVector<Utilisateur*>* users = bdd.GetDroitUtilisateur();
+        QString loginEntreParUtilisateur = login->text();
+        QString motDePasseEntreParUtilisateur = motDePasse->text();
+
+        QVector<Utilisateur*>* users = bdd.GetDroitUtilisateur(loginEntreParUtilisateur, motDePasseEntreParUtilisateur);
+
         for (int i = 0; i < users->size(); i++)
         {
-            std::cout << (*users)[i]->GetId() << std::endl;
             std::cout << (*users)[i]->GetDroit() << std::endl;
         }
 

@@ -39,7 +39,7 @@ public:
     QVector<Produit*>* AfficheUnProduit(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
-    QVector<Utilisateur*>* GetDroitUtilisateur();
+    QVector<Utilisateur*>* GetDroitUtilisateur(QString loginEntreParUtilisateur, QString motDePasseEntreParUtilisateur);
 
     //Permet d'ajouter un utilistateur
     //En cours de dev il manque les droits !!
