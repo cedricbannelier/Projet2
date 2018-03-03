@@ -23,18 +23,17 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     bool fermeFenetre = false;
+
     //Permet d'afficher la fenetre login au démarrage de l'application
     void afficheFenetreLogin();
+
 private slots:
+
     //Bouton permettant de valider l'ajout d'un article
     void on_boutonAjoutArticle_clicked();
 
     //Bouton permettant de valider la suppression d'un article
     void on_boutonSupprimer_clicked();
-
-//    void on_boutonConsulterFicheProduit_clicked();
-
-//    void on_boutonModifier_clicked();
 
     //Bouton permettant de consulter une fiche article
     void on_boutonConsulterFicheProduit_clicked();
@@ -44,7 +43,7 @@ private slots:
 
     void on_boutonModifier_clicked();
 
-    void on_pushButtonValidationModification_clicked();
+//    void on_pushButtonValidationModification_clicked();
 
     void on_pushButtonRecupererRowId_clicked();
 
@@ -58,7 +57,6 @@ private:
     bool verificationLogin();
 
     //Permet d'afficher tout le stock
-    //En cour de dev
     void creationVuStock();
 
     //Permet de renvoyer un popup pour avertir l'utilisateur si

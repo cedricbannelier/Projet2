@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <login.h>
+#include <database.h>
 
 int main(int argc, char *argv[])
 {
@@ -7,6 +9,18 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow;
 
-    return application.exec();
+    Login fenetreDeLogin;
+//    Database bdd;
 
+//    bdd.CreateDatabase();
+    if (fenetreDeLogin.exec() == QDialog::Accepted)
+    {
+        mainWindow.show();
+        return application.exec();
+    }
+    else
+    {
+        application.quit();
+    }
+    return 0;
 }

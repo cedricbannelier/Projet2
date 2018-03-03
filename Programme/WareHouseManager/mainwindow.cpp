@@ -1,9 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMenu>
-
 #include <iostream>
-
 #include <QInputDialog>
 
 #include "produit.h"
@@ -39,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QMenu *menuAide = menuBar()->addMenu("&Aide");
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
-
+/*
         this->afficheFenetreLogin();
 
 
@@ -51,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         {
             this->show();
         }
+*/
 }
 
 MainWindow::~MainWindow()
@@ -82,16 +81,11 @@ void MainWindow::afficheFenetreLogin()
 
     if(fenetreLogin->exec() == QDialog::Accepted)
     {
-
-       do
-       {
-            labelAvertissement->show();
-            labelAvertissement->setText("Mauvais login ou mot de passe");
-
-       }while(verificationLogin() == false);
-
-
-
+        if(verificationLogin() == false)
+        {
+                 labelAvertissement->show();
+                 labelAvertissement->setText("Mauvais login ou mot de passe");
+         }
     }
     else
     {
@@ -166,7 +160,8 @@ void MainWindow::on_boutonAjoutArticle_clicked()
     Produit* produit = new Produit(ui->lineEditAjoutCodeArticle->text(),
                                    ui->lineEditAjoutDesignationArticle->text(),
                                    ui->lineEditAjoutPoidsArticle->text(),
-                                   ui->lineEditAjoutEmplacementArticle->text());
+                                   ui->lineEditAjoutEmplacementArticle->text(),
+                                   ui->comboBoxDimensionEmballage->currentIndex()+1);
 
     bdd.InsertProduit(*produit);
 
@@ -220,7 +215,7 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 
      bdd.AjoutUtilisateur(*nouvelUtilistateur);
 }
-
+/*
 void MainWindow::on_pushButtonValidationModification_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Validation de modification mainwindow.CPP" << std::endl;
@@ -228,11 +223,12 @@ void MainWindow::on_pushButtonValidationModification_clicked()
     Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text(),
                                    ui->lineEditModificationDesignationArticle->text(),
                                    ui->lineEditModificationPoidsArticle->text(),
-                                   ui->lineEditModificationEmplacementArticle->text());
+                                   ui->lineEditModificationEmplacementArticle->text(),
+                                   QString(ui->comboBoxModifierDimensionEmballage->currentText()));
 
     bdd.UpdateProduit(*produit);
 }
-
+*/
 void MainWindow::on_pushButtonRecupererRowId_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Recuperer RowId mainwindow.CPP" << std::endl;

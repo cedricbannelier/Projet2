@@ -78,7 +78,6 @@ void Database::CreateDatabase()
                "FOREIGN KEY(`idConstructeur`) REFERENCES `constructeur`(`ROWID`),"
                "FOREIGN KEY(`idArticle`) REFERENCES `article`(`ROWID`)"
                ");");
-
    m_bdd.close();
 }
 
@@ -87,12 +86,13 @@ void Database::InsertProduit(Produit& produitAInserDansLaBdd)
     std::cout << "MODE DEBUG : Dans insertproduit" << std::endl;
     m_bdd.open();
     QSqlQuery query;
-    query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle)"
-                  "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle);");
+    query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage)"
+                  "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle, :idEmballage);");
     query.bindValue(":codeArticle", produitAInserDansLaBdd.GetCodeArticle());
     query.bindValue(":designationArticle", produitAInserDansLaBdd.GetDesignationArticle());
     query.bindValue(":poisArticle", produitAInserDansLaBdd.GetPoidsArticle());
     query.bindValue(":emplacementArticle", produitAInserDansLaBdd.GetEmplacementArticle());
+    query.bindValue(":idEmballage", produitAInserDansLaBdd.GetEmballage());
     query.exec();
     m_bdd.close();
 }
@@ -304,6 +304,8 @@ VALUES ('poire', 'poire rouge', 10, 'B1A2C', 2);
 
 INSERT INTO emballage (typeEmballage, hauteurEmballage, largeurEmballage, longueurEmballage)
 VALUES ('carton',100,750,50);
+INSERT INTO emballage (typeEmballage, hauteurEmballage, largeurEmballage, longueurEmballage)
+VALUES ('carton',50,25,50);
 
 SELECT codeArticle as Référence, designationArticle as Libelle, poidsArticle as Poids, emplacementArticle as 'Empl.', typeEmballage as Type, hauteurEmballage as H, largeurEmballage as l, profondeurEmballage as P
 FROM article, emballage

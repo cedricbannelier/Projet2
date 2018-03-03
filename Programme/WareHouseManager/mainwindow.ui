@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -79,10 +79,10 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <layout class="QGridLayout" name="gridLayout_5">
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEditAjoutDesignationArticle">
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditAjoutCodeArticle">
            <property name="placeholderText">
-            <string>Libelle</string>
+            <string>Article</string>
            </property>
           </widget>
          </item>
@@ -96,10 +96,17 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditAjoutCodeArticle">
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lineEditAjoutDesignationArticle">
            <property name="placeholderText">
-            <string>Article</string>
+            <string>Libelle</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="labelAjouterPoidsArticle">
+           <property name="text">
+            <string>Poids (gramme)</string>
            </property>
           </widget>
          </item>
@@ -110,64 +117,47 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_8">
-           <property name="text">
-            <string>Type emballage</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QComboBox" name="comboBox">
-           <item>
-            <property name="text">
-             <string>Carton</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Palette</string>
-            </property>
-           </item>
-          </widget>
-         </item>
          <item row="0" column="0">
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="labelAjouterCodeArticle">
            <property name="text">
             <string>Code Article</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="text">
-            <string>Poids (gramme)</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_3">
+          <widget class="QLabel" name="labelAjouterDesignationArticle">
            <property name="text">
             <string>Libelle</string>
            </property>
           </widget>
          </item>
+         <item row="4" column="1">
+          <widget class="QComboBox" name="comboBoxDimensionEmballage">
+           <item>
+            <property name="text">
+             <string>C : 50 * 750 * 700</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>C : 50 * 25 * 50</string>
+            </property>
+           </item>
+          </widget>
+         </item>
          <item row="3" column="0">
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="labelAjouterEmplacementArticle">
            <property name="text">
             <string>Emplacement</string>
            </property>
           </widget>
          </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="label_13">
+         <item row="4" column="0">
+          <widget class="QLabel" name="labelAjouterDimensionEmballage">
            <property name="text">
-            <string>Dimension</string>
+            <string>Dimension L * l * h</string>
            </property>
           </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QComboBox" name="comboBoxDimensionEmballage"/>
          </item>
         </layout>
        </item>
@@ -239,7 +229,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>291</width>
+        <width>441</width>
         <height>31</height>
        </rect>
       </property>
@@ -266,83 +256,91 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="gridLayoutWidget_7">
+     <widget class="QWidget" name="verticalLayoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>90</y>
-        <width>251</width>
-        <height>119</height>
+        <x>10</x>
+        <y>50</y>
+        <width>441</width>
+        <height>241</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_7">
-       <item row="2" column="0">
-        <widget class="QLabel" name="ModificationEmplacement_2">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="ModificationEmplacement_2">
+           <property name="text">
+            <string>Désignation</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="ModificationCodeArticle">
+           <property name="text">
+            <string>Code article</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEditModificationPoidsArticle">
+           <property name="inputMask">
+            <string>9999.99</string>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="ModificationEmplacement_3">
+           <property name="text">
+            <string>Poids</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="ModificationEmplacement">
+           <property name="text">
+            <string>Emplacement</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="labelModifierDimensionEmballage">
+           <property name="text">
+            <string>Dimension L * l * h</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QComboBox" name="comboBoxModifierDimensionEmballage"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonValidationModification">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="text">
-          <string>Désignation</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
-       </item>
-       <item row="4" column="1">
-        <widget class="QLineEdit" name="lineEditModificationPoidsArticle">
-         <property name="inputMask">
-          <string>9999.99</string>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="ModificationCodeArticle">
-         <property name="text">
-          <string>Code article</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="ModificationEmplacement">
-         <property name="text">
-          <string>Emplacement</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="ModificationEmplacement_3">
-         <property name="text">
-          <string>Poids</string>
+          <string>Valider</string>
          </property>
         </widget>
        </item>
       </layout>
-     </widget>
-     <widget class="QPushButton" name="pushButtonValidationModification">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>220</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Valider</string>
-      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabRechercher">

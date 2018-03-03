@@ -13,6 +13,10 @@ class Database
 public:
     Database();
 
+
+    //Création de m_bdd
+    QSqlDatabase m_bdd;
+
     //Création de la base de donnée
     void CreateDatabase();
 
@@ -55,8 +59,8 @@ public:
 
 private:
 
-    //Création de m_bdd
-    QSqlDatabase m_bdd;
+
+
 };
 
 
