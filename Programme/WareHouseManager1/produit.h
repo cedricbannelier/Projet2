@@ -21,6 +21,7 @@ public:
     void SetPoidsArticle(QString poidsA);
     void SetEmplacementArticle(QString emplacementA);
 
+
 private:
     int id;
     QString codeArticle;

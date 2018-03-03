@@ -6,7 +6,7 @@
 
 QT += sql
 
-# QT       += core gui
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,17 +31,15 @@ SOURCES += \
     database.cpp \
     produit.cpp \
     utilisateur.cpp \
-    fenetrelogin.cpp
+    login.cpp
 
 HEADERS += \
         mainwindow.h \
     database.h \
     produit.h \
     utilisateur.h \
-    fenetrelogin.h
+    login.h
 
 FORMS += \
-        mainwindow.ui
-
-RESOURCES += \
-    icone.qrc
+        mainwindow.ui \
+    login.ui
