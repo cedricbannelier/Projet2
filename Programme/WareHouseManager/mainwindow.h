@@ -9,6 +9,7 @@
 #include <QDialogButtonBox>
 #include <QMessageBox>
 #include <QLabel>
+#include <QTableView>
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +48,10 @@ private slots:
 
     void on_pushButtonRecupererRowId_clicked();
 
+    void on_AjoutEmballage_clicked();
+
+    void on_ButonAfficheStockComplet_clicked();
+
 private:
     //Permet de vérifier si le login est bien dans la base de donnée
     //En cours de dev
@@ -76,6 +81,7 @@ private:
     QLineEdit * motDePasse = new QLineEdit();
     QDialogButtonBox * buttonBox = new QDialogButtonBox(
                 QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-};
+
+ };
 
 #endif // MAINWINDOW_H

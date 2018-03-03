@@ -6,6 +6,7 @@
 #include <vector>
 #include "produit.h"
 #include "utilisateur.h"
+#include "emballage.h"
 
 class Database
 {
@@ -47,6 +48,10 @@ public:
     void AjoutUtilisateur(Utilisateur& user);
 
     int RecupererRowIdTableArticle(QString codeArticle);
+
+    bool AjoutEmballage(Emballage& nouvelEmballage);
+
+    void AfficheLeStock();
 
 private:
 

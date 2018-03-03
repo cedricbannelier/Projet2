@@ -9,6 +9,7 @@
 #include "produit.h"
 #include "Database.h"
 #include "utilisateur.h"
+#include "emballage.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -39,7 +40,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
 
-        this->hide();
         this->afficheFenetreLogin();
 
 
@@ -69,7 +69,6 @@ void MainWindow::afficheFenetreLogin()
     boxLayout->addWidget(motDePasse);
     boxLayout->addWidget(buttonBox);
 
-
     labelBienvenue->setText("WareHouseManager");
     labelBienvenue->setFont(QFont( "Helvetica", 24));
 
@@ -79,34 +78,25 @@ void MainWindow::afficheFenetreLogin()
     motDePasse->setPlaceholderText("Mot de passe");
     motDePasse->setEchoMode(QLineEdit::Password);
 
-    login->setFocus();
-
     fenetreLogin->setLayout(boxLayout);
 
-    int result = fenetreLogin->exec();
-    MainWindow::hide();
-
-
-
-    if(result == QDialog::Accepted)
+    if(fenetreLogin->exec() == QDialog::Accepted)
     {
-        bool a = verificationLogin();
-        qDebug() << "OK";
-        if(a)
-        {
-            MainWindow::show();
-        }
-        else{
+
+       do
+       {
             labelAvertissement->show();
             labelAvertissement->setText("Mauvais login ou mot de passe");
-        }
+
+       }while(verificationLogin() == false);
+
+
 
     }
     else
     {
         fermeFenetre= true;
         qDebug() << "Cancel";
-
     }
 }
 
@@ -180,6 +170,12 @@ void MainWindow::on_boutonAjoutArticle_clicked()
 
     bdd.InsertProduit(*produit);
 
+    //Vide les champs après l'insertion
+    ui->lineEditAjoutCodeArticle->clear();
+    ui->lineEditAjoutDesignationArticle->clear();
+    ui->lineEditAjoutPoidsArticle->clear();
+    ui->lineEditAjoutEmplacementArticle->clear();
+
 }
 
 //Supprime un article dans la base de donnée
@@ -244,4 +240,36 @@ void MainWindow::on_pushButtonRecupererRowId_clicked()
     int id = bdd.RecupererRowIdTableArticle(ui->lineEditCodeArticlePourRowId->text());
 
     std::cout << id << std::endl;
+}
+
+void MainWindow::on_AjoutEmballage_clicked()
+{
+    std::cout << "MODE DEBUG : Dans la methode ajouter emballage mainwindow.CPP" << std::endl;
+
+    Emballage* nouvelEmballage = new Emballage(ui->comboBoxTypeEmballage->currentText(),
+                                               ui->comboBoxHauteurEmballage->currentText().toInt(),
+                                               ui->comboBoxLargeurEmballage->currentText().toInt(),
+                                               ui->comboBoxLongueurEmballage->currentText().toInt());
+
+    bdd.AjoutEmballage(*nouvelEmballage);
+
+}
+
+void MainWindow::on_ButonAfficheStockComplet_clicked()
+{
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
+    bdd.OpenDatabase();
+    QSqlQuery* query = new QSqlQuery();
+
+    query->prepare("SELECT codeArticle as Référence, designationArticle as Libelle, poidsArticle as Poids, emplacementArticle as 'Empl.', "
+                   "typeEmballage as Type, hauteurEmballage as H, largeurEmballage as l, longueurEmballage as L FROM article, emballage "
+                   "WHERE article.idEmballage = emballage.idEmballage");
+    query->exec();
+    modal->setQuery(*query);
+    ui->tableView->setModel(modal);
+
+    bdd.CloseDatabase();
+
+
 }

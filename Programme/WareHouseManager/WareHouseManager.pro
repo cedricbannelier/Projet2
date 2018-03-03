@@ -31,17 +31,20 @@ SOURCES += \
     database.cpp \
     produit.cpp \
     utilisateur.cpp \
-    fenetrelogin.cpp
+    emballage.cpp \
+    login.cpp
 
 HEADERS += \
         mainwindow.h \
     database.h \
     produit.h \
     utilisateur.h \
-    fenetrelogin.h
+    emballage.h \
+    login.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    login.ui
 
 RESOURCES += \
     icone.qrc
