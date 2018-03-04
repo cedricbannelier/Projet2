@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QMenu *menuAide = menuBar()->addMenu("&Aide");
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
+
+        this->miseAJour();
 /*
         this->afficheFenetreLogin();
 
@@ -99,13 +101,14 @@ void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
 {
     if(etatQuery)
     {
-       QMessageBox::warning(this, "Etat de la requete",
-                            "La requete n'est pas passée !",QMessageBox::Ok);
+        QMessageBox::information(this, "Etat de la requete",
+                                 "Article supprimé !",QMessageBox::Ok);
+
     }
     else
     {
-        QMessageBox::information(this, "Etat de la requete",
-                                 "Article supprimée !",QMessageBox::Ok);
+        QMessageBox::warning(this, "Etat de la requete",
+                             "La requete n'est pas passée !",QMessageBox::Ok);
    }
 }
 
@@ -133,6 +136,7 @@ bool MainWindow::verificationLogin()
             }
 
         }
+        return 0;
 }
 
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
@@ -148,6 +152,7 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
             ui->afficheDesignationArticle ->setText((*produits)[i]->GetDesignationArticle());
             ui->affichePoidsArticle->setText((*produits)[i]->GetPoidsArticle());
             ui->afficheEmplacementArticle->setText((*produits)[i]->GetEmplacementArticle());
+            ui->afficheEmballageArticle->setText((*produits)[i]->GetEmballageArticle());
         }
 }
 
@@ -161,16 +166,32 @@ void MainWindow::on_boutonAjoutArticle_clicked()
                                    ui->lineEditAjoutDesignationArticle->text(),
                                    ui->lineEditAjoutPoidsArticle->text(),
                                    ui->lineEditAjoutEmplacementArticle->text(),
-                                   ui->comboBoxDimensionEmballage->currentIndex()+1);
+                                   ui->comboBoxDimensionEmballage->currentText());
 
-    bdd.InsertProduit(*produit);
+    if(ui->lineEditAjoutCodeArticle->text() == NULL ||
+       ui->lineEditAjoutDesignationArticle->text() == NULL ||
+       ui->lineEditAjoutPoidsArticle->text() == NULL ||
+       ui->lineEditAjoutEmplacementArticle->text() == NULL)
+    {
+        QMessageBox::warning(this, "Warning", "Veuillez remplir tous les champs",QMessageBox::Ok);
+    }
+    else
+        if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text()) == false)
+        {
+        QMessageBox::warning(this, "Warning", "Le code article est déjà présent dans la base de données",QMessageBox::Ok);
+    }
+    else
+    {
+        bdd.InsertProduit(*produit);
 
-    //Vide les champs après l'insertion
-    ui->lineEditAjoutCodeArticle->clear();
-    ui->lineEditAjoutDesignationArticle->clear();
-    ui->lineEditAjoutPoidsArticle->clear();
-    ui->lineEditAjoutEmplacementArticle->clear();
+        //Vide les champs après l'insertion
+        ui->lineEditAjoutCodeArticle->clear();
+        ui->lineEditAjoutDesignationArticle->clear();
+        ui->lineEditAjoutPoidsArticle->clear();
+        ui->lineEditAjoutEmplacementArticle->clear();
 
+        QMessageBox::information(this, "Information", "Votre article a bien été ajouté dans la base de données",QMessageBox::Ok);
+    }
 }
 
 //Supprime un article dans la base de donnée
@@ -178,9 +199,22 @@ void MainWindow::on_boutonSupprimer_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton supprimer d'un article mainwindow.CPP" << std::endl;
 
-//    bdd.deleteProduit(ui->lineEditSupprimerArticle->text());
+    if(ui->lineEditSupprimerArticle->text() == NULL)
+    {
+        QMessageBox::warning(this, "Warning", "Veuillez saisir un code article",QMessageBox::Ok);
+    }
+    else
+    if(bdd.ArticlePresentDansLaBddAvecId(ui->lineEditSupprimerArticle->text()) == false)
+    {
+        QMessageBox::warning(this, "Warning", "Le code article saisi n'est pas dans la base de données",QMessageBox::Ok);
+    }
+    else
+    {
+        bdd.DeleteProduit(ui->lineEditSupprimerArticle->text());
+        QMessageBox::information(this, "Information", "Votre article a été supprimé avec succès",QMessageBox::Ok);
+    }
 
-    popupQueryIsOkOrNot(bdd.DeleteProduit(ui->lineEditSupprimerArticle->text()));
+ //   popupQueryIsOkOrNot(bdd.DeleteProduit(ui->lineEditSupprimerArticle->text()));
 }
 //En cours de dev
 
@@ -202,6 +236,7 @@ void MainWindow::on_boutonModifier_clicked()
                 setText((*produits)[i]->GetPoidsArticle());
         ui->lineEditModificationEmplacementArticle->
                 setText((*produits)[i]->GetEmplacementArticle());
+        ui->comboBoxModifierDimensionEmballage->addItem((*produits)[i]->GetEmballageArticle());
     }
 }
 
@@ -215,7 +250,7 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 
      bdd.AjoutUtilisateur(*nouvelUtilistateur);
 }
-/*
+
 void MainWindow::on_pushButtonValidationModification_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Validation de modification mainwindow.CPP" << std::endl;
@@ -224,11 +259,11 @@ void MainWindow::on_pushButtonValidationModification_clicked()
                                    ui->lineEditModificationDesignationArticle->text(),
                                    ui->lineEditModificationPoidsArticle->text(),
                                    ui->lineEditModificationEmplacementArticle->text(),
-                                   QString(ui->comboBoxModifierDimensionEmballage->currentText()));
+                                   ui->comboBoxModifierDimensionEmballage->currentText());
 
     bdd.UpdateProduit(*produit);
 }
-*/
+
 void MainWindow::on_pushButtonRecupererRowId_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Recuperer RowId mainwindow.CPP" << std::endl;
@@ -259,13 +294,32 @@ void MainWindow::on_ButonAfficheStockComplet_clicked()
     QSqlQuery* query = new QSqlQuery();
 
     query->prepare("SELECT codeArticle as Référence, designationArticle as Libelle, poidsArticle as Poids, emplacementArticle as 'Empl.', "
-                   "typeEmballage as Type, hauteurEmballage as H, largeurEmballage as l, longueurEmballage as L FROM article, emballage "
-                   "WHERE article.idEmballage = emballage.idEmballage");
+                   "typeEmballage as Type, hauteurEmballage as H, largeurEmballage as l, longueurEmballage as L, qteStock as QTE "
+                   "FROM article, emballage, consulter "
+                   "WHERE article.idEmballage = emballage.idEmballage "
+                   "AND article.idArticle = consulter.idArticle");
+
     query->exec();
     modal->setQuery(*query);
     ui->tableView->setModel(modal);
 
     bdd.CloseDatabase();
+}
 
+void MainWindow::miseAJour()
+{
+        bdd.OpenDatabase();
 
+        QSqlQuery query;
+
+        query.exec("SELECT * FROM emballage;");
+        int i = 0;
+
+        while(query.next())
+        {
+            ui->comboBoxDimensionEmballage->addItem(query.value(0).toString(), i);
+            i++;
+
+        }
+        bdd.CloseDatabase();
 }

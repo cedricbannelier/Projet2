@@ -35,10 +35,11 @@ void Database::CreateDatabase()
     QSqlQuery query;
 
    query.exec("CREATE TABLE IF NOT EXISTS `utilisateur` ("
-               "`login`	TEXT NOT NULL,"
-               "`motDePasseUtilisateur`TEXT NOT NULL,"
-               "'droitUtilisateur' INTEGER NOT NULL"
-               ");");
+              "idUtilisateur INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+              "`login`	TEXT NOT NULL,"
+              "`motDePasseUtilisateur`TEXT NOT NULL,"
+              "'droitUtilisateur' INTEGER NOT NULL"
+              ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `article` ("
                "idArticle INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
@@ -64,11 +65,12 @@ void Database::CreateDatabase()
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `consulter` ("
+               "idConsulter INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "qteStock TEXT NOT NULL,"
                "`idUtilisateur` INTEGER NOT NULL,"
                "`idArticle` INTEGER NOT NULL,"
-               "FOREIGN KEY(`idUtilisateur`) REFERENCES `utilisateur`(`ROWID`),"
-               "FOREIGN KEY(`idArticle`) REFERENCES `article`(`ROWID`)"
+               "FOREIGN KEY(`idUtilisateur`) REFERENCES `utilisateur`(`idUtilisateur`),"
+               "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `livrer` ("
@@ -92,7 +94,7 @@ void Database::InsertProduit(Produit& produitAInserDansLaBdd)
     query.bindValue(":designationArticle", produitAInserDansLaBdd.GetDesignationArticle());
     query.bindValue(":poisArticle", produitAInserDansLaBdd.GetPoidsArticle());
     query.bindValue(":emplacementArticle", produitAInserDansLaBdd.GetEmplacementArticle());
-    query.bindValue(":idEmballage", produitAInserDansLaBdd.GetEmballage());
+    query.bindValue(":idEmballage", produitAInserDansLaBdd.GetEmballageArticle());
     query.exec();
     m_bdd.close();
 }
@@ -159,7 +161,9 @@ QVector<Produit*>* Database::AfficheUnProduit(QString codeArticle)
     m_bdd.open();
     QVector<Produit*>* produits = new QVector<Produit*>;
     QSqlQuery query;
-    query.prepare("SELECT * FROM article WHERE codeArticle = :codeArticle;");
+    query.prepare("SELECT codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage "
+                  "FROM article "
+                  "WHERE codeArticle = :codeArticle;");
     query.bindValue(":codeArticle", codeArticle);
     query.exec();
     do
@@ -172,6 +176,7 @@ QVector<Produit*>* Database::AfficheUnProduit(QString codeArticle)
             produit->SetDesignationArticle(query.value(1).toString());
             produit->SetPoidsArticle(query.value(2).toString());
             produit->SetEmplacementArticle(query.value(3).toString());
+            produit->SetEmballageArticle(query.value(4).toString());
 
         }
     }while(query.next());
@@ -292,6 +297,66 @@ bool Database::AjoutEmballage(Emballage&nouvelEmballage)
     m_bdd.close();
 
     return true;
+}
+
+bool Database::ArticlePresentDansLaBddAvecId(QString codeArticle)
+{
+    std::cout << "MODE DEBUG : Dans Verification si article present dans la BDD database.CPP" << std::endl;
+
+    m_bdd.open();
+
+    QSqlQuery query;
+    query.prepare("SELECT idArticle "
+                  "FROM article "
+                  "WHERE codeArticle=:codeArticle;");
+    query.bindValue(":codeArticle", codeArticle);
+    query.exec();
+
+    query.next();
+
+    int presenceDansLaBdd = query.value(0).toInt();
+
+    if(presenceDansLaBdd == 0)
+     {
+        m_bdd.close();
+        return false;
+     }
+     else
+     {
+
+        m_bdd.close();
+        return true;
+     }
+}
+
+bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
+{
+    std::cout << "MODE DEBUG : Dans Verification si article present dans la BDD database.CPP" << std::endl;
+
+    m_bdd.open();
+
+    QSqlQuery query;
+    query.prepare("SELECT codeArticle "
+                  "FROM article "
+                  "WHERE codeArticle=:codeArticle;");
+    query.bindValue(":codeArticle", codeArticle);
+    query.exec();
+
+    query.next();
+
+    QString presenceDansLaBdd = query.value(0).toString();
+
+    if(presenceDansLaBdd == codeArticle)
+     {
+        m_bdd.close();
+        return false;
+     }
+     else
+     {
+
+        m_bdd.close();
+        return true;
+     }
 }
 
 /*

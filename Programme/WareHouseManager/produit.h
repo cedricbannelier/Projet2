@@ -8,20 +8,20 @@ class Produit
 {
 public:
     Produit();
-    Produit(QString codeA, QString designationA, QString poidsA, QString emplacementA, int emballageA);
+    Produit(QString codeA, QString designationA, QString poidsA, QString emplacementA, QString emballageA);
 
     QString GetCodeArticle();
     QString GetDesignationArticle();
     QString GetPoidsArticle();
     QString GetEmplacementArticle();
-    int GetEmballage();
+    QString GetEmballageArticle();
     int GetId();
 
     void SetCodeArticle(QString codeA);
     void SetDesignationArticle(QString designationA);
     void SetPoidsArticle(QString poidsA);
     void SetEmplacementArticle(QString emplacementA);
-    void SetEmballage(int emballageA);
+    void SetEmballageArticle(QString emballageA);
 
 private:
     int id;
@@ -29,7 +29,7 @@ private:
     QString designationArticle;
     QString poidsArticle;
     QString emplacementArticle;
-    int emballage;
+    QString emballageArticle;
 };
 
 #endif // PRODUIT_H

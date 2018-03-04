@@ -57,6 +57,8 @@ public:
 
     void AfficheLeStock();
 
+    bool ArticlePresentDansLaBddAvecId(QString codeArticle);
+    bool ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle);
 private:
 
 

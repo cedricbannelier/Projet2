@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -89,7 +89,7 @@
          <item row="2" column="1">
           <widget class="QLineEdit" name="lineEditAjoutPoidsArticle">
            <property name="inputMask">
-            <string>9999.99</string>
+            <string/>
            </property>
            <property name="placeholderText">
             <string>Poids</string>
@@ -106,7 +106,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="labelAjouterPoidsArticle">
            <property name="text">
-            <string>Poids (gramme)</string>
+            <string>Poids</string>
            </property>
           </widget>
          </item>
@@ -133,16 +133,9 @@
          </item>
          <item row="4" column="1">
           <widget class="QComboBox" name="comboBoxDimensionEmballage">
-           <item>
-            <property name="text">
-             <string>C : 50 * 750 * 700</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>C : 50 * 25 * 50</string>
-            </property>
-           </item>
+           <property name="modelColumn">
+            <number>0</number>
+           </property>
           </widget>
          </item>
          <item row="3" column="0">
@@ -426,17 +419,17 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="afficheCodeArticle">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Poids</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="afficheCodeArticle">
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -447,24 +440,17 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="codeArticle">
-         <property name="text">
-          <string>Code article</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="afficheDesignationArticle">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="affichePoidsArticle">
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="codeArticle">
+         <property name="text">
+          <string>Code article</string>
          </property>
         </widget>
        </item>
@@ -477,6 +463,27 @@
        </item>
        <item row="3" column="1">
         <widget class="QLineEdit" name="afficheEmplacementArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="afficheDesignationArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Emballage</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="afficheEmballageArticle">
          <property name="readOnly">
           <bool>true</bool>
          </property>

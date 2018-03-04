@@ -5,13 +5,13 @@ Produit::Produit()
 
 }
 
-Produit::Produit(QString codeA, QString designationA, QString poidsA, QString emplacementA, int emballageA)
+Produit::Produit(QString codeA, QString designationA, QString poidsA, QString emplacementA, QString emballageA)
 {
     this->codeArticle = codeA;
     this->designationArticle = designationA;
     this->poidsArticle = poidsA;
     this->emplacementArticle = emplacementA;
-    this->emballage = emballageA;
+    this->emballageArticle = emballageA;
 }
 
 QString Produit::GetCodeArticle()
@@ -39,9 +39,9 @@ int Produit::GetId()
     return this->id;
 }
 
-int Produit::GetEmballage()
+QString Produit::GetEmballageArticle()
 {
-    return this->emballage;
+    return this->emballageArticle;
 }
 
 void Produit::SetCodeArticle(QString codeA)
@@ -61,7 +61,7 @@ void Produit::SetEmplacementArticle(QString emplacementA)
 {
     this->emplacementArticle = emplacementA;
 }
-void Produit::SetEmballage(int emballageA)
+void Produit::SetEmballageArticle(QString emballageA)
 {
-    this->emballage = emballageA;
+    this->emballageArticle = emballageA;
 }
