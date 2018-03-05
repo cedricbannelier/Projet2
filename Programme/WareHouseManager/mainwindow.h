@@ -53,6 +53,7 @@ private slots:
 
     //Permet de mettre à jour les combobox
     void miseAJour();
+
 private:
     //Permet de vérifier si le login est bien dans la base de donnée
     //En cours de dev

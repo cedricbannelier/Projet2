@@ -143,14 +143,14 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
 
-        QString codeArticle = ui->lineEditRechercher->text();
+        QString codeArticle = ui->lineEditRechercher->text().toUpper();
         QVector<Produit*>* produits = bdd.AfficheUnProduit(codeArticle);
 
         for (int i = 0; i < produits->size(); i++)
         {
             ui->afficheCodeArticle->setText((*produits)[i]->GetCodeArticle());
             ui->afficheDesignationArticle ->setText((*produits)[i]->GetDesignationArticle());
-            ui->affichePoidsArticle->setText((*produits)[i]->GetPoidsArticle());
+            ui->affichePoidsArticle->setText(QString::number((*produits)[i]->GetPoidsArticle()));
             ui->afficheEmplacementArticle->setText((*produits)[i]->GetEmplacementArticle());
             ui->afficheEmballageArticle->setText((*produits)[i]->GetEmballageArticle());
         }
@@ -162,9 +162,10 @@ void MainWindow::on_boutonAjoutArticle_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article mainwindow.CPP" << std::endl;
 
-    Produit* produit = new Produit(ui->lineEditAjoutCodeArticle->text(),
+
+    Produit* produit = new Produit(ui->lineEditAjoutCodeArticle->text().toUpper(),
                                    ui->lineEditAjoutDesignationArticle->text(),
-                                   ui->lineEditAjoutPoidsArticle->text(),
+                                   ui->lineEditAjoutPoidsArticle->text().toInt(),
                                    ui->lineEditAjoutEmplacementArticle->text(),
                                    ui->comboBoxDimensionEmballage->currentText());
 
@@ -176,7 +177,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
         QMessageBox::warning(this, "Warning", "Veuillez remplir tous les champs",QMessageBox::Ok);
     }
     else
-        if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text()) == false)
+        if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text().toUpper()) == false)
         {
         QMessageBox::warning(this, "Warning", "Le code article est déjà présent dans la base de données",QMessageBox::Ok);
     }
@@ -199,30 +200,30 @@ void MainWindow::on_boutonSupprimer_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton supprimer d'un article mainwindow.CPP" << std::endl;
 
-    if(ui->lineEditSupprimerArticle->text() == NULL)
+    if(ui->lineEditSupprimerArticle->text().toUpper() == NULL)
     {
         QMessageBox::warning(this, "Warning", "Veuillez saisir un code article",QMessageBox::Ok);
     }
     else
-    if(bdd.ArticlePresentDansLaBddAvecId(ui->lineEditSupprimerArticle->text()) == false)
+    if(bdd.ArticlePresentDansLaBddAvecId(ui->lineEditSupprimerArticle->text().toUpper()) == false)
     {
         QMessageBox::warning(this, "Warning", "Le code article saisi n'est pas dans la base de données",QMessageBox::Ok);
     }
     else
     {
-        bdd.DeleteProduit(ui->lineEditSupprimerArticle->text());
+        bdd.DeleteProduit(ui->lineEditSupprimerArticle->text().toUpper());
         QMessageBox::information(this, "Information", "Votre article a été supprimé avec succès",QMessageBox::Ok);
     }
 
  //   popupQueryIsOkOrNot(bdd.DeleteProduit(ui->lineEditSupprimerArticle->text()));
 }
-//En cours de dev
 
+//En cours de dev
 void MainWindow::on_boutonModifier_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton modifier d'un article mainwindow.CPP" << std::endl;
 
-    QString codeArticle = ui->lineEditModifierArticle->text();
+    QString codeArticle = ui->lineEditModifierArticle->text().toUpper();
 
     QVector<Produit*>* produits = bdd.AfficheUnProduit(codeArticle);
 
@@ -233,13 +234,14 @@ void MainWindow::on_boutonModifier_clicked()
         ui->lineEditModificationDesignationArticle->
                 setText((*produits)[i]->GetDesignationArticle());
         ui->lineEditModificationPoidsArticle->
-                setText((*produits)[i]->GetPoidsArticle());
+                setText(QString::number((*produits)[i]->GetPoidsArticle()));
         ui->lineEditModificationEmplacementArticle->
                 setText((*produits)[i]->GetEmplacementArticle());
         ui->comboBoxModifierDimensionEmballage->addItem((*produits)[i]->GetEmballageArticle());
     }
 }
 
+//Création d'un utilisateur
 void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 {
      std::cout << "MODE DEBUG : Dans la methode creation utilisateur mainwindow.CPP" << std::endl;
@@ -251,19 +253,21 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
      bdd.AjoutUtilisateur(*nouvelUtilistateur);
 }
 
+//Mise à jour d'un article
 void MainWindow::on_pushButtonValidationModification_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Validation de modification mainwindow.CPP" << std::endl;
 
-    Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text(),
+    Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text().toUpper(),
                                    ui->lineEditModificationDesignationArticle->text(),
-                                   ui->lineEditModificationPoidsArticle->text(),
+                                   ui->lineEditModificationPoidsArticle->text().toInt(),
                                    ui->lineEditModificationEmplacementArticle->text(),
                                    ui->comboBoxModifierDimensionEmballage->currentText());
 
     bdd.UpdateProduit(*produit);
 }
 
+//Permet de récuperer l'ID d'un article
 void MainWindow::on_pushButtonRecupererRowId_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Recuperer RowId mainwindow.CPP" << std::endl;
@@ -283,9 +287,12 @@ void MainWindow::on_AjoutEmballage_clicked()
                                                ui->comboBoxLongueurEmballage->currentText().toInt());
 
     bdd.AjoutEmballage(*nouvelEmballage);
+    miseAJour();
 
 }
 
+
+//Affiche tout le stock meme avec des quantités à NULL ou à zéro
 void MainWindow::on_ButonAfficheStockComplet_clicked()
 {
     QSqlQueryModel * modal = new QSqlQueryModel();
@@ -293,19 +300,21 @@ void MainWindow::on_ButonAfficheStockComplet_clicked()
     bdd.OpenDatabase();
     QSqlQuery* query = new QSqlQuery();
 
-    query->prepare("SELECT codeArticle as Référence, designationArticle as Libelle, poidsArticle as Poids, emplacementArticle as 'Empl.', "
-                   "typeEmballage as Type, hauteurEmballage as H, largeurEmballage as l, longueurEmballage as L, qteStock as QTE "
-                   "FROM article, emballage, consulter "
-                   "WHERE article.idEmballage = emballage.idEmballage "
-                   "AND article.idArticle = consulter.idArticle");
+    query->prepare("SELECT consulter.qteStock as QTE, article.codeArticle as Référence, article.designationArticle as Libelle, "
+                   "article.poidsArticle as Poids, article.emplacementArticle as Empl, emballage.typeEmballage as Type, "
+                   "emballage.hauteurEmballage as H, emballage.largeurEmballage as l, longueurEmballage as L "
+                   "FROM article "
+                   "LEFT JOIN consulter ON article.idArticle = consulter.idArticle "
+                   "LEFT JOIN emballage ON article.idEmballage = emballage.idEmballage");
 
-    query->exec();
+    query->exec();    
     modal->setQuery(*query);
     ui->tableView->setModel(modal);
-
     bdd.CloseDatabase();
+
 }
 
+//Permet de selectionner tous les types d'emballage et affiche l'ID
 void MainWindow::miseAJour()
 {
         bdd.OpenDatabase();
@@ -315,6 +324,10 @@ void MainWindow::miseAJour()
         query.exec("SELECT * FROM emballage;");
         int i = 0;
 
+        //On vide la combobox
+        ui->comboBoxDimensionEmballage->clear();
+
+        //On remplit la comobox
         while(query.next())
         {
             ui->comboBoxDimensionEmballage->addItem(query.value(0).toString(), i);

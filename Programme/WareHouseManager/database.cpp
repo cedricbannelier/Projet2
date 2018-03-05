@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <QMessageBox>
+ #include <QCoreApplication>
 
 #include "Database.h"
 
@@ -30,6 +31,8 @@ void Database::CreateDatabase()
 
     //Création de la base de données
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");
+//    QString dbPath = QCoreApplication::applicationDirPath() + "/warehousedb.db";
+//    m_bdd.setDatabaseName(dbPath);
     m_bdd.setDatabaseName("c:/warehousebd/warehousedb.db");
     m_bdd.open();
     QSqlQuery query;
@@ -110,7 +113,7 @@ bool Database::DeleteProduit(const QString& codeArticle)
     QSqlQuery query;
     query.prepare("DELETE FROM article "
                   "WHERE codeArticle=:codeArticle;");
-    query.bindValue(":codeArticle", codeArticle);
+    query.bindValue(":codeArticle", codeArticle.toUpper());
 
     if(query.exec())
            {
@@ -174,7 +177,7 @@ QVector<Produit*>* Database::AfficheUnProduit(QString codeArticle)
             produits->push_back(produit);
             produit->SetCodeArticle(query.value(0).toString());
             produit->SetDesignationArticle(query.value(1).toString());
-            produit->SetPoidsArticle(query.value(2).toString());
+            produit->SetPoidsArticle(query.value(2).toInt());
             produit->SetEmplacementArticle(query.value(3).toString());
             produit->SetEmballageArticle(query.value(4).toString());
 
@@ -339,14 +342,14 @@ bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
     query.prepare("SELECT codeArticle "
                   "FROM article "
                   "WHERE codeArticle=:codeArticle;");
-    query.bindValue(":codeArticle", codeArticle);
+    query.bindValue(":codeArticle", codeArticle.toUpper());
     query.exec();
 
     query.next();
 
-    QString presenceDansLaBdd = query.value(0).toString();
+    QString presenceDansLaBdd = query.value(0).toString().toUpper();
 
-    if(presenceDansLaBdd == codeArticle)
+    if(presenceDansLaBdd.toUpper() == codeArticle.toUpper())
      {
         m_bdd.close();
         return false;
@@ -381,6 +384,7 @@ FROM emballage
 WHERE typeEmballage ='Carton';
 
 */
+
 
 
 

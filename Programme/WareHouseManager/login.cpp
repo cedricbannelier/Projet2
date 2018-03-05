@@ -1,6 +1,5 @@
 #include "login.h"
 #include "ui_login.h"
-#include "mainwindow.h"
 #include <iostream>
 #include "database.h"
 
@@ -9,6 +8,9 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    ui->icone->setPixmap(QPixmap(":/icones/warehouse.png"));
+    ui->lineEditLogin->setFocus();
+    this->setWindowTitle("Login");
 }
 
 Login::~Login()
@@ -19,7 +21,4 @@ Login::~Login()
 void Login::on_buttonBox_accepted()
 {
     std::cout << "Dans la methode OK du bouton" << std::endl;
-
-
-
 }

@@ -8,6 +8,8 @@ QT += sql
 
 # QT       += core gui
 
+# RC_FILE += icone.rc
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WareHouseManager
@@ -32,7 +34,8 @@ SOURCES += \
     produit.cpp \
     utilisateur.cpp \
     emballage.cpp \
-    login.cpp
+    login.cpp \
+    fournisseur.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +43,8 @@ HEADERS += \
     produit.h \
     utilisateur.h \
     emballage.h \
-    login.h
+    login.h \
+    fournisseur.h
 
 FORMS += \
         mainwindow.ui \
@@ -48,3 +52,5 @@ FORMS += \
 
 RESOURCES += \
     icone.qrc
+
+DISTFILES +=
