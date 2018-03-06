@@ -45,14 +45,16 @@ private slots:
 
     void on_pushButtonValidationModification_clicked();
 
-    void on_pushButtonRecupererRowId_clicked();
-
     void on_AjoutEmballage_clicked();
 
     void on_ButonAfficheStockComplet_clicked();
 
     //Permet de mettre à jour les combobox
     void miseAJour();
+
+    void on_butonAjoutFournisseur_clicked();
+
+    void on_BoutonValiderReception_clicked();
 
 private:
     //Permet de vérifier si le login est bien dans la base de donnée

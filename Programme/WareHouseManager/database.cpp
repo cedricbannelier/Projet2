@@ -62,26 +62,29 @@ void Database::CreateDatabase()
                "longueurEmballage REAL NOT NULL"
                ");");
 
-    query.exec("CREATE TABLE IF NOT EXISTS `constructeur` ("
-               "nomConstructeur TEXT NOT NULL,"
-               "referenceConstructeur TEXT NOT NULL"
+    query.exec("CREATE TABLE IF NOT EXISTS `fournisseur` ("
+               "idFournisseur INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+               "nomFournisseur TEXT NOT NULL"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `consulter` ("
                "idConsulter INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "qteStock TEXT NOT NULL,"
-               "`idUtilisateur` INTEGER NOT NULL,"
-               "`idArticle` INTEGER NOT NULL,"
+               "idUtilisateur INTEGER NOT NULL,"
+               "idArticle INTEGER NOT NULL,"
                "FOREIGN KEY(`idUtilisateur`) REFERENCES `utilisateur`(`idUtilisateur`),"
                "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
                ");");
 
     query.exec("CREATE TABLE IF NOT EXISTS `livrer` ("
-               "qteLivree TEXT NOT NULL,"
-               "`idArticle` INTEGER NOT NULL,"
-               "`idConstructeur` INTEGER NOT NULL,"
-               "FOREIGN KEY(`idConstructeur`) REFERENCES `constructeur`(`ROWID`),"
-               "FOREIGN KEY(`idArticle`) REFERENCES `article`(`ROWID`)"
+               "idLivrer INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+               "qteLivree TEXT NOT NULL, "
+               "numeroLivraison INTEGER NOT NULL, "
+               "dateLivraison INTEGER NOT NULL, "
+               "idArticle INTEGER NOT NULL, "
+               "idFournisseur INTEGER NOT NULL, "
+               "FOREIGN KEY(`idFournisseur`) REFERENCES `fournisseur`(`idFournisseur`),"
+               "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
                ");");
    m_bdd.close();
 }
@@ -117,18 +120,18 @@ bool Database::DeleteProduit(const QString& codeArticle)
 
     if(query.exec())
            {
+                m_bdd.close();
                return true;
-               m_bdd.close();
+
            }
      else
            {
-                qDebug() << "add product error !"
-                         << query.lastError();
-           }
-    m_bdd.close();
-    return false;
 
+                m_bdd.close();
+                return false;
+           }
 }
+
 //En cours de dev
 //Permet de faire un update
 
@@ -262,23 +265,42 @@ void Database::AjoutUtilisateur(Utilisateur &user)
     m_bdd.close();
 }
 
-int Database::RecupererRowIdTableArticle(QString codeArticle)
+int Database::RecupererIdArticle(QString codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans Recuperer ROW ID database.CPP" << std::endl;
+    std::cout << "MODE DEBUG : Dans Recuperer ID article database.CPP" << std::endl;
 
     m_bdd.open();
 
     QSqlQuery query;
-    query.prepare("SELECT rowid FROM article WHERE codeArticle=:codeArticle");
+    query.prepare("SELECT idArticle FROM article WHERE codeArticle=:codeArticle");
     query.bindValue(":codeArticle", codeArticle);
     query.exec();
 
     query.next();
-    int rowid = query.value(0).toInt();
+    int idArticle = query.value(0).toInt();
 
     m_bdd.close();
 
-    return rowid;
+    return idArticle;
+}
+
+int Database::RecupererIdFournisseur(QString nomFournisseur)
+{
+    std::cout << "MODE DEBUG : Dans Recuperer ID Fournisseur database.CPP" << std::endl;
+
+    m_bdd.open();
+
+    QSqlQuery query;
+    query.prepare("SELECT idFournisseur FROM fournisseur WHERE nomFournisseur=:nomFournisseur");
+    query.bindValue(":nomFournisseur", nomFournisseur);
+    query.exec();
+
+    query.next();
+    int idFournisseur = query.value(0).toInt();
+
+    m_bdd.close();
+
+    return idFournisseur;
 }
 
 bool Database::AjoutEmballage(Emballage&nouvelEmballage)
@@ -362,6 +384,86 @@ bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
      }
 }
 
+bool Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
+{
+    std::cout << "MODE DEBUG : Dans ajouter nouveau fournisseur database.CPP" << std::endl;
+
+    m_bdd.open();
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO fournisseur (nomFournisseur)"
+                  "VALUES(:nomFournisseur);");
+    query.bindValue(":nomFournisseur", nouvelFournisseur.GetNomFournisseur());
+
+    if(query.exec())
+           {
+               m_bdd.close();
+               return true;
+
+           }
+     else
+           {
+
+                m_bdd.close();
+                return false;
+           }
+}
+
+
+
+void Database::ReceptionLivraison(QString qteLivree, QString numeroLivraison, int dateLivraison, int idArticle, int idFournisseur)
+{
+    std::cout << "MODE DEBUG : Dans reception commande database.CPP" << std::endl;
+
+
+    m_bdd.open();
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO livrer (qteLivree, numeroLivraison, dateLivraison, idArticle, idFournisseur)"
+                  "VALUES(:qteLivree, :numeroLivraison, :dateLivraison, :idArticle, :idFournisseur);");
+    query.bindValue(":qteLivree", qteLivree);
+    query.bindValue(":numeroLivraison", numeroLivraison);
+    query.bindValue(":dateLivraison", dateLivraison);
+    query.bindValue(":idArticle", idArticle);
+    query.bindValue(":idFournisseur", idFournisseur);
+
+    query.exec();
+
+    m_bdd.close();
+
+}
+
+bool Database::FournisseurPresentDansLaBdd(QString nomFournisseur)
+{
+    std::cout << "MODE DEBUG : Dans Verification si fournisseur est present dans la BDD database.CPP" << std::endl;
+
+    m_bdd.open();
+
+    QSqlQuery query;
+    query.prepare("SELECT nomFournisseur "
+                  "FROM fournisseur "
+                  "WHERE nomFournisseur=:nomFournisseur;");
+    query.bindValue(":nomFournisseur", nomFournisseur.toUpper());
+    query.exec();
+
+    query.next();
+
+    QString presenceDansLaBdd = query.value(0).toString().toUpper();
+
+    if(presenceDansLaBdd.toUpper() == nomFournisseur.toUpper())
+     {
+        m_bdd.close();
+        return false;
+     }
+     else
+     {
+
+        m_bdd.close();
+        return true;
+     }
+}
+
+
 /*
 INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage)
 VALUES ('pomme', 'pomme verte', 10, 'A1B2C', 1);
@@ -382,6 +484,17 @@ WHERE article.idEmballage = emballage.idEmballage
 SELECT distinct largeurEmballage, longueurEmballage, hauteurEmballage
 FROM emballage
 WHERE typeEmballage ='Carton';
+
+SELECT
+livrer.qteLivree + consulter.qteStock AS 'Qte reelle',
+consulter.qteStock AS Qte,
+SUM(livrer.qteLivree) as 'QTE Livrée',
+article.codeArticle as Référence,
+article.designationArticle as Libelle,
+article.poidsArticle as Poids, article.emplacementArticle as Empl
+FROM article
+inner join consulter ON article.idArticle = consulter.idArticle
+inner JOIN livrer ON article.idArticle = livrer.idArticle
 
 */
 

@@ -7,6 +7,7 @@
 #include "produit.h"
 #include "utilisateur.h"
 #include "emballage.h"
+#include "fournisseur.h"
 
 class Database
 {
@@ -51,7 +52,9 @@ public:
     //En cours de dev il manque les droits !!
     void AjoutUtilisateur(Utilisateur& user);
 
-    int RecupererRowIdTableArticle(QString codeArticle);
+    int RecupererIdArticle(QString codeArticle);
+
+    int RecupererIdFournisseur(QString nomFournisseur);
 
     bool AjoutEmballage(Emballage& nouvelEmballage);
 
@@ -59,6 +62,13 @@ public:
 
     bool ArticlePresentDansLaBddAvecId(QString codeArticle);
     bool ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle);
+
+    bool AjoutFournisseur(Fournisseur & nouvelFournisseur);
+
+    void ReceptionLivraison(QString qteLivree, QString numeroLivraison, int dateLivraison, int idArticle, int idFournisseur);
+
+    bool FournisseurPresentDansLaBdd(QString nomFournisseur);
+
 private:
 
 

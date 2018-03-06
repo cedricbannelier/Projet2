@@ -8,6 +8,7 @@
 #include "Database.h"
 #include "utilisateur.h"
 #include "emballage.h"
+#include "fournisseur.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -37,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QMenu *menuAide = menuBar()->addMenu("&Aide");
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
+
+        ui->labelFournisseurInformations->hide();
+        ui->labelAjoutArticleInformations->hide();
 
         this->miseAJour();
 /*
@@ -174,12 +178,16 @@ void MainWindow::on_boutonAjoutArticle_clicked()
        ui->lineEditAjoutPoidsArticle->text() == NULL ||
        ui->lineEditAjoutEmplacementArticle->text() == NULL)
     {
-        QMessageBox::warning(this, "Warning", "Veuillez remplir tous les champs",QMessageBox::Ok);
+        ui->labelAjoutArticleInformations->setText("<font color=\"#FF0000\">Veuillez remplir tous les champs</font>");
+        ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
+        ui->labelAjoutArticleInformations->show();
     }
     else
         if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text().toUpper()) == false)
         {
-        QMessageBox::warning(this, "Warning", "Le code article est déjà présent dans la base de données",QMessageBox::Ok);
+        ui->labelAjoutArticleInformations->setText("<font color=\"#FF0000\">Le code article est déjà présent dans la base de données</font>");
+        ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
+        ui->labelAjoutArticleInformations->show();
     }
     else
     {
@@ -191,7 +199,9 @@ void MainWindow::on_boutonAjoutArticle_clicked()
         ui->lineEditAjoutPoidsArticle->clear();
         ui->lineEditAjoutEmplacementArticle->clear();
 
-        QMessageBox::information(this, "Information", "Votre article a bien été ajouté dans la base de données",QMessageBox::Ok);
+        ui->labelAjoutArticleInformations->setText("<font color=\"#088A08\">Votre article a bien été ajouté dans la base de données</font>");
+        ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
+        ui->labelAjoutArticleInformations->show();
     }
 }
 
@@ -267,16 +277,6 @@ void MainWindow::on_pushButtonValidationModification_clicked()
     bdd.UpdateProduit(*produit);
 }
 
-//Permet de récuperer l'ID d'un article
-void MainWindow::on_pushButtonRecupererRowId_clicked()
-{
-    std::cout << "MODE DEBUG : Dans la methode Recuperer RowId mainwindow.CPP" << std::endl;
-
-    int id = bdd.RecupererRowIdTableArticle(ui->lineEditCodeArticlePourRowId->text());
-
-    std::cout << id << std::endl;
-}
-
 void MainWindow::on_AjoutEmballage_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode ajouter emballage mainwindow.CPP" << std::endl;
@@ -321,7 +321,7 @@ void MainWindow::miseAJour()
 
         QSqlQuery query;
 
-        query.exec("SELECT * FROM emballage;");
+        query.exec("SELECT largeurEmballage || longueurEmballage || hauteurEmballage AS 'l * L * h' FROM emballage;");
         int i = 0;
 
         //On vide la combobox
@@ -335,4 +335,76 @@ void MainWindow::miseAJour()
 
         }
         bdd.CloseDatabase();
+}
+
+void MainWindow::on_butonAjoutFournisseur_clicked()
+{
+    std::cout << "MODE DEBUG : Dans la methode ajouter un fournisseur mainwindow.CPP" << std::endl;
+
+    Fournisseur* nouvelFournisseur = new Fournisseur(ui->lineEditAjoutFournisseur->text().toUpper());
+
+    if(ui->lineEditAjoutFournisseur->text().toUpper() == NULL)
+    {
+        ui->labelFournisseurInformations->setText("<font color=\"#FF0000\">Veuillez saisir un fournisseur</font>");
+        ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
+        ui->labelFournisseurInformations->show();
+    }
+    else
+        if(bdd.FournisseurPresentDansLaBdd(ui->lineEditAjoutFournisseur->text().toUpper()) == false)
+        {
+            ui->labelFournisseurInformations->setText("<font color=\"#FF0000\">Le fournisseur est déjà présent dans la base de données</font>");
+            ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
+            ui->labelFournisseurInformations->show();
+    }
+    else
+    {
+        bdd.AjoutFournisseur(*nouvelFournisseur);
+
+        //Vide les champs après l'insertion
+        ui->lineEditAjoutFournisseur->clear();
+
+        ui->labelFournisseurInformations->setText("<font color=\"#088A08\">Le fournisseur a été créé</font>");
+        ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
+        ui->labelFournisseurInformations->show();
+    }
+}
+
+void MainWindow::on_BoutonValiderReception_clicked()
+{
+    std::cout << "MODE DEBUG : Dans la methode reception commande mainwindow.CPP" << std::endl;
+
+    int idArticle = bdd.RecupererIdArticle(ui->lineEditArticleLivre->text().toUpper());
+
+    int idFournisseur = bdd.RecupererIdFournisseur(ui->lineEditFournisseurLivraison->text().toUpper());
+
+
+    if(idArticle == 0)
+    {
+        QMessageBox::warning(this, "Code Article INCONNU", "Le code article saisi n'est pas dans la base de données. ""<br>"""
+                                                           "Veuillez l'ajouter avant de faire la réception",QMessageBox::Ok);
+    }
+    else
+        if(idFournisseur == 0)
+
+   {
+       QMessageBox::warning(this, "Code Fournisseur INCONNU", "Le fournisseur saisi n'est pas dans la base de données.""<br>"" "
+                                                              "Veuillez l'ajouter avant de faire la réception",QMessageBox::Ok);
+    }
+        else
+        {
+            bdd.ReceptionLivraison(ui->lineEditQteLivree->text(),
+                                   ui->lineEditNumeroLivraison->text(),
+                                   ui->lineEditDateLivraison->text().toInt(),
+                                   idArticle,
+                                   idFournisseur);
+
+            ui->lineEditQteLivree->clear();
+            ui->lineEditNumeroLivraison->clear();
+            ui->lineEditDateLivraison->clear();
+            ui->lineEditFournisseurLivraison->clear();
+            ui->lineEditArticleLivre->clear();
+
+            QMessageBox::information(this, "Réception faite", "La réception a été validée",QMessageBox::Ok);
+        }
+
 }

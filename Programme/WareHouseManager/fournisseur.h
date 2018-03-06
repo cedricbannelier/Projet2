@@ -7,7 +7,7 @@
 class Fournisseur
 {
 public:
-    Fournisseur(QString nomFournisseur, QString referenceFournisseur);
+    Fournisseur(QString nomFournisseur);
 
     int GetIdFournisseur();
     QString GetNomFournisseur();

@@ -1,9 +1,8 @@
 #include "fournisseur.h"
 
-Fournisseur::Fournisseur(QString nomFournisseur, QString referenceFournisseur)
+Fournisseur::Fournisseur(QString nomFournisseur)
 {
     this->nomFournisseur = nomFournisseur;
-    this->referenceFournisseur = referenceFournisseur;
 }
 
 int Fournisseur::GetIdFournisseur()
