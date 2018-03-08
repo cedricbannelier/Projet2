@@ -56,6 +56,8 @@ private slots:
 
     void on_BoutonValiderReception_clicked();
 
+    void on_BoutonExportExcel_clicked();
+
 private:
     //Permet de vérifier si le login est bien dans la base de donnée
     //En cours de dev
@@ -75,6 +77,8 @@ private:
     //Création de la bdd de type Database
     Database bdd;
 
+    QSqlQueryModel * modal = new QSqlQueryModel();
+
     //Permet de créer la fenetre du login au démarrage de l'application
     QDialog * fenetreLogin = new QDialog();
     QLabel * labelBienvenue = new QLabel();
@@ -85,6 +89,6 @@ private:
     QDialogButtonBox * buttonBox = new QDialogButtonBox(
                 QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
 
- };
+};
 
 #endif // MAINWINDOW_H

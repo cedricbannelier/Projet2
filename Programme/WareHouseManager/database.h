@@ -4,7 +4,8 @@
 #include <QString>
 #include <QtSql/QtSql>
 #include <vector>
-#include "produit.h"
+
+#include "article.h"
 #include "utilisateur.h"
 #include "emballage.h"
 #include "fournisseur.h"
@@ -29,7 +30,7 @@ public:
 
     //Permet d'inserer un produit
     //Param codeArticle, designationArticle, poidsArticle, emplacementArticle
-    void InsertProduit(Produit &produitAInserDansLaBdd);
+    void InsertProduit(Article &produitAInserDansLaBdd);
 
     //Permet de supprimer un produit
     //Param codeArticle
@@ -38,11 +39,11 @@ public:
     int DroitUtilisateur();
 
     //Permet de mettre à jour un produit (en cours de dev)
-    bool UpdateProduit(Produit &produit);
+    bool UpdateProduit(Article &produit);
 
     //Création d'un vecteur de vecteur de produit
     //Param nom
-    QVector<Produit*>* AfficheUnProduit(QString codeArticle);
+    QVector<Article*>* AfficheUnProduit(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
     QVector<Utilisateur*>* GetDroitUtilisateur(QString loginEntreParUtilisateur,

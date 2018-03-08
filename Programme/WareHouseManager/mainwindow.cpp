@@ -3,8 +3,9 @@
 #include <QMenu>
 #include <iostream>
 #include <QInputDialog>
+#include <QFile>
 
-#include "produit.h"
+#include "article.h"
 #include "Database.h"
 #include "utilisateur.h"
 #include "emballage.h"
@@ -148,15 +149,15 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
     std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
 
         QString codeArticle = ui->lineEditRechercher->text().toUpper();
-        QVector<Produit*>* produits = bdd.AfficheUnProduit(codeArticle);
+        QVector<Article*>* articles = bdd.AfficheUnProduit(codeArticle);
 
-        for (int i = 0; i < produits->size(); i++)
+        for (int i = 0; i < articles->size(); i++)
         {
-            ui->afficheCodeArticle->setText((*produits)[i]->GetCodeArticle());
-            ui->afficheDesignationArticle ->setText((*produits)[i]->GetDesignationArticle());
-            ui->affichePoidsArticle->setText(QString::number((*produits)[i]->GetPoidsArticle()));
-            ui->afficheEmplacementArticle->setText((*produits)[i]->GetEmplacementArticle());
-            ui->afficheEmballageArticle->setText((*produits)[i]->GetEmballageArticle());
+            ui->afficheCodeArticle->setText((*articles)[i]->GetCodeArticle());
+            ui->afficheDesignationArticle ->setText((*articles)[i]->GetDesignationArticle());
+            ui->affichePoidsArticle->setText(QString::number((*articles)[i]->GetPoidsArticle()));
+            ui->afficheEmplacementArticle->setText((*articles)[i]->GetEmplacementArticle());
+            ui->afficheEmballageArticle->setText((*articles)[i]->GetEmballageArticle());
         }
 }
 
@@ -167,7 +168,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article mainwindow.CPP" << std::endl;
 
 
-    Produit* produit = new Produit(ui->lineEditAjoutCodeArticle->text().toUpper(),
+    Article* article = new Article(ui->lineEditAjoutCodeArticle->text().toUpper(),
                                    ui->lineEditAjoutDesignationArticle->text(),
                                    ui->lineEditAjoutPoidsArticle->text().toInt(),
                                    ui->lineEditAjoutEmplacementArticle->text(),
@@ -191,7 +192,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
     }
     else
     {
-        bdd.InsertProduit(*produit);
+        bdd.InsertProduit(*article);
 
         //Vide les champs après l'insertion
         ui->lineEditAjoutCodeArticle->clear();
@@ -235,19 +236,19 @@ void MainWindow::on_boutonModifier_clicked()
 
     QString codeArticle = ui->lineEditModifierArticle->text().toUpper();
 
-    QVector<Produit*>* produits = bdd.AfficheUnProduit(codeArticle);
+    QVector<Article*>* articles = bdd.AfficheUnProduit(codeArticle);
 
-    for (int i = 0; i < produits->size(); i++)
+    for (int i = 0; i < articles->size(); i++)
     {
         ui->lineEditModificationCodeArticle->
-                setText((*produits)[i]->GetCodeArticle());
+                setText((*articles)[i]->GetCodeArticle());
         ui->lineEditModificationDesignationArticle->
-                setText((*produits)[i]->GetDesignationArticle());
+                setText((*articles)[i]->GetDesignationArticle());
         ui->lineEditModificationPoidsArticle->
-                setText(QString::number((*produits)[i]->GetPoidsArticle()));
+                setText(QString::number((*articles)[i]->GetPoidsArticle()));
         ui->lineEditModificationEmplacementArticle->
-                setText((*produits)[i]->GetEmplacementArticle());
-        ui->comboBoxModifierDimensionEmballage->addItem((*produits)[i]->GetEmballageArticle());
+                setText((*articles)[i]->GetEmplacementArticle());
+        ui->comboBoxModifierDimensionEmballage->addItem((*articles)[i]->GetEmballageArticle());
     }
 }
 
@@ -268,13 +269,13 @@ void MainWindow::on_pushButtonValidationModification_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Validation de modification mainwindow.CPP" << std::endl;
 
-    Produit* produit = new Produit(ui->lineEditModificationCodeArticle->text().toUpper(),
+    Article* article = new Article(ui->lineEditModificationCodeArticle->text().toUpper(),
                                    ui->lineEditModificationDesignationArticle->text(),
                                    ui->lineEditModificationPoidsArticle->text().toInt(),
                                    ui->lineEditModificationEmplacementArticle->text(),
                                    ui->comboBoxModifierDimensionEmballage->currentText());
 
-    bdd.UpdateProduit(*produit);
+    bdd.UpdateProduit(*article);
 }
 
 void MainWindow::on_AjoutEmballage_clicked()
@@ -285,17 +286,14 @@ void MainWindow::on_AjoutEmballage_clicked()
                                                ui->comboBoxHauteurEmballage->currentText().toInt(),
                                                ui->comboBoxLargeurEmballage->currentText().toInt(),
                                                ui->comboBoxLongueurEmballage->currentText().toInt());
-
     bdd.AjoutEmballage(*nouvelEmballage);
     miseAJour();
-
 }
-
 
 //Affiche tout le stock meme avec des quantités à NULL ou à zéro
 void MainWindow::on_ButonAfficheStockComplet_clicked()
 {
-    QSqlQueryModel * modal = new QSqlQueryModel();
+//    QSqlQueryModel * modal = new QSqlQueryModel();
 
     bdd.OpenDatabase();
     QSqlQuery* query = new QSqlQuery();
@@ -306,12 +304,11 @@ void MainWindow::on_ButonAfficheStockComplet_clicked()
                    "FROM article "
                    "LEFT JOIN consulter ON article.idArticle = consulter.idArticle "
                    "LEFT JOIN emballage ON article.idEmballage = emballage.idEmballage");
-
     query->exec();    
     modal->setQuery(*query);
     ui->tableView->setModel(modal);
+    ui->tableView->resizeColumnsToContents();
     bdd.CloseDatabase();
-
 }
 
 //Permet de selectionner tous les types d'emballage et affiche l'ID
@@ -408,3 +405,52 @@ void MainWindow::on_BoutonValiderReception_clicked()
         }
 
 }
+
+void MainWindow::on_BoutonExportExcel_clicked()
+{
+    on_ButonAfficheStockComplet_clicked();
+
+    QString textData;
+    int lignes = modal->rowCount();
+    int colonnes = modal->columnCount();
+
+    for (int i = 0; i < lignes; i++)
+    {
+        for (int j = 0; j < colonnes; j++)
+        {
+                textData += modal->data(modal->index(i,j)).toString();
+                textData += "; ";      // ; pour la séparation
+        }
+        textData += "\n";             // retour à la ligne
+    }
+    QFile csvFile("test.csv");
+
+    if(csvFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
+
+        QTextStream out(&csvFile);
+        out << textData;
+
+        csvFile.close();
+    }
+}
+
+/*
+SELECT
+SUM(consulter.qteStock + livrer.qteLivree) AS 'QteT',
+consulter.qteStock AS 'QTE consulter',
+SUM(livrer.qteLivree) AS 'QTE LIVRE',
+consulter.qteStock as QTE,
+article.codeArticle as Référence,
+article.designationArticle as Libelle,
+article.poidsArticle as Poids,
+article.emplacementArticle as Empl,
+emballage.typeEmballage as Type,
+emballage.hauteurEmballage as H,
+emballage.largeurEmballage as l,
+longueurEmballage as L
+FROM article
+LEFT JOIN consulter ON article.idArticle = consulter.idArticle
+LEFT JOIN emballage ON article.idEmballage = emballage.idEmballage
+LEFT JOIN livrer ON article.idArticle = livrer.idArticle
+WHERE article.idArticle=14;
+*/

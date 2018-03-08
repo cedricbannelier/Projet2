@@ -1,21 +1,21 @@
-#ifndef PRODUIT_H
-#define PRODUIT_H
+#ifndef ARTICLE_H
+#define ARTICLE_H
 
 #include <QString>
 
 
-class Produit
+class Article
 {
 public:
-    Produit();
-    Produit(QString codeA, QString designationA, int poidsA, QString emplacementA, QString emballageA);
+    Article();
+    Article(QString codeA, QString designationA, int poidsA, QString emplacementA, QString emballageA);
 
+    int GetIdArticle();
     QString GetCodeArticle();
     QString GetDesignationArticle();
     int GetPoidsArticle();
     QString GetEmplacementArticle();
     QString GetEmballageArticle();
-    int GetId();
 
     void SetCodeArticle(QString codeA);
     void SetDesignationArticle(QString designationA);
@@ -24,7 +24,7 @@ public:
     void SetEmballageArticle(QString emballageA);
 
 private:
-    int id;
+    int idArticle;
     QString codeArticle;
     QString designationArticle;
     int poidsArticle;
@@ -32,4 +32,4 @@ private:
     QString emballageArticle;
 };
 
-#endif // PRODUIT_H
+#endif // ARTICLE_H

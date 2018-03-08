@@ -28,3 +28,4 @@ void Fournisseur::SetReferenceFournisseur(QString referenceFournisseur)
 {
     this->referenceFournisseur = referenceFournisseur;
 }
+

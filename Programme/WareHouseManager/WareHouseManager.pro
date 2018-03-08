@@ -31,20 +31,22 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     database.cpp \
-    produit.cpp \
-    utilisateur.cpp \
     emballage.cpp \
     login.cpp \
-    fournisseur.cpp
+    fournisseur.cpp \
+    article.cpp \
+    utilisateur.cpp \
+    logisticien.cpp
 
 HEADERS += \
         mainwindow.h \
     database.h \
-    produit.h \
-    utilisateur.h \
     emballage.h \
     login.h \
-    fournisseur.h
+    fournisseur.h \
+    article.h \
+    utilisateur.h \
+    logisticien.h
 
 FORMS += \
         mainwindow.ui \

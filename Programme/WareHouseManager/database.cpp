@@ -31,8 +31,6 @@ void Database::CreateDatabase()
 
     //Création de la base de données
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");
-//    QString dbPath = QCoreApplication::applicationDirPath() + "/warehousedb.db";
-//    m_bdd.setDatabaseName(dbPath);
     m_bdd.setDatabaseName("c:/warehousebd/warehousedb.db");
     m_bdd.open();
     QSqlQuery query;
@@ -89,7 +87,7 @@ void Database::CreateDatabase()
    m_bdd.close();
 }
 
-void Database::InsertProduit(Produit& produitAInserDansLaBdd)
+void Database::InsertProduit(Article &produitAInserDansLaBdd)
 {
     std::cout << "MODE DEBUG : Dans insertproduit" << std::endl;
     m_bdd.open();
@@ -135,7 +133,7 @@ bool Database::DeleteProduit(const QString& codeArticle)
 //En cours de dev
 //Permet de faire un update
 
-bool Database::UpdateProduit(Produit &produit)
+bool Database::UpdateProduit(Article &produit)
 {
     std::cout << "MODE DEBUG : Dans Update un produit" << std::endl;
 
@@ -161,11 +159,11 @@ bool Database::UpdateProduit(Produit &produit)
 }
 
 //Permet de récuperer la table des produits
-QVector<Produit*>* Database::AfficheUnProduit(QString codeArticle)
+QVector<Article *> *Database::AfficheUnProduit(QString codeArticle)
 {
     std::cout << "MODE DEBUG : Dans la methode AfficheUnProduit database.CPP" << std::endl;
     m_bdd.open();
-    QVector<Produit*>* produits = new QVector<Produit*>;
+    QVector<Article*>* articles = new QVector<Article*>;
     QSqlQuery query;
     query.prepare("SELECT codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage "
                   "FROM article "
@@ -176,18 +174,18 @@ QVector<Produit*>* Database::AfficheUnProduit(QString codeArticle)
     {
         if(query.next())
         {
-            Produit * produit = new Produit();
-            produits->push_back(produit);
-            produit->SetCodeArticle(query.value(0).toString());
-            produit->SetDesignationArticle(query.value(1).toString());
-            produit->SetPoidsArticle(query.value(2).toInt());
-            produit->SetEmplacementArticle(query.value(3).toString());
-            produit->SetEmballageArticle(query.value(4).toString());
+            Article * article = new Article();
+            articles->push_back(article);
+            article->SetCodeArticle(query.value(0).toString());
+            article->SetDesignationArticle(query.value(1).toString());
+            article->SetPoidsArticle(query.value(2).toInt());
+            article->SetEmplacementArticle(query.value(3).toString());
+            article->SetEmballageArticle(query.value(4).toString());
 
         }
     }while(query.next());
     m_bdd.close();
-    return produits;
+    return articles;
 }
 
 //Permet de récuperer la table complete ARTICLE
