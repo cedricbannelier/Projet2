@@ -91,7 +91,7 @@ void Database::InsertProduit(Article &produitAInserDansLaBdd)
 {
     std::cout << "MODE DEBUG : Dans insertproduit" << std::endl;
     m_bdd.open();
-    QSqlQuery query;
+    QSqlQuery query();
     query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage)"
                   "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle, :idEmballage);");
     query.bindValue(":codeArticle", produitAInserDansLaBdd.GetCodeArticle());
@@ -237,7 +237,7 @@ QVector<Utilisateur*>* Database::GetDroitUtilisateur(QString loginEntreParUtilis
 
     m_bdd.close();
 
-    return users;    
+    return users;
 }
 
 void Database::AjoutUtilisateur(Utilisateur &user)
