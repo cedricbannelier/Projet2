@@ -43,8 +43,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         ui->labelFournisseurInformations->hide();
         ui->labelAjoutArticleInformations->hide();
 
-        ui->statusBar->showMessage(user->GetLogin());
-
  //       this->miseAJour();
 
 }

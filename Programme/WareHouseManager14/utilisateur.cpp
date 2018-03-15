@@ -48,12 +48,12 @@ void Utilisateur::SetMotDePasse(QString motDePasse)
     this->motDePasse = motDePasse;
 }
 
-int Utilisateur::SetDroit(int droit)
+void Utilisateur::SetDroit(int droit)
 {
     this->droit = droit;
 }
 
-int Utilisateur::SetId(int id)
+void Utilisateur::SetId(int id)
 {
     this->id = id;
 }

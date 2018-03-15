@@ -19,11 +19,6 @@ public:
 
     bool test();
 
-    enum droit
-    {
-        Logisiticien = 1,
-        Administrateur
-    };
 private slots:
 //    void on_buttonBox_accepted();
 

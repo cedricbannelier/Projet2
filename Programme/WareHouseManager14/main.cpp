@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     Database bdd;
 
-    Utilisateur * nouvelleConnexion = new Utilisateur();
+//    Utilisateur * nouvelleConnexion = new Utilisateur();
 
     bdd.CreateDatabase();
 
@@ -30,16 +30,12 @@ int main(int argc, char *argv[])
                 mainWindow.show();
                 return application.exec();
             }
-
         }
         else
         {
             application.quit();
         }
-
-
     }while(fenetreDeLogin.test() == false);
-
 
     return 0;
 }

@@ -29,10 +29,6 @@ bool Login::test()
 
     int droit = bdd.GetDroitUtilisateur(loginSaisie, mdpSaisie);
 
- /*   nouvelleConnexion.SetLogin(loginSaisie);
-    nouvelleConnexion.SetMotDePasse(mdpSaisie);
-    nouvelleConnexion.SetDroit(droit);
-*/
     if(droit == 1 || droit == 2)
     {
         std::cout << "Access Granted" << std::endl;
