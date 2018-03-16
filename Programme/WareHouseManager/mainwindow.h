@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include <QLineEdit>
 #include "Database.h"
+#include "login.h"
 #include <QVBoxLayout>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QMessageBox>
 #include <QLabel>
 #include <QTableView>
+#include "utilisateur.h"
 
 namespace Ui {
 class MainWindow;
@@ -77,7 +79,10 @@ private:
     //Création de la bdd de type Database
     Database bdd;
 
-    QSqlQueryModel * modal = new QSqlQueryModel();
+    Utilisateur * user;
+
+    QSqlQueryModel modal;
+
 
     //Permet de créer la fenetre du login au démarrage de l'application
     QDialog * fenetreLogin = new QDialog();

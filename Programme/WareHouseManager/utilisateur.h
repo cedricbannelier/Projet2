@@ -20,8 +20,8 @@ public:
     //Setter
     void SetLogin(QString login);
     void SetMotDePasse(QString motDePasse);
-    int SetDroit(int droit);
-    int SetId(int id);
+    void SetDroit(int droit);
+    void SetId(int id);
 
 
 private:

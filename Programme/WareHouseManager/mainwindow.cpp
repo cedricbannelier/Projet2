@@ -11,10 +11,10 @@
 #include "emballage.h"
 #include "fournisseur.h"
 
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    bdd.CreateDatabase();
 
     ui->setupUi(this);
         QMenu *menuFichier = menuBar()->addMenu("&Fichier");
@@ -43,27 +43,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         ui->labelFournisseurInformations->hide();
         ui->labelAjoutArticleInformations->hide();
 
-        this->miseAJour();
-/*
-        this->afficheFenetreLogin();
+ //       this->miseAJour();
 
-
-        if (this->fermeFenetre)
-        {
-            this->close();
-        }
-        else
-        {
-            this->show();
-        }
-*/
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/*
 void MainWindow::afficheFenetreLogin()
 {
     QObject::connect(buttonBox, SIGNAL(accepted()), fenetreLogin, SLOT(accept()));
@@ -100,7 +88,7 @@ void MainWindow::afficheFenetreLogin()
         qDebug() << "Cancel";
     }
 }
-
+*/
 //Affiche une fenêtre pour savoir si la requete de suppression est bien passé.
 void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
 {
@@ -116,7 +104,7 @@ void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
                              "La requete n'est pas passée !",QMessageBox::Ok);
    }
 }
-
+/*
 bool MainWindow::verificationLogin()
 {
         std::cout << "MODE DEBUG : Dans verification login mainwindow.CPP" << std::endl;
@@ -143,7 +131,7 @@ bool MainWindow::verificationLogin()
         }
         return 0;
 }
-
+*/
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
@@ -183,9 +171,8 @@ void MainWindow::on_boutonAjoutArticle_clicked()
         ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
         ui->labelAjoutArticleInformations->show();
     }
-    else
-        if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text().toUpper()) == false)
-        {
+    else if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text().toUpper()) == false)
+    {
         ui->labelAjoutArticleInformations->setText("<font color=\"#FF0000\">Le code article est déjà présent dans la base de données</font>");
         ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
         ui->labelAjoutArticleInformations->show();
@@ -259,7 +246,7 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 
      Utilisateur* nouvelUtilistateur = new Utilisateur(ui->lineEditeCreationLogin->text(),
                                                        ui->lineEditeCreationMotDePasse->text(),
-                                                       ui->comboBoxChoixDroitUtilisateur->currentIndex());
+                                                       ui->comboBoxChoixDroitUtilisateur->currentIndex()+1);
 
      bdd.AjoutUtilisateur(*nouvelUtilistateur);
 }
@@ -293,30 +280,22 @@ void MainWindow::on_AjoutEmballage_clicked()
 //Affiche tout le stock meme avec des quantités à NULL ou à zéro
 void MainWindow::on_ButonAfficheStockComplet_clicked()
 {
-//    QSqlQueryModel * modal = new QSqlQueryModel();
 
-    bdd.OpenDatabase();
-    QSqlQuery* query = new QSqlQuery();
-
-    query->prepare("SELECT consulter.qteStock as QTE, article.codeArticle as Référence, article.designationArticle as Libelle, "
-                   "article.poidsArticle as Poids, article.emplacementArticle as Empl, emballage.typeEmballage as Type, "
-                   "emballage.hauteurEmballage as H, emballage.largeurEmballage as l, longueurEmballage as L "
-                   "FROM article "
-                   "LEFT JOIN consulter ON article.idArticle = consulter.idArticle "
-                   "LEFT JOIN emballage ON article.idEmballage = emballage.idEmballage");
-    query->exec();    
-    modal->setQuery(*query);
-    ui->tableView->setModel(modal);
+//    bdd.OpenDatabase();
+    bdd.GetModal(&this->modal);
+    ui->tableView->setModel(&this->modal);
     ui->tableView->resizeColumnsToContents();
-    bdd.CloseDatabase();
+//    bdd.CloseDatabase();
 }
+
+
 
 //Permet de selectionner tous les types d'emballage et affiche l'ID
 void MainWindow::miseAJour()
 {
-        bdd.OpenDatabase();
+//        bdd.OpenDatabase();
 
-        QSqlQuery query;
+    QSqlQuery query;
 
         query.exec("SELECT largeurEmballage || longueurEmballage || hauteurEmballage AS 'l * L * h' FROM emballage;");
         int i = 0;
@@ -331,7 +310,7 @@ void MainWindow::miseAJour()
             i++;
 
         }
-        bdd.CloseDatabase();
+//        bdd.CloseDatabase();
 }
 
 void MainWindow::on_butonAjoutFournisseur_clicked()
@@ -410,27 +389,24 @@ void MainWindow::on_BoutonExportExcel_clicked()
 {
     on_ButonAfficheStockComplet_clicked();
 
-    QString textData;
-    int lignes = modal->rowCount();
-    int colonnes = modal->columnCount();
+    QFile csvFile("test.csv");
+
+    if(!(csvFile.open(QIODevice::WriteOnly | QIODevice::Append)))
+        return; //TODO: message utilisateur
+
+    QTextStream out(&csvFile);
+
+    int lignes = modal.rowCount();
+    int colonnes = modal.columnCount();
 
     for (int i = 0; i < lignes; i++)
     {
         for (int j = 0; j < colonnes; j++)
         {
-                textData += modal->data(modal->index(i,j)).toString();
-                textData += "; ";      // ; pour la séparation
+                out << modal.data(modal.index(i,j)).toString();
+                out << "; ";      // ; pour la séparation
         }
-        textData += "\n";             // retour à la ligne
-    }
-    QFile csvFile("test.csv");
-
-    if(csvFile.open(QIODevice::WriteOnly | QIODevice::Append)) {
-
-        QTextStream out(&csvFile);
-        out << textData;
-
-        csvFile.close();
+        out << "\n";             // retour à la ligne
     }
 }
 

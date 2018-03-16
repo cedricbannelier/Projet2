@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <login.h>
 #include <database.h>
+#include <iostream>
+#include "utilisateur.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,18 +11,31 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow;
 
-    Login fenetreDeLogin;
-//    Database bdd;
+    Database bdd;
 
-//    bdd.CreateDatabase();
-    if (fenetreDeLogin.exec() == QDialog::Accepted)
+//    Utilisateur * nouvelleConnexion = new Utilisateur();
+
+    bdd.CreateDatabase();
+
+    Login fenetreDeLogin;
+
+    do
     {
-        mainWindow.show();
-        return application.exec();
-    }
-    else
-    {
-        application.quit();
-    }
+        if (fenetreDeLogin.exec() == QDialog::Accepted)
+        {
+            std::cout << "Dans le main" << std::endl;
+
+            if(fenetreDeLogin.test())
+            {
+                mainWindow.show();
+                return application.exec();
+            }
+        }
+        else
+        {
+            application.quit();
+        }
+    }while(fenetreDeLogin.test() == false);
+
     return 0;
 }

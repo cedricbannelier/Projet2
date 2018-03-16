@@ -19,6 +19,8 @@ public:
     //Création de m_bdd
     QSqlDatabase m_bdd;
 
+    void GetModal(QSqlQueryModel *modal);
+
     //Création de la base de donnée
     void CreateDatabase();
 
@@ -31,6 +33,8 @@ public:
     //Permet d'inserer un produit
     //Param codeArticle, designationArticle, poidsArticle, emplacementArticle
     void InsertProduit(Article &produitAInserDansLaBdd);
+
+    void InsertStockAZeroApresInsertProduit();
 
     //Permet de supprimer un produit
     //Param codeArticle
@@ -46,8 +50,7 @@ public:
     QVector<Article*>* AfficheUnProduit(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
-    QVector<Utilisateur*>* GetDroitUtilisateur(QString loginEntreParUtilisateur,
-                                               QString motDePasseEntreParUtilisateur);
+    int GetDroitUtilisateur(QString loginSaisie, QString mdpSaisie);
 
     //Permet d'ajouter un utilistateur
     //En cours de dev il manque les droits !!

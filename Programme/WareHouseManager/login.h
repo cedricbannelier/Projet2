@@ -17,11 +17,16 @@ public:
     explicit Login(QWidget *parent = 0);
     ~Login();
 
+    bool test();
+
 private slots:
-    void on_buttonBox_accepted();
+//    void on_buttonBox_accepted();
 
 private:
     Ui::Login *ui;
+
+    //Création de la bdd de type Database
+    Database bdd;
 };
 
 #endif // LOGIN_H
