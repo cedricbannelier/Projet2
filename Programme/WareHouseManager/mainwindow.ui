@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -951,6 +951,51 @@
      <attribute name="title">
       <string>Expédition</string>
      </attribute>
+     <widget class="QPushButton" name="BoutonExpedition">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>160</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Valider</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>70</y>
+        <width>160</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelCodeArticleExpedition">
+         <property name="text">
+          <string>Code article</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEditCodeArticleExpedition"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelQuantiteExpedition">
+         <property name="text">
+          <string>Quantite</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEditQuantiteExpedition"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>

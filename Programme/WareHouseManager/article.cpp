@@ -34,11 +34,6 @@ QString Article::GetEmplacementArticle()
     return this->emplacementArticle;
 }
 
-int Article::GetIdArticle()
-{
-    return this->idArticle;
-}
-
 QString Article::GetEmballageArticle()
 {
     return this->emballageArticle;

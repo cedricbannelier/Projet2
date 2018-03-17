@@ -7,8 +7,6 @@ Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
 {
-
-
     ui->setupUi(this);
     ui->icone->setPixmap(QPixmap(":/icones/warehouse.png"));
     ui->lineEditLogin->setFocus();
@@ -27,16 +25,23 @@ bool Login::test()
     QString loginSaisie = ui->lineEditLogin->text();
     QString mdpSaisie = ui->lineEditMDP->text();
 
-    int droit = bdd.GetDroitUtilisateur(loginSaisie, mdpSaisie);
-
-    if(droit == 1 || droit == 2)
+    if(loginSaisie.isEmpty() || mdpSaisie.isEmpty())
     {
-        std::cout << "Access Granted" << std::endl;
-        return true;
+        return false;
     }
     else
     {
-        std::cout << "Acces Denied" << std::endl;
-        return false;
+        int droit = bdd.GetDroitUtilisateur(loginSaisie, mdpSaisie);
+
+        if(droit == 1 || droit == 2)
+        {
+            std::cout << "Access Granted" << std::endl;
+            return true;
+        }
+        else
+        {
+            std::cout << "Acces Denied" << std::endl;
+            return false;
+        }
     }
 }

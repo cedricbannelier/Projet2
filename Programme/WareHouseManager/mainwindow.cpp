@@ -15,8 +15,8 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
+
         QMenu *menuFichier = menuBar()->addMenu("&Fichier");
         QAction *actionQuitter = new QAction("&Quitter", this);
         menuFichier->addAction(actionQuitter);
@@ -42,96 +42,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 
         ui->labelFournisseurInformations->hide();
         ui->labelAjoutArticleInformations->hide();
-
- //       this->miseAJour();
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-/*
-void MainWindow::afficheFenetreLogin()
-{
-    QObject::connect(buttonBox, SIGNAL(accepted()), fenetreLogin, SLOT(accept()));
-    QObject::connect(buttonBox, SIGNAL(rejected()), fenetreLogin, SLOT(reject()));
 
-    boxLayout->addWidget(labelBienvenue);
-    boxLayout->addWidget(labelAvertissement);
-    boxLayout->addWidget(login);
-    boxLayout->addWidget(motDePasse);
-    boxLayout->addWidget(buttonBox);
-
-    labelBienvenue->setText("WareHouseManager");
-    labelBienvenue->setFont(QFont( "Helvetica", 24));
-
-    labelAvertissement->hide();
-
-    login->setPlaceholderText("Login");
-    motDePasse->setPlaceholderText("Mot de passe");
-    motDePasse->setEchoMode(QLineEdit::Password);
-
-    fenetreLogin->setLayout(boxLayout);
-
-    if(fenetreLogin->exec() == QDialog::Accepted)
-    {
-        if(verificationLogin() == false)
-        {
-                 labelAvertissement->show();
-                 labelAvertissement->setText("Mauvais login ou mot de passe");
-         }
-    }
-    else
-    {
-        fermeFenetre= true;
-        qDebug() << "Cancel";
-    }
-}
-*/
-//Affiche une fenêtre pour savoir si la requete de suppression est bien passé.
-void MainWindow::popupQueryIsOkOrNot(bool etatQuery)
-{
-    if(etatQuery)
-    {
-        QMessageBox::information(this, "Etat de la requete",
-                                 "Article supprimé !",QMessageBox::Ok);
-
-    }
-    else
-    {
-        QMessageBox::warning(this, "Etat de la requete",
-                             "La requete n'est pas passée !",QMessageBox::Ok);
-   }
-}
-/*
-bool MainWindow::verificationLogin()
-{
-        std::cout << "MODE DEBUG : Dans verification login mainwindow.CPP" << std::endl;
-
-        QString loginEntreParUtilisateur = login->text();
-        QString motDePasseEntreParUtilisateur = motDePasse->text();
-
-        QVector<Utilisateur*>* users = bdd.GetDroitUtilisateur(loginEntreParUtilisateur,
-                                                               motDePasseEntreParUtilisateur);
-
-        //On parcourt et on affiche uniquement le login dans la status bar
-        for (int i = 0; i < users->size(); i++)
-        {
-            if((*users)[i]->GetLogin() == NULL)
-            {
-                return false;
-            }
-            else
-            {
-                ui->statusBar->showMessage("Connexion : " + (QString)((*users)[i]->GetLogin()));
-                return true;
-            }
-
-        }
-        return 0;
-}
-*/
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
@@ -181,11 +98,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
     {
         bdd.InsertProduit(*article);
 
-        //Vide les champs après l'insertion
-        ui->lineEditAjoutCodeArticle->clear();
-        ui->lineEditAjoutDesignationArticle->clear();
-        ui->lineEditAjoutPoidsArticle->clear();
-        ui->lineEditAjoutEmplacementArticle->clear();
+        ViderLineEdit();
 
         ui->labelAjoutArticleInformations->setText("<font color=\"#088A08\">Votre article a bien été ajouté dans la base de données</font>");
         ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
@@ -212,11 +125,8 @@ void MainWindow::on_boutonSupprimer_clicked()
         bdd.DeleteProduit(ui->lineEditSupprimerArticle->text().toUpper());
         QMessageBox::information(this, "Information", "Votre article a été supprimé avec succès",QMessageBox::Ok);
     }
-
- //   popupQueryIsOkOrNot(bdd.DeleteProduit(ui->lineEditSupprimerArticle->text()));
 }
 
-//En cours de dev
 void MainWindow::on_boutonModifier_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton modifier d'un article mainwindow.CPP" << std::endl;
@@ -280,12 +190,9 @@ void MainWindow::on_AjoutEmballage_clicked()
 //Affiche tout le stock meme avec des quantités à NULL ou à zéro
 void MainWindow::on_ButonAfficheStockComplet_clicked()
 {
-
-//    bdd.OpenDatabase();
-    bdd.GetModal(&this->modal);
+    bdd.VuStockModal(&this->modal);
     ui->tableView->setModel(&this->modal);
     ui->tableView->resizeColumnsToContents();
-//    bdd.CloseDatabase();
 }
 
 
@@ -337,7 +244,7 @@ void MainWindow::on_butonAjoutFournisseur_clicked()
         bdd.AjoutFournisseur(*nouvelFournisseur);
 
         //Vide les champs après l'insertion
-        ui->lineEditAjoutFournisseur->clear();
+        ViderLineEdit();
 
         ui->labelFournisseurInformations->setText("<font color=\"#088A08\">Le fournisseur a été créé</font>");
         ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
@@ -350,9 +257,7 @@ void MainWindow::on_BoutonValiderReception_clicked()
     std::cout << "MODE DEBUG : Dans la methode reception commande mainwindow.CPP" << std::endl;
 
     int idArticle = bdd.RecupererIdArticle(ui->lineEditArticleLivre->text().toUpper());
-
     int idFournisseur = bdd.RecupererIdFournisseur(ui->lineEditFournisseurLivraison->text().toUpper());
-
 
     if(idArticle == 0)
     {
@@ -374,12 +279,7 @@ void MainWindow::on_BoutonValiderReception_clicked()
                                    idArticle,
                                    idFournisseur);
 
-            ui->lineEditQteLivree->clear();
-            ui->lineEditNumeroLivraison->clear();
-            ui->lineEditDateLivraison->clear();
-            ui->lineEditFournisseurLivraison->clear();
-            ui->lineEditArticleLivre->clear();
-
+            ViderLineEdit();
             QMessageBox::information(this, "Réception faite", "La réception a été validée",QMessageBox::Ok);
         }
 
@@ -410,23 +310,17 @@ void MainWindow::on_BoutonExportExcel_clicked()
     }
 }
 
-/*
-SELECT
-SUM(consulter.qteStock + livrer.qteLivree) AS 'QteT',
-consulter.qteStock AS 'QTE consulter',
-SUM(livrer.qteLivree) AS 'QTE LIVRE',
-consulter.qteStock as QTE,
-article.codeArticle as Référence,
-article.designationArticle as Libelle,
-article.poidsArticle as Poids,
-article.emplacementArticle as Empl,
-emballage.typeEmballage as Type,
-emballage.hauteurEmballage as H,
-emballage.largeurEmballage as l,
-longueurEmballage as L
-FROM article
-LEFT JOIN consulter ON article.idArticle = consulter.idArticle
-LEFT JOIN emballage ON article.idEmballage = emballage.idEmballage
-LEFT JOIN livrer ON article.idArticle = livrer.idArticle
-WHERE article.idArticle=14;
-*/
+void MainWindow::ViderLineEdit()
+{
+    foreach(QLineEdit* lineEdit, findChildren<QLineEdit*>())
+    {
+       lineEdit->clear();
+    }
+
+}
+//En cours de dev
+void MainWindow::on_BoutonExpedition_clicked()
+{
+    QString codeArticleExpedition = ui->lineEditCodeArticleExpedition->text();
+    QString quantiteExpedition = ui->lineEditQuantiteExpedition->text();
+}

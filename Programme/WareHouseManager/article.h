@@ -7,11 +7,18 @@
 class Article
 {
 public:
+
+    //Constructeur vide
     Article();
+
+    //Constructeur
+    //Param : QString codeA
     Article(QString codeA, QString designationA, int poidsA, QString emplacementA, QString emballageA);
 
-    int GetIdArticle();
+    //Getteur codeArticle
     QString GetCodeArticle();
+
+    //Getteur designationArticle
     QString GetDesignationArticle();
     int GetPoidsArticle();
     QString GetEmplacementArticle();
@@ -24,7 +31,6 @@ public:
     void SetEmballageArticle(QString emballageA);
 
 private:
-    int idArticle;
     QString codeArticle;
     QString designationArticle;
     int poidsArticle;

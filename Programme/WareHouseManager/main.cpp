@@ -13,29 +13,26 @@ int main(int argc, char *argv[])
 
     Database bdd;
 
-//    Utilisateur * nouvelleConnexion = new Utilisateur();
-
     bdd.CreateDatabase();
 
     Login fenetreDeLogin;
 
-    do
+    while(fenetreDeLogin.exec() == QDialog::Accepted)
     {
-        if (fenetreDeLogin.exec() == QDialog::Accepted)
-        {
-            std::cout << "Dans le main" << std::endl;
 
-            if(fenetreDeLogin.test())
-            {
-                mainWindow.show();
-                return application.exec();
-            }
+        std::cout << "Dans le main" << std::endl;
+
+        if(fenetreDeLogin.test())
+        {
+            mainWindow.show();
+            application.exec();
+            application.quit();
         }
-        else
+
+        else if(fenetreDeLogin.exec() == QDialog::Rejected) //QDialog::Rejected
         {
             application.quit();
         }
-    }while(fenetreDeLogin.test() == false);
-
+    }
     return 0;
 }

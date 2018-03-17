@@ -15,11 +15,10 @@ class Database
 public:
     Database();
 
-
     //Création de m_bdd
     QSqlDatabase m_bdd;
 
-    void GetModal(QSqlQueryModel *modal);
+    void VuStockModal(QSqlQueryModel *modal);
 
     //Création de la base de donnée
     void CreateDatabase();
