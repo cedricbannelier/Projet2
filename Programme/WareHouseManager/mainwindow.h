@@ -67,6 +67,8 @@ private slots:
 
     void on_BoutonExpedition_clicked();
 
+    void on_actionQuitter_triggered();
+
 private:
 
     //Permet de vider les lineEdit

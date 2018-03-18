@@ -16,12 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-        QMenu *menuFichier = menuBar()->addMenu("&Fichier");
-        QAction *actionQuitter = new QAction("&Quitter", this);
-        menuFichier->addAction(actionQuitter);
-        connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-
+/*
         QMenu *menuEdition = menuBar()->addMenu("&Edition");
         QAction *actionCopier = new QAction("&Copier", this);
         menuEdition->addAction(actionCopier);
@@ -39,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
         QMenu *menuAide = menuBar()->addMenu("&Aide");
         QAction *aide1 = new QAction("&aide1", this);
         menuAide->addAction(aide1);
-
+*/
         ui->labelFournisseurInformations->hide();
         ui->labelAjoutArticleInformations->hide();
 }
@@ -190,6 +185,7 @@ void MainWindow::on_AjoutEmballage_clicked()
 //Affiche tout le stock meme avec des quantités à NULL ou à zéro
 void MainWindow::on_ButonAfficheStockComplet_clicked()
 {
+    ui->tableView->setFont(QFont("Tahoma",ui->spinBoxTaillePolice->value()));
     bdd.VuStockModal(&this->modal);
     ui->tableView->setModel(&this->modal);
     ui->tableView->resizeColumnsToContents();
@@ -323,4 +319,9 @@ void MainWindow::on_BoutonExpedition_clicked()
 {
     QString codeArticleExpedition = ui->lineEditCodeArticleExpedition->text();
     QString quantiteExpedition = ui->lineEditQuantiteExpedition->text();
+}
+
+void MainWindow::on_actionQuitter_triggered()
+{
+    qApp->quit();
 }

@@ -1,0 +1,14 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\database.o
+./debug\emballage.o
+./debug\login.o
+./debug\fournisseur.o
+./debug\article.o
+./debug\utilisateur.o
+./debug\logisticien.o
+./debug\qrc_icone.o
+./debug\moc_mainwindow.o
+./debug\moc_login.o
+);
