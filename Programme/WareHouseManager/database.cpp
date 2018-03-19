@@ -202,6 +202,33 @@ QVector<Article *> *Database::AfficheUnProduit(QString codeArticle)
     return articles;
 }
 
+Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
+{
+    std::cout << "MODE DEBUG : Droit utilisateur dans database.CPP" << std::endl;
+
+    QSqlQuery query(m_bdd);
+
+    query.prepare("SELECT login, droitUtilisateur "
+                  "FROM utilisateur "
+                  "WHERE login = :loginEntreParUtilisateur "
+                  "AND motDePasseUtilisateur = :motDePasseUtilisateur; ");
+    query.bindValue(":loginEntreParUtilisateur", nouvelUtilisateur->GetLogin());
+    query.bindValue(":motDePasseUtilisateur", nouvelUtilisateur->GetMotDePasse());
+    query.exec();
+
+    do
+    {
+        if(query.next())
+        {
+            Utilisateur * user = new Utilisateur();
+            user->SetLogin(query.value(0).toString());
+            user->SetDroit(query.value(1).toString().toInt());
+            return user;
+        }
+    }while(query.next());
+
+}
+
 //Permet de récuperer la table complete ARTICLE
 //En cours de dev
 void Database::AfficheLeStock()
@@ -213,24 +240,6 @@ void Database::AfficheLeStock()
     QSqlQuery query(m_bdd);
     query.exec("SELECT * FROM article;");
     modal->setQuery(query);
-}
-
-int Database::GetDroitUtilisateur(QString loginSaisie, QString mdpSaisie)
-{
-    std::cout << "MODE DEBUG : Droit utilisateur dans database.CPP" << std::endl;
-
-    QSqlQuery query(m_bdd);
-
-    query.prepare("SELECT droitUtilisateur FROM utilisateur WHERE login = :loginEntreParUtilisateur AND motDePasseUtilisateur = :motDePasseUtilisateur; ");
-    query.bindValue(":loginEntreParUtilisateur", loginSaisie);
-    query.bindValue(":motDePasseUtilisateur", mdpSaisie);
-    query.exec();
-
-    query.next();
-
-    int droit = query.value(0).toInt();
-
-    return droit;
 }
 
 void Database::AjoutUtilisateur(Utilisateur &user)
@@ -330,25 +339,23 @@ bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
     std::cout << "MODE DEBUG : Dans Verification si article present dans la BDD database.CPP" << std::endl;
 
     QSqlQuery query(m_bdd);
-    query.prepare("SELECT codeArticle "
+    query.prepare("SELECT COUNT(idArticle) as 'nb' "
                   "FROM article "
                   "WHERE codeArticle=:codeArticle;");
     query.bindValue(":codeArticle", codeArticle.toUpper());
     query.exec();
-
     query.next();
 
-    QString presenceDansLaBdd = query.value(0).toString().toUpper();
+    int presenceDansLaBdd = query.value(0).toInt();
 
-    if(presenceDansLaBdd.toUpper() == codeArticle.toUpper())
-     {
-        return false;
-     }
-     else
+    if(presenceDansLaBdd == 0)
      {
         return true;
      }
-    return false;
+     else
+     {
+        return false;
+     }
 }
 
 bool Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
@@ -430,7 +437,7 @@ void Database::VuStockModal(QSqlQueryModel *modal)
     modal->setQuery(query);
 }
 
-void Database::NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, QString codeArticleExpedition)
+void Database::NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, int idArticle)
 {
     QSqlQuery query(m_bdd);
 
@@ -439,54 +446,9 @@ void Database::NouvelleExpedition(int quantiteExpedition, QString numeroExpediti
                   "VALUES (:quantiteExpedition, :numeroExpedition, :codeArticleExpedition)");
     query.bindValue(":quantiteExpedition", quantiteExpedition);
     query.bindValue(":numeroExpedition", numeroExpedition);
-    query.bindValue(":codeArticleExpedition", codeArticleExpedition);
+    query.bindValue(":codeArticleExpedition", idArticle);
     query.exec();
 }
-
-/*
-INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage)
-VALUES ('pomme', 'pomme verte', 10, 'A1B2C', 1);
-
-INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage)
-VALUES ('poire', 'poire rouge', 10, 'B1A2C', 2);
-
-
-INSERT INTO emballage (typeEmballage, hauteurEmballage, largeurEmballage, longueurEmballage)
-VALUES ('carton',100,750,50);
-INSERT INTO emballage (typeEmballage, hauteurEmballage, largeurEmballage, longueurEmballage)
-VALUES ('carton',50,25,50);
-
-SELECT codeArticle as Référence, designationArticle as Libelle, poidsArticle as Poids, emplacementArticle as 'Empl.', typeEmballage as Type, hauteurEmballage as H, largeurEmballage as l, profondeurEmballage as P
-FROM article, emballage
-WHERE article.idEmballage = emballage.idEmballage
-
-SELECT distinct largeurEmballage, longueurEmballage, hauteurEmballage
-FROM emballage
-WHERE typeEmballage ='Carton';
-
-SELECT
-SUM(livrer.qteLivree + consulter.qteStock) AS 'Qte Phy',
-SUM(livrer.qteLivree) as 'QTE TOTALE Livrée',
-article.codeArticle as Référence,
-article.designationArticle as Libelle,
-article.poidsArticle as Poids, article.emplacementArticle as Empl
-FROM article
-LEFT JOIN consulter ON article.idArticle = consulter.idArticle
-LEFT JOIN livrer ON article.idArticle = livrer.idArticle
-
-
-SELECT
-                  SUM(livrer.qteLivree - expedition.qteExpedition) AS 'Qte Phy Totale',
-                  article.codeArticle as Référence,
-                  article.designationArticle as Libelle,
-                  article.poidsArticle as Poids,
-                  article.emplacementArticle as Empl
-                  FROM article
-                  LEFT JOIN livrer ON article.idArticle = livrer.idArticle
-                  LEFT JOIN expedition ON article.idArticle = expedition.idArticle
-                  GROUP BY article.idArticle
-
-*/
 
 
 

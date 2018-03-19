@@ -24,6 +24,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+     Utilisateur user;
 
 private slots:
 
@@ -69,6 +70,8 @@ private slots:
 
     void on_actionQuitter_triggered();
 
+
+
 private:
 
     //Permet de vider les lineEdit
@@ -80,7 +83,7 @@ private:
     //Création de la bdd de type Database
     Database bdd;
 
-    Utilisateur * user;
+
 
     QSqlQueryModel modal;
 

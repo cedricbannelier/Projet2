@@ -18,24 +18,33 @@ Login::~Login()
     delete ui;
 }
 
-bool Login::test()
+bool Login::autorisation()
 {
     std::cout << "Dans la methode OK du bouton login.cpp" << std::endl;
 
-    QString loginSaisie = ui->lineEditLogin->text();
-    QString mdpSaisie = ui->lineEditMDP->text();
+    user.SetLogin(ui->lineEditLogin->text());
+    user.SetMotDePasse(ui->lineEditMDP->text());
 
-    if(loginSaisie.isEmpty() || mdpSaisie.isEmpty())
+    /*QString loginSaisie = ui->lineEditLogin->text();
+    QString mdpSaisie = ui->lineEditMDP->text();*/
+
+
+    /*Utilisateur * nouvelleUtilisateur = new Utilisateur(ui->lineEditLogin->text(),
+                                                        ui->lineEditMDP->text());*/
+
+
+    if(user.GetLogin().isEmpty() || user.GetMotDePasse().isEmpty())
     {
         return false;
     }
     else
     {
-        int droit = bdd.GetDroitUtilisateur(loginSaisie, mdpSaisie);
+        Utilisateur* test = bdd.GetDroitUtilisateur(&user);
 
-        if(droit == 1 || droit == 2)
+        if( test->GetDroit() == 1 ||  test->GetDroit() == 2)
         {
             std::cout << "Access Granted" << std::endl;
+            user.SetDroit(test->GetDroit());
             return true;
         }
         else

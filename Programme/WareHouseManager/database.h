@@ -50,7 +50,7 @@ public:
     QVector<Article*>* AfficheUnProduit(QString codeArticle);
 
     //Création d'un vecteur de vecteur d'utilisateur
-    int GetDroitUtilisateur(QString loginSaisie, QString mdpSaisie);
+    Utilisateur *GetDroitUtilisateur(Utilisateur * nouvelUtilisateur);
 
     //Permet d'ajouter un utilistateur
     //En cours de dev il manque les droits !!
@@ -73,7 +73,7 @@ public:
 
     bool FournisseurPresentDansLaBdd(QString nomFournisseur);
 
-    void NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, QString codeArticleExpedition);
+    void NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, int idArticle);
 
 private:
 

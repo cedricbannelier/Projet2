@@ -19,17 +19,16 @@ int main(int argc, char *argv[])
 
     while(fenetreDeLogin.exec() == QDialog::Accepted)
     {
-
         std::cout << "Dans le main" << std::endl;
-
-        if(fenetreDeLogin.test())
+        if(fenetreDeLogin.autorisation())
         {
+            mainWindow.user.SetDroit(fenetreDeLogin.user.GetDroit());
+            mainWindow.user.SetLogin(fenetreDeLogin.user.GetLogin());
             mainWindow.show();
             application.exec();
             application.quit();
         }
-
-        else if(fenetreDeLogin.exec() == QDialog::Rejected) //QDialog::Rejected
+        else if(fenetreDeLogin.exec() == QDialog::Rejected)
         {
             application.quit();
         }

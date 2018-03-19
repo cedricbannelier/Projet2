@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "Database.h"
 #include "mainwindow.h"
+#include "utilisateur.h"
 
 namespace Ui {
 class Login;
@@ -17,16 +18,14 @@ public:
     explicit Login(QWidget *parent = 0);
     ~Login();
 
-    bool test();
-
-private slots:
-//    void on_buttonBox_accepted();
+    bool autorisation();
+    Utilisateur user;
 
 private:
     Ui::Login *ui;
 
-    //Création de la bdd de type Database
     Database bdd;
+
 };
 
 #endif // LOGIN_H

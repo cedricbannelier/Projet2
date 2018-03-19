@@ -8,8 +8,6 @@ QT += sql
 
 # QT       += core gui
 
-# RC_FILE += icone.rc
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WareHouseManager

@@ -17,27 +17,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-/*
-        QMenu *menuEdition = menuBar()->addMenu("&Edition");
-        QAction *actionCopier = new QAction("&Copier", this);
-        menuEdition->addAction(actionCopier);
+    user.GetDroit();
+    QString::number(user.GetDroit());
 
-        QAction *actionColler = new QAction("&Coller", this);
-        menuEdition->addAction(actionColler);
+    ui->label_14->setText(QString::number(user.GetDroit()));
+    ui->statusBar->showMessage("rr");
 
-        QAction *actionCouper = new QAction("&Couper", this);
-        menuEdition->addAction(actionCouper);
-
-        QMenu *menuOptions = menuBar()->addMenu("&Options");
-        QAction *option1 = new QAction("&option1", this);
-        menuOptions->addAction(option1);
-
-        QMenu *menuAide = menuBar()->addMenu("&Aide");
-        QAction *aide1 = new QAction("&aide1", this);
-        menuAide->addAction(aide1);
-*/
         ui->labelFournisseurInformations->hide();
         ui->labelAjoutArticleInformations->hide();
+
 }
 
 MainWindow::~MainWindow()
@@ -80,25 +68,17 @@ void MainWindow::on_boutonAjoutArticle_clicked()
        ui->lineEditAjoutPoidsArticle->text() == NULL ||
        ui->lineEditAjoutEmplacementArticle->text() == NULL)
     {
-        ui->labelAjoutArticleInformations->setText("<font color=\"#FF0000\">Veuillez remplir tous les champs</font>");
-        ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
-        ui->labelAjoutArticleInformations->show();
+        QMessageBox::warning(this, "Warning", "Veuillez remplir tous les champs",QMessageBox::Ok);
     }
     else if(bdd.ArticlePresentDansLaBddAvecLeCodeArticle(ui->lineEditAjoutCodeArticle->text().toUpper()) == false)
     {
-        ui->labelAjoutArticleInformations->setText("<font color=\"#FF0000\">Le code article est déjà présent dans la base de données</font>");
-        ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
-        ui->labelAjoutArticleInformations->show();
+        QMessageBox::warning(this, "Warning", "Le code article est déjà présent dans la base de données",QMessageBox::Ok);
     }
     else
     {
         bdd.InsertProduit(*article);
-
         ViderLineEdit();
-
-        ui->labelAjoutArticleInformations->setText("<font color=\"#088A08\">Votre article a bien été ajouté dans la base de données</font>");
-        ui->labelAjoutArticleInformations->setAlignment(Qt::AlignCenter);
-        ui->labelAjoutArticleInformations->show();
+        QMessageBox::information(this, "Information", "Votre article a bien été ajouté dans la base de données",QMessageBox::Ok);
     }
 }
 
@@ -192,29 +172,23 @@ void MainWindow::on_ButonAfficheStockComplet_clicked()
     ui->tableView->resizeColumnsToContents();
 }
 
-
-
 //Permet de selectionner tous les types d'emballage et affiche l'ID
 void MainWindow::miseAJour()
 {
-//        bdd.OpenDatabase();
-
     QSqlQuery query;
 
-        query.exec("SELECT largeurEmballage || longueurEmballage || hauteurEmballage AS 'l * L * h' FROM emballage;");
-        int i = 0;
+    query.exec("SELECT largeurEmballage || longueurEmballage || hauteurEmballage AS 'l * L * h' FROM emballage;");
+    int i = 0;
 
-        //On vide la combobox
-        ui->comboBoxDimensionEmballage->clear();
+    //On vide la combobox
+    ui->comboBoxDimensionEmballage->clear();
 
-        //On remplit la comobox
-        while(query.next())
-        {
-            ui->comboBoxDimensionEmballage->addItem(query.value(0).toString(), i);
-            i++;
-
-        }
-//        bdd.CloseDatabase();
+    //On remplit la comobox
+    while(query.next())
+    {
+        ui->comboBoxDimensionEmballage->addItem(query.value(0).toString(), i);
+        i++;
+    }
 }
 
 void MainWindow::on_butonAjoutFournisseur_clicked()
@@ -225,27 +199,19 @@ void MainWindow::on_butonAjoutFournisseur_clicked()
 
     if(ui->lineEditAjoutFournisseur->text().toUpper() == NULL)
     {
-        ui->labelFournisseurInformations->setText("<font color=\"#FF0000\">Veuillez saisir un fournisseur</font>");
-        ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
-        ui->labelFournisseurInformations->show();
+        QMessageBox::warning(this, "Warning", "Veuillez saisir un fournisseur",QMessageBox::Ok);
     }
     else
         if(bdd.FournisseurPresentDansLaBdd(ui->lineEditAjoutFournisseur->text().toUpper()) == false)
         {
-            ui->labelFournisseurInformations->setText("<font color=\"#FF0000\">Le fournisseur est déjà présent dans la base de données</font>");
-            ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
-            ui->labelFournisseurInformations->show();
-    }
+
+            QMessageBox::warning(this, "Warning", "Le fournisseur est déjà présent dans la base de données",QMessageBox::Ok);
+        }
     else
     {
         bdd.AjoutFournisseur(*nouvelFournisseur);
-
-        //Vide les champs après l'insertion
         ViderLineEdit();
-
-        ui->labelFournisseurInformations->setText("<font color=\"#088A08\">Le fournisseur a été créé</font>");
-        ui->labelFournisseurInformations->setAlignment(Qt::AlignCenter);
-        ui->labelFournisseurInformations->show();
+        QMessageBox::information(this, "Warning", "Le fournisseur a été créé",QMessageBox::Ok);
     }
 }
 
@@ -270,26 +236,18 @@ void MainWindow::on_BoutonValiderReception_clicked()
     }
         else
         {
-            /*bdd.ReceptionLivraison(ui->lineEditQteLivree->text().toInt(),
-                                   ui->lineEditNumeroLivraison->text(),
-                                   ui->lineEditDateLivraison->text().toInt(),
-                                   idArticle,
-                                   idFournisseur);
-            */
-
             Livraison * nouvelleLivraison = new Livraison(ui->lineEditQteLivree->text().toInt(),
                                                           ui->lineEditNumeroLivraison->text(),
                                                           ui->lineEditDateLivraison->text().toInt(),
                                                           idArticle,
                                                           idFournisseur);
+
             bdd.ReceptionLivraison(*nouvelleLivraison);
 
-
-
             ViderLineEdit();
+
             QMessageBox::information(this, "Réception faite", "La réception a été validée",QMessageBox::Ok);
         }
-
 }
 
 void MainWindow::on_BoutonExportExcel_clicked()
@@ -328,12 +286,20 @@ void MainWindow::ViderLineEdit()
 //En cours de dev
 void MainWindow::on_BoutonExpedition_clicked()
 {
-    QString codeArticleExpedition = ui->lineEditCodeArticleExpedition->text();
     int quantiteExpedition = ui->lineEditQuantiteExpedition->text().toInt();
     QString numeroExpedition = ui->lineEditNumeroExpedition->text();
 
-    bdd.NouvelleExpedition(quantiteExpedition, numeroExpedition, codeArticleExpedition);
+    int idArticle = bdd.RecupererIdArticle(ui->lineEditCodeArticleExpedition->text().toUpper());
 
+    if(idArticle == 0)
+    {
+        QMessageBox::warning(this, "Code Article INCONNU", "Le code article saisi n'est pas dans la base de données. ""<br>"""
+                                                           "Veuillez l'ajouter avant de faire la réception",QMessageBox::Ok);
+    }
+    else
+    {
+        bdd.NouvelleExpedition(quantiteExpedition, numeroExpedition, idArticle);
+    }
 }
 
 void MainWindow::on_actionQuitter_triggered()
