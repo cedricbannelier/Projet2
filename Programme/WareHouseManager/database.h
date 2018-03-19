@@ -9,6 +9,7 @@
 #include "utilisateur.h"
 #include "emballage.h"
 #include "fournisseur.h"
+#include "livraison.h"
 
 class Database
 {
@@ -68,9 +69,11 @@ public:
 
     bool AjoutFournisseur(Fournisseur & nouvelFournisseur);
 
-    void ReceptionLivraison(QString qteLivree, QString numeroLivraison, int dateLivraison, int idArticle, int idFournisseur);
+    void ReceptionLivraison(Livraison & nouvelleLivraionsDansBdd);
 
     bool FournisseurPresentDansLaBdd(QString nomFournisseur);
+
+    void NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, QString codeArticleExpedition);
 
 private:
 

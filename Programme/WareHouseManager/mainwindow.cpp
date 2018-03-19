@@ -10,6 +10,7 @@
 #include "utilisateur.h"
 #include "emballage.h"
 #include "fournisseur.h"
+#include "livraison.h"
 
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
@@ -269,11 +270,21 @@ void MainWindow::on_BoutonValiderReception_clicked()
     }
         else
         {
-            bdd.ReceptionLivraison(ui->lineEditQteLivree->text(),
+            /*bdd.ReceptionLivraison(ui->lineEditQteLivree->text().toInt(),
                                    ui->lineEditNumeroLivraison->text(),
                                    ui->lineEditDateLivraison->text().toInt(),
                                    idArticle,
                                    idFournisseur);
+            */
+
+            Livraison * nouvelleLivraison = new Livraison(ui->lineEditQteLivree->text().toInt(),
+                                                          ui->lineEditNumeroLivraison->text(),
+                                                          ui->lineEditDateLivraison->text().toInt(),
+                                                          idArticle,
+                                                          idFournisseur);
+            bdd.ReceptionLivraison(*nouvelleLivraison);
+
+
 
             ViderLineEdit();
             QMessageBox::information(this, "Réception faite", "La réception a été validée",QMessageBox::Ok);
@@ -318,7 +329,11 @@ void MainWindow::ViderLineEdit()
 void MainWindow::on_BoutonExpedition_clicked()
 {
     QString codeArticleExpedition = ui->lineEditCodeArticleExpedition->text();
-    QString quantiteExpedition = ui->lineEditQuantiteExpedition->text();
+    int quantiteExpedition = ui->lineEditQuantiteExpedition->text().toInt();
+    QString numeroExpedition = ui->lineEditNumeroExpedition->text();
+
+    bdd.NouvelleExpedition(quantiteExpedition, numeroExpedition, codeArticleExpedition);
+
 }
 
 void MainWindow::on_actionQuitter_triggered()

@@ -76,12 +76,20 @@ void Database::CreateDatabase()
 
     query.exec("CREATE TABLE IF NOT EXISTS `livrer` ("
                "idLivrer INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-               "qteLivree TEXT NOT NULL, "
-               "numeroLivraison INTEGER NOT NULL, "
+               "qteLivree INTEGER NOT NULL, "
+               "numeroLivraison TEXT NOT NULL, "
                "dateLivraison INTEGER NOT NULL, "
                "idArticle INTEGER NOT NULL, "
                "idFournisseur INTEGER NOT NULL, "
                "FOREIGN KEY(`idFournisseur`) REFERENCES `fournisseur`(`idFournisseur`),"
+               "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
+               ");");
+
+    query.exec("CREATE TABLE IF NOT EXISTS `expedition` ("
+               "idExpedition INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+               "qteExpedition INTEGER NOT NULL, "
+               "numeroExpedition TEXT NOT NULL, "
+               "idArticle INTEGER NOT NULL, "
                "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
                ");");
 }
@@ -362,18 +370,18 @@ bool Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
            }
 }
 
-void Database::ReceptionLivraison(QString qteLivree, QString numeroLivraison, int dateLivraison, int idArticle, int idFournisseur)
+void Database::ReceptionLivraison(Livraison & nouvelleLivraionsDansBdd)
 {
     std::cout << "MODE DEBUG : Dans reception commande database.CPP" << std::endl;
 
     QSqlQuery query(m_bdd);
     query.prepare("INSERT INTO livrer (qteLivree, numeroLivraison, dateLivraison, idArticle, idFournisseur)"
                   "VALUES(:qteLivree, :numeroLivraison, :dateLivraison, :idArticle, :idFournisseur);");
-    query.bindValue(":qteLivree", qteLivree);
-    query.bindValue(":numeroLivraison", numeroLivraison);
-    query.bindValue(":dateLivraison", dateLivraison);
-    query.bindValue(":idArticle", idArticle);
-    query.bindValue(":idFournisseur", idFournisseur);
+    query.bindValue(":qteLivree", nouvelleLivraionsDansBdd.GetQteLivree());
+    query.bindValue(":numeroLivraison", nouvelleLivraionsDansBdd.GetNumeroLivraison());
+    query.bindValue(":dateLivraison", nouvelleLivraionsDansBdd.GetDateLivraison());
+    query.bindValue(":idArticle", nouvelleLivraionsDansBdd.GetIdArticle());
+    query.bindValue(":idFournisseur", nouvelleLivraionsDansBdd.GetIdFournisseur());
 
     query.exec();
 }
@@ -406,20 +414,33 @@ bool Database::FournisseurPresentDansLaBdd(QString nomFournisseur)
 
 void Database::VuStockModal(QSqlQueryModel *modal)
 {
-    QSqlQuery query;
+    QSqlQuery query(m_bdd);
 
     query.prepare("SELECT "
-                  "consulter.qteStock + livrer.qteLivree AS 'Qte Phy Totale', "
-                  "livrer.qteLivree AS 'QTE LIVRE', "
+                  "SUM(livrer.qteLivree - expedition.qteExpedition) AS 'Qte Phy Totale', "
                   "article.codeArticle as Référence, "
                   "article.designationArticle as Libelle, "
                   "article.poidsArticle as Poids, "
                   "article.emplacementArticle as Empl "
                   "FROM article "
-                  "LEFT JOIN consulter ON article.idArticle = consulter.idArticle "
-                  "LEFT JOIN livrer ON article.idArticle = livrer.idArticle");
+                  "LEFT JOIN livrer ON article.idArticle = livrer.idArticle "
+                  "LEFT JOIN expedition ON article.idArticle = expedition.idArticle "
+                  "GROUP BY article.idArticle");
     query.exec();
     modal->setQuery(query);
+}
+
+void Database::NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, QString codeArticleExpedition)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("INSERT INTO expedition"
+                  "(qteExpedition, numeroExpedition, idArticle) "
+                  "VALUES (:quantiteExpedition, :numeroExpedition, :codeArticleExpedition)");
+    query.bindValue(":quantiteExpedition", quantiteExpedition);
+    query.bindValue(":numeroExpedition", numeroExpedition);
+    query.bindValue(":codeArticleExpedition", codeArticleExpedition);
+    query.exec();
 }
 
 /*
@@ -452,6 +473,18 @@ article.poidsArticle as Poids, article.emplacementArticle as Empl
 FROM article
 LEFT JOIN consulter ON article.idArticle = consulter.idArticle
 LEFT JOIN livrer ON article.idArticle = livrer.idArticle
+
+
+SELECT
+                  SUM(livrer.qteLivree - expedition.qteExpedition) AS 'Qte Phy Totale',
+                  article.codeArticle as Référence,
+                  article.designationArticle as Libelle,
+                  article.poidsArticle as Poids,
+                  article.emplacementArticle as Empl
+                  FROM article
+                  LEFT JOIN livrer ON article.idArticle = livrer.idArticle
+                  LEFT JOIN expedition ON article.idArticle = expedition.idArticle
+                  GROUP BY article.idArticle
 
 */
 

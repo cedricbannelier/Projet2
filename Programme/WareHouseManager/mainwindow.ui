@@ -27,7 +27,7 @@
      <string/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -1007,6 +1007,9 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="lineEditCodeArticleExpedition"/>
        </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEditQuantiteExpedition"/>
+       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="labelQuantiteExpedition">
          <property name="text">
@@ -1014,8 +1017,15 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEditQuantiteExpedition"/>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelNumeroExpedition">
+         <property name="text">
+          <string>Numero expédition</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEditNumeroExpedition"/>
        </item>
       </layout>
      </widget>

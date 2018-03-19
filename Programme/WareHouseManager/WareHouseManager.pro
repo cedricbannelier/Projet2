@@ -36,7 +36,8 @@ SOURCES += \
     fournisseur.cpp \
     article.cpp \
     utilisateur.cpp \
-    logisticien.cpp
+    logisticien.cpp \
+    livraison.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS += \
     fournisseur.h \
     article.h \
     utilisateur.h \
-    logisticien.h
+    logisticien.h \
+    livraison.h
 
 FORMS += \
         mainwindow.ui \
