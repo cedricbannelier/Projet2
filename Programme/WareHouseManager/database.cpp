@@ -215,7 +215,6 @@ Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
     query.bindValue(":loginEntreParUtilisateur", nouvelUtilisateur->GetLogin());
     query.bindValue(":motDePasseUtilisateur", nouvelUtilisateur->GetMotDePasse());
     query.exec();
-
     do
     {
         if(query.next())
@@ -226,7 +225,6 @@ Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
             return user;
         }
     }while(query.next());
-
 }
 
 //Permet de récuperer la table complete ARTICLE
@@ -448,6 +446,30 @@ void Database::NouvelleExpedition(int quantiteExpedition, QString numeroExpediti
     query.bindValue(":numeroExpedition", numeroExpedition);
     query.bindValue(":codeArticleExpedition", idArticle);
     query.exec();
+}
+
+void Database::ListeDesArticlesEnBdd(QSqlQueryModel *modal)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("SELECT "
+                  "codeArticle "
+                  "FROM article "
+                  );
+    query.exec();
+    modal->setQuery(query);
+}
+
+void Database::ListeDesFournisseursEnBdd(QSqlQueryModel *modal)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("SELECT "
+                  "nomFournisseur "
+                  "FROM fournisseur "
+                  );
+    query.exec();
+    modal->setQuery(query);
 }
 
 

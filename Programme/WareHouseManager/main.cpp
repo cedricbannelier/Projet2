@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
         {
             mainWindow.user.SetDroit(fenetreDeLogin.user.GetDroit());
             mainWindow.user.SetLogin(fenetreDeLogin.user.GetLogin());
+            mainWindow.afficheUtilisateur();
             mainWindow.show();
             application.exec();
             application.quit();

@@ -25,13 +25,6 @@ bool Login::autorisation()
     user.SetLogin(ui->lineEditLogin->text());
     user.SetMotDePasse(ui->lineEditMDP->text());
 
-    /*QString loginSaisie = ui->lineEditLogin->text();
-    QString mdpSaisie = ui->lineEditMDP->text();*/
-
-
-    /*Utilisateur * nouvelleUtilisateur = new Utilisateur(ui->lineEditLogin->text(),
-                                                        ui->lineEditMDP->text());*/
-
 
     if(user.GetLogin().isEmpty() || user.GetMotDePasse().isEmpty())
     {
@@ -45,6 +38,7 @@ bool Login::autorisation()
         {
             std::cout << "Access Granted" << std::endl;
             user.SetDroit(test->GetDroit());
+            std::cout << user.GetDroit();
             return true;
         }
         else

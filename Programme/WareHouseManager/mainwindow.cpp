@@ -6,7 +6,7 @@
 #include <QFile>
 
 #include "article.h"
-#include "Database.h"
+#include "database.h"
 #include "utilisateur.h"
 #include "emballage.h"
 #include "fournisseur.h"
@@ -17,14 +17,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    user.GetDroit();
-    QString::number(user.GetDroit());
 
-    ui->label_14->setText(QString::number(user.GetDroit()));
-    ui->statusBar->showMessage("rr");
-
-        ui->labelFournisseurInformations->hide();
-        ui->labelAjoutArticleInformations->hide();
+    CreationTableView();
 
 }
 
@@ -33,11 +27,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::afficheUtilisateur()
+{
+    ui->statusBar->showMessage("Connecté en tant que : " + user.GetLogin() + " | "
+                               + "Droit : " + QString::number(user.GetDroit()));
+}
+
+
 void MainWindow::on_boutonConsulterFicheProduit_clicked()
 {
     std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
 
-        QString codeArticle = ui->lineEditRechercher->text().toUpper();
+        QString codeArticle = ui->comboBoxCodeArticle->currentText();
         QVector<Article*>* articles = bdd.AfficheUnProduit(codeArticle);
 
         for (int i = 0; i < articles->size(); i++)
@@ -55,7 +56,6 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
 void MainWindow::on_boutonAjoutArticle_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article mainwindow.CPP" << std::endl;
-
 
     Article* article = new Article(ui->lineEditAjoutCodeArticle->text().toUpper(),
                                    ui->lineEditAjoutDesignationArticle->text(),
@@ -87,27 +87,27 @@ void MainWindow::on_boutonSupprimer_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton supprimer d'un article mainwindow.CPP" << std::endl;
 
-    if(ui->lineEditSupprimerArticle->text().toUpper() == NULL)
+    if(ui->comboBoxSupprimerArticle->currentText() == NULL)
     {
         QMessageBox::warning(this, "Warning", "Veuillez saisir un code article",QMessageBox::Ok);
     }
     else
-    if(bdd.ArticlePresentDansLaBddAvecId(ui->lineEditSupprimerArticle->text().toUpper()) == false)
+    if(bdd.ArticlePresentDansLaBddAvecId(ui->comboBoxSupprimerArticle->currentText()) == false)
     {
         QMessageBox::warning(this, "Warning", "Le code article saisi n'est pas dans la base de données",QMessageBox::Ok);
     }
     else
     {
-        bdd.DeleteProduit(ui->lineEditSupprimerArticle->text().toUpper());
+        bdd.DeleteProduit(ui->comboBoxSupprimerArticle->currentText());
         QMessageBox::information(this, "Information", "Votre article a été supprimé avec succès",QMessageBox::Ok);
+        on_tabWidget_currentChanged();
     }
 }
 
 void MainWindow::on_boutonModifier_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton modifier d'un article mainwindow.CPP" << std::endl;
-
-    QString codeArticle = ui->lineEditModifierArticle->text().toUpper();
+    QString codeArticle = ui->comboBoxModifierArticle->currentText();
 
     QVector<Article*>* articles = bdd.AfficheUnProduit(codeArticle);
 
@@ -151,7 +151,7 @@ void MainWindow::on_pushButtonValidationModification_clicked()
     bdd.UpdateProduit(*article);
 }
 
-void MainWindow::on_AjoutEmballage_clicked()
+void MainWindow::on_boutonAjoutEmballage_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode ajouter emballage mainwindow.CPP" << std::endl;
 
@@ -219,35 +219,37 @@ void MainWindow::on_BoutonValiderReception_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode reception commande mainwindow.CPP" << std::endl;
 
-    int idArticle = bdd.RecupererIdArticle(ui->lineEditArticleLivre->text().toUpper());
-    int idFournisseur = bdd.RecupererIdFournisseur(ui->lineEditFournisseurLivraison->text().toUpper());
+    int idArticle = bdd.RecupererIdArticle(ui->comboBoxCodeArticleReceptionCommande->currentText());
+    int idFournisseur = bdd.RecupererIdFournisseur(ui->comboBoxFournisseur->currentText());
+    int qteSaisie = ui->lineEditQteLivree->text().toInt();
 
-    if(idArticle == 0)
+    if(ui->lineEditDateLivraison->text() == NULL ||
+       ui->lineEditNumeroLivraison->text() == NULL ||
+       ui->lineEditQteLivree->text() == NULL ||
+       ui->comboBoxCodeArticleReceptionCommande->currentText() == NULL ||
+       ui->comboBoxFournisseur->currentText() == NULL)
     {
-        QMessageBox::warning(this, "Code Article INCONNU", "Le code article saisi n'est pas dans la base de données. ""<br>"""
-                                                           "Veuillez l'ajouter avant de faire la réception",QMessageBox::Ok);
+        QMessageBox::warning(this, "Champs", "Veuillez saisir tous les champs",QMessageBox::Ok);
+    }
+    //On test si la quantité est à zéro ou négative
+    else if(qteSaisie <= 0)
+    {
+        QMessageBox::warning(this, "Qantité", "La quantité saisie est erronnée",QMessageBox::Ok);
     }
     else
-        if(idFournisseur == 0)
+    {
+        Livraison * nouvelleLivraison = new Livraison(ui->lineEditQteLivree->text().toInt(),
+                                                      ui->lineEditNumeroLivraison->text(),
+                                                      ui->lineEditDateLivraison->text().toInt(),
+                                                      idArticle,
+                                                      idFournisseur);
 
-   {
-       QMessageBox::warning(this, "Code Fournisseur INCONNU", "Le fournisseur saisi n'est pas dans la base de données.""<br>"" "
-                                                              "Veuillez l'ajouter avant de faire la réception",QMessageBox::Ok);
+        bdd.ReceptionLivraison(*nouvelleLivraison);
+
+        ViderLineEdit();
+
+        QMessageBox::information(this, "Réception faite", "La réception a été validée",QMessageBox::Ok);
     }
-        else
-        {
-            Livraison * nouvelleLivraison = new Livraison(ui->lineEditQteLivree->text().toInt(),
-                                                          ui->lineEditNumeroLivraison->text(),
-                                                          ui->lineEditDateLivraison->text().toInt(),
-                                                          idArticle,
-                                                          idFournisseur);
-
-            bdd.ReceptionLivraison(*nouvelleLivraison);
-
-            ViderLineEdit();
-
-            QMessageBox::information(this, "Réception faite", "La réception a été validée",QMessageBox::Ok);
-        }
 }
 
 void MainWindow::on_BoutonExportExcel_clicked()
@@ -306,3 +308,42 @@ void MainWindow::on_actionQuitter_triggered()
 {
     qApp->quit();
 }
+
+//En cours de dev
+void MainWindow::on_actionSe_deconnecter_triggered()
+{
+
+}
+
+void MainWindow::on_tabWidget_currentChanged()
+{
+    if(user.GetDroit() == LOGISTICIEN)
+    {
+        ui->tabModifier->setDisabled(true);
+    }
+    bdd.ListeDesArticlesEnBdd(&this->modalArticle);
+    ui->comboBoxCodeArticle->setModel(&this->modalArticle);
+    ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
+    ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
+    ui->comboBoxModifierArticle->setModel(&this->modalArticle);
+
+    bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
+    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
+}
+
+void MainWindow::CreationTableView()
+{
+    QStandardItemModel *model = new QStandardItemModel(2,3,this);
+
+    model->setHorizontalHeaderItem(0, new QStandardItem(QString("Code article")));
+    model->setHorizontalHeaderItem(1, new QStandardItem(QString("Désignation")));
+    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Quantité total")));
+
+    QStandardItem *premiereLigne = new QStandardItem(QString("10"));
+    model->setItem(0,0,premiereLigne);
+    QStandardItem *deuxiemeLigne = new QStandardItem(QString("20"));
+    model->setItem(1,0,deuxiemeLigne);
+
+    ui->tableViewTest->setModel(model);
+}
+

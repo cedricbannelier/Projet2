@@ -34,7 +34,6 @@ SOURCES += \
     fournisseur.cpp \
     article.cpp \
     utilisateur.cpp \
-    logisticien.cpp \
     livraison.cpp
 
 HEADERS += \
@@ -45,7 +44,6 @@ HEADERS += \
     fournisseur.h \
     article.h \
     utilisateur.h \
-    logisticien.h \
     livraison.h
 
 FORMS += \

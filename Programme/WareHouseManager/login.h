@@ -2,7 +2,7 @@
 #define LOGIN_H
 
 #include <QDialog>
-#include "Database.h"
+#include "database.h"
 #include "mainwindow.h"
 #include "utilisateur.h"
 

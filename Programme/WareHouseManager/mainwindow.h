@@ -3,15 +3,16 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
-#include "Database.h"
-#include "login.h"
 #include <QVBoxLayout>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QMessageBox>
 #include <QLabel>
 #include <QTableView>
+#include <QStandardItemModel>
 #include "utilisateur.h"
+#include "database.h"
+#include "login.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +26,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
      Utilisateur user;
+
+     void afficheUtilisateur();
+
+     enum droits {
+       LOGISTICIEN = 1,
+       ADMINISTRATEUR = 2,
+     };
 
 private slots:
 
@@ -47,7 +55,7 @@ private slots:
     void on_pushButtonValidationModification_clicked();
 
     //Bouton permettant d'ajouter un emballage
-    void on_AjoutEmballage_clicked();
+    void on_boutonAjoutEmballage_clicked();
 
     //Bouton permettant d'afficher le stock complet
     void on_ButonAfficheStockComplet_clicked();
@@ -70,8 +78,11 @@ private slots:
 
     void on_actionQuitter_triggered();
 
+    void on_actionSe_deconnecter_triggered();
 
+    void on_tabWidget_currentChanged();
 
+    void CreationTableView();
 private:
 
     //Permet de vider les lineEdit
@@ -83,9 +94,9 @@ private:
     //Création de la bdd de type Database
     Database bdd;
 
-
-
     QSqlQueryModel modal;
+    QSqlQueryModel modalArticle;
+    QSqlQueryModel modalFournisseur;
 
 };
 
