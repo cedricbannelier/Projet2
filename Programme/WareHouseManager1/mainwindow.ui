@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(244, 244, 244);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -311,8 +311,8 @@ background-color: rgb(255, 255, 255);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>881</width>
+         <height>400</height>
         </rect>
        </property>
        <attribute name="label">
@@ -469,8 +469,8 @@ background-color: rgb(255, 255, 255);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>881</width>
+         <height>400</height>
         </rect>
        </property>
        <attribute name="label">
@@ -582,9 +582,6 @@ background-color: rgb(255, 255, 255);</string>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="QComboBox" name="comboBoxModifierArticle"/>
-       </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="boutonModifier">
          <property name="font">
@@ -602,6 +599,9 @@ background-color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>
+       <item row="0" column="0">
+        <widget class="QComboBox" name="comboBoxModifierArticle"/>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="verticalLayoutWidget_5">
@@ -616,6 +616,9 @@ background-color: rgb(255, 255, 255);</string>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <layout class="QGridLayout" name="gridLayout_7">
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
+         </item>
          <item row="2" column="0">
           <widget class="QLabel" name="ModificationDesignation">
            <property name="text">
@@ -640,29 +643,16 @@ background-color: rgb(255, 255, 255);</string>
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="ModificationPoids">
            <property name="text">
             <string>Poids</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
-         </item>
-         <item row="6" column="1">
-          <widget class="QComboBox" name="comboBoxModifierDimensionEmballage"/>
-         </item>
-         <item row="6" column="0">
-          <widget class="QLabel" name="labelModifierDimensionEmballage">
-           <property name="text">
-            <string>Dimension L * l * h</string>
            </property>
           </widget>
          </item>
@@ -672,6 +662,16 @@ background-color: rgb(255, 255, 255);</string>
             <string>Emplacement</string>
            </property>
           </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="labelModifierDimensionEmballage">
+           <property name="text">
+            <string>Dimension L * l * h</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QComboBox" name="comboBoxModifierDimensionEmballage"/>
          </item>
         </layout>
        </item>
@@ -689,6 +689,47 @@ background-color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>Valider</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabRechercher">
+     <attribute name="title">
+      <string>Rechercher</string>
+     </attribute>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>291</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="placeholderText">
+          <string>Article ou emplacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="boutonRechercher">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Rechercher</string>
          </property>
         </widget>
        </item>
@@ -1076,6 +1117,16 @@ background-color: rgb(255, 255, 255);</string>
             </property>
            </widget>
           </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditCodeArticleExpedition">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Code article</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="1">
            <widget class="QLineEdit" name="lineEditQuantiteExpedition">
             <property name="placeholderText">
@@ -1104,9 +1155,6 @@ background-color: rgb(255, 255, 255);</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="comboBoxCodeArticleExpedition"/>
-          </item>
          </layout>
         </item>
         <item>
@@ -1130,47 +1178,6 @@ background-color: rgb(255, 255, 255);</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="tabRechercher">
-     <attribute name="title">
-      <string>Rechercher</string>
-     </attribute>
-     <widget class="QWidget" name="gridLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>291</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLineEdit" name="lineEdit">
-         <property name="placeholderText">
-          <string>Article ou emplacement</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="boutonRechercher">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgb(34, 86, 131);
-background-color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Rechercher</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -1192,16 +1199,7 @@ background-color: rgb(255, 255, 255);</string>
     <addaction name="actionSe_deconnecter"/>
     <addaction name="actionQuitter"/>
    </widget>
-   <widget class="QMenu" name="menuEdition">
-    <property name="title">
-     <string>Edition</string>
-    </property>
-    <addaction name="actionCopier"/>
-    <addaction name="actionColler"/>
-    <addaction name="actionCouper"/>
-   </widget>
    <addaction name="menuFichier"/>
-   <addaction name="menuEdition"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuitter">
@@ -1215,21 +1213,6 @@ background-color: rgb(255, 255, 255);</string>
   <action name="actionSe_deconnecter">
    <property name="text">
     <string>Se deconnecter</string>
-   </property>
-  </action>
-  <action name="actionCopier">
-   <property name="text">
-    <string>Copier</string>
-   </property>
-  </action>
-  <action name="actionColler">
-   <property name="text">
-    <string>Coller</string>
-   </property>
-  </action>
-  <action name="actionCouper">
-   <property name="text">
-    <string>Couper</string>
    </property>
   </action>
  </widget>

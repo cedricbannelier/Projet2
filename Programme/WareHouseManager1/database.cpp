@@ -92,25 +92,6 @@ void Database::CreateDatabase()
                "idArticle INTEGER NOT NULL, "
                "FOREIGN KEY(`idArticle`) REFERENCES `article`(`idArticle`)"
                ");");
-
-    CreationAdministrateur();
-
-}
-
-void Database::CreationAdministrateur()
-{
-    QSqlQuery query(m_bdd);
-    query.exec("SELECT COUNT(login) FROM utilisateur WHERE login='administrateur'");
-
-    query.next();
-
-    int presenceDansLaBdd = query.value(0).toInt();
-
-    if(presenceDansLaBdd == 0)
-     {
-        query.exec("INSERT INTO utilisateur(login, motDePasseUtilisateur, droitUtilisateur) "
-                   " VALUES ('administrateur', 'administrateur', 2)");
-     }
 }
 
 void Database::InsertProduit(Article &produitAInserDansLaBdd)

@@ -19,8 +19,6 @@ public:
     //Création de m_bdd
     QSqlDatabase m_bdd;
 
-    void CreationAdministrateur();
-
     void VuStockModal(QSqlQueryModel *modal);
 
     //Création de la base de donnée

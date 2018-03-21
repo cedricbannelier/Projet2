@@ -291,23 +291,16 @@ void MainWindow::on_BoutonExpedition_clicked()
     int quantiteExpedition = ui->lineEditQuantiteExpedition->text().toInt();
     QString numeroExpedition = ui->lineEditNumeroExpedition->text();
 
-    int idArticle = bdd.RecupererIdArticle(ui->comboBoxCodeArticleExpedition->currentText());
+    int idArticle = bdd.RecupererIdArticle(ui->lineEditCodeArticleExpedition->text().toUpper());
 
-    if (ui->lineEditQuantiteExpedition->text() == NULL ||
-        ui->lineEditNumeroExpedition->text() == NULL ||
-        ui->comboBoxCodeArticleExpedition->currentText() == NULL)
+    if(idArticle == 0)
     {
-        QMessageBox::warning(this, "Champs", "Veuillez saisir tous les champs",QMessageBox::Ok);
-    }
-    else if (quantiteExpedition <= 0)
-    {
-        QMessageBox::warning(this, "Qantité", "La quantité saisie est erronnée",QMessageBox::Ok);
+        QMessageBox::warning(this, "Code Article INCONNU", "Le code article saisi n'est pas dans la base de données. ""<br>"""
+                                                           "Veuillez l'ajouter avant de faire la réception",QMessageBox::Ok);
     }
     else
     {
         bdd.NouvelleExpedition(quantiteExpedition, numeroExpedition, idArticle);
-        QMessageBox::information(this, "Expédition faite", "L'expédition a été validée",QMessageBox::Ok);
-        ViderLineEdit();
     }
 }
 
@@ -327,16 +320,12 @@ void MainWindow::on_tabWidget_currentChanged()
     if(user.GetDroit() == LOGISTICIEN)
     {
         ui->tabModifier->setDisabled(true);
-        ui->tabSupprimer->setDisabled(true);
-        ui->tabCreationUtilisateur->setDisabled(true);
-        ui->tabAjouter->setDisabled(true);
     }
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
     ui->comboBoxCodeArticle->setModel(&this->modalArticle);
     ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
     ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
     ui->comboBoxModifierArticle->setModel(&this->modalArticle);
-    ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
 
     bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
     ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
