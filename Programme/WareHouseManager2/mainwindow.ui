@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>905</width>
+    <height>614</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WareHouseManager</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>901</width>
+      <height>571</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(244, 244, 244);</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tabConsulter">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <attribute name="title">
+      <string>Consulter stock</string>
+     </attribute>
+     <widget class="QPushButton" name="ButonAfficheStockComplet">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>10</y>
+        <width>121</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Afficher le stock</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tableView">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>881</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="BoutonExportExcel">
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>10</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Export CSV</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBoxTaillePolice">
+      <property name="geometry">
+       <rect>
+        <x>92</x>
+        <y>14</y>
+        <width>76</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelTaillePoliceTableView">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>76</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Taille Police</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabAjouter">
+     <attribute name="title">
+      <string>Ajouter</string>
+     </attribute>
+     <widget class="QToolBox" name="toolBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>881</width>
+        <height>481</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="ajoutArticle">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>881</width>
+         <height>400</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Ajout Article</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>571</width>
+          <height>261</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Ajout Article</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>20</y>
+           <width>511</width>
+           <height>231</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="lineEditAjoutCodeArticle">
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Article</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="lineEditAjoutPoidsArticle">
+              <property name="inputMask">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="placeholderText">
+               <string>Poids</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="lineEditAjoutDesignationArticle">
+              <property name="placeholderText">
+               <string>Libelle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelAjouterPoidsArticle">
+              <property name="text">
+               <string>Poids</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="lineEditAjoutEmplacementArticle">
+              <property name="placeholderText">
+               <string>Emplacement</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelAjouterCodeArticle">
+              <property name="text">
+               <string>Code Article</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelAjouterDesignationArticle">
+              <property name="text">
+               <string>Libelle</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="comboBoxDimensionEmballage">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="modelColumn">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelAjouterEmplacementArticle">
+              <property name="text">
+               <string>Emplacement</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="labelAjouterDimensionEmballage">
+              <property name="text">
+               <string>Dimension L * l * h</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="boutonAjoutArticle">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Ajouter</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="ajoutEmballage">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Ajout Emballage</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>561</width>
+          <height>241</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Ajout Emballage</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>20</y>
+           <width>511</width>
+           <height>211</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelTypeEmballage">
+              <property name="text">
+               <string>Type Emballage</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="comboBoxLongueurEmballage">
+              <item>
+               <property name="text">
+                <string>70</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>78</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>80</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="comboBoxLargeurEmballage">
+              <item>
+               <property name="text">
+                <string>60</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>38</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>58</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="comboBoxHauteurEmballage">
+              <item>
+               <property name="text">
+                <string>60</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>30</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>50</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelLargeur">
+              <property name="text">
+               <string>Largeur</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelLongueur">
+              <property name="text">
+               <string>Longueur</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="labelHauteur">
+              <property name="text">
+               <string>Hauteur</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBoxTypeEmballage">
+              <item>
+               <property name="text">
+                <string>Carton</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Palette</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QPushButton" name="boutonAjoutEmballage">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="text">
+             <string>Valdier</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="ajoutFournisseur">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Ajout Fournisseur</string>
+       </attribute>
+       <widget class="QWidget" name="horizontalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>10</y>
+          <width>441</width>
+          <height>80</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="labelAjoutNomFournisseur">
+           <property name="text">
+            <string>Nom fournisseur</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditAjoutFournisseur"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="butonAjoutFournisseur">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+           </property>
+           <property name="text">
+            <string>Ajouter</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabSupprimer">
+     <attribute name="title">
+      <string>Supprimer</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>571</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Supprimer article</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_8">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>50</y>
+         <width>501</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QComboBox" name="comboBoxSupprimerArticle"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="boutonSupprimer">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Supprimer</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabModifier">
+     <attribute name="title">
+      <string>Modifier</string>
+     </attribute>
+     <widget class="QWidget" name="gridLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QComboBox" name="comboBoxModifierArticle"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="boutonModifier">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Modifier</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>441</width>
+        <height>241</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="2" column="0">
+          <widget class="QLabel" name="ModificationDesignation">
+           <property name="text">
+            <string>Désignation</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="ModificationCodeArticle">
+           <property name="text">
+            <string>Code article</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lineEditModificationPoidsArticle">
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="frame">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="ModificationPoids">
+           <property name="text">
+            <string>Poids</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
+         </item>
+         <item row="5" column="1">
+          <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
+         </item>
+         <item row="6" column="1">
+          <widget class="QComboBox" name="comboBoxModifierDimensionEmballage"/>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="labelModifierDimensionEmballage">
+           <property name="text">
+            <string>Dimension L * l * h</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="ModificationEmplacement">
+           <property name="text">
+            <string>Emplacement</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonValidationModification">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Valider</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabConsulterFicheArticle">
+     <attribute name="title">
+      <string>Consulter fiche article</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>30</y>
+        <width>431</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QComboBox" name="comboBoxCodeArticle"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="boutonConsulterFicheProduit">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Rechercher</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="gridLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>189</x>
+        <y>160</y>
+        <width>431</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelPoids">
+         <property name="text">
+          <string>Poids</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="afficheCodeArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelDesignation">
+         <property name="text">
+          <string>Désignation</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="affichePoidsArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="codeArticle">
+         <property name="text">
+          <string>Code article</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelEmplacement">
+         <property name="text">
+          <string>Emplacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="afficheEmplacementArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="afficheDesignationArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelEmballage">
+         <property name="text">
+          <string>Emballage</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="afficheEmballageArticle">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabCreationUtilisateur">
+     <attribute name="title">
+      <string>Creation d'utilisateur</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>571</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Création utilisateur</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>501</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelMotDePasse">
+            <property name="text">
+             <string>Mot de passe</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelMetier">
+            <property name="text">
+             <string>Métier</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboBoxChoixDroitUtilisateur">
+            <item>
+             <property name="text">
+              <string>Logisticien</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Administrateur</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelLogin">
+            <property name="text">
+             <string>Login</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditeCreationMotDePasse">
+            <property name="echoMode">
+             <enum>QLineEdit::Password</enum>
+            </property>
+            <property name="placeholderText">
+             <string>Mot de passe</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="lineEditeCreationLogin">
+            <property name="placeholderText">
+             <string>Login</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonCreationUtilisateur">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Valider</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabReceptionCommande">
+     <attribute name="title">
+      <string>Réception commande</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>571</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Réception de commande</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_6">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>501</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelDateLivraison">
+            <property name="text">
+             <string>Date de livraison</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLineEdit" name="lineEditNumeroLivraison">
+            <property name="placeholderText">
+             <string>Numéro de livraison</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLineEdit" name="lineEditDateLivraison">
+            <property name="inputMask">
+             <string>00/00/0000</string>
+            </property>
+            <property name="placeholderText">
+             <string>Date de livraison jj/mm/aaaa</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelNumeroLivraison">
+            <property name="text">
+             <string>Numéro de livraison</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelQuantiteLivree">
+            <property name="text">
+             <string>Quantité livrée</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelArticleLivre">
+            <property name="text">
+             <string>Article livré</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLineEdit" name="lineEditQteLivree">
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Quantité livrée</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelFournisseur">
+            <property name="text">
+             <string>Fournisseur</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QComboBox" name="comboBoxFournisseur">
+            <property name="currentText">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QComboBox" name="comboBoxCodeArticleReceptionCommande"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="BoutonValiderReception">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Valider</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabExpedition">
+     <attribute name="title">
+      <string>Expédition</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>571</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Expédition commande</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>501</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelCodeArticleExpedition">
+            <property name="text">
+             <string>Code article</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQuantiteExpedition">
+            <property name="placeholderText">
+             <string>Quantité expédiée</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelQuantiteExpedition">
+            <property name="text">
+             <string>Quantite</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelNumeroExpedition">
+            <property name="text">
+             <string>Numero expédition</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditNumeroExpedition">
+            <property name="placeholderText">
+             <string>Numéro d'expédition</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBoxCodeArticleExpedition"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="BoutonExpedition">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Valider</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabRechercher">
+     <attribute name="title">
+      <string>Rechercher</string>
+     </attribute>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>291</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="placeholderText">
+          <string>Article ou emplacement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="boutonRechercher">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Rechercher</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>905</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="actionSe_deconnecter"/>
+    <addaction name="actionQuitter"/>
+   </widget>
+   <widget class="QMenu" name="menuEdition">
+    <property name="title">
+     <string>Edition</string>
+    </property>
+    <addaction name="actionCopier"/>
+    <addaction name="actionColler"/>
+    <addaction name="actionCouper"/>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuEdition"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionSe_deconnecter">
+   <property name="text">
+    <string>Se deconnecter</string>
+   </property>
+  </action>
+  <action name="actionCopier">
+   <property name="text">
+    <string>Copier</string>
+   </property>
+  </action>
+  <action name="actionColler">
+   <property name="text">
+    <string>Coller</string>
+   </property>
+  </action>
+  <action name="actionCouper">
+   <property name="text">
+    <string>Couper</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>ButonAfficheStockComplet</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>lineEditAjoutCodeArticle</tabstop>
+  <tabstop>lineEditAjoutDesignationArticle</tabstop>
+  <tabstop>lineEditAjoutPoidsArticle</tabstop>
+  <tabstop>lineEditAjoutEmplacementArticle</tabstop>
+  <tabstop>comboBoxDimensionEmballage</tabstop>
+  <tabstop>boutonAjoutArticle</tabstop>
+  <tabstop>boutonModifier</tabstop>
+  <tabstop>lineEditModificationCodeArticle</tabstop>
+  <tabstop>lineEditModificationDesignationArticle</tabstop>
+  <tabstop>lineEditModificationPoidsArticle</tabstop>
+  <tabstop>lineEditModificationEmplacementArticle</tabstop>
+  <tabstop>comboBoxModifierDimensionEmballage</tabstop>
+  <tabstop>pushButtonValidationModification</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>boutonRechercher</tabstop>
+  <tabstop>boutonConsulterFicheProduit</tabstop>
+  <tabstop>afficheCodeArticle</tabstop>
+  <tabstop>afficheDesignationArticle</tabstop>
+  <tabstop>affichePoidsArticle</tabstop>
+  <tabstop>afficheEmplacementArticle</tabstop>
+  <tabstop>afficheEmballageArticle</tabstop>
+  <tabstop>boutonAjoutEmballage</tabstop>
+  <tabstop>comboBoxTypeEmballage</tabstop>
+  <tabstop>comboBoxHauteurEmballage</tabstop>
+  <tabstop>comboBoxLargeurEmballage</tabstop>
+  <tabstop>comboBoxLongueurEmballage</tabstop>
+  <tabstop>lineEditAjoutFournisseur</tabstop>
+  <tabstop>butonAjoutFournisseur</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
