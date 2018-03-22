@@ -84,6 +84,12 @@ private slots:
 
     void on_tabWidget_currentChanged();
 
+    void on_actionA_props_triggered();
+
+    void on_actionCouper_triggered();
+
+    void on_actionColler_triggered();
+
 private:
 
     //Permet de vider les lineEdit
@@ -100,7 +106,6 @@ private:
     QSqlQueryModel modal;
     QSqlQueryModel modalArticle;
     QSqlQueryModel modalFournisseur;
-
 };
 
 #endif // MAINWINDOW_H

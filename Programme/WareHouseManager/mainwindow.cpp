@@ -351,3 +351,21 @@ QString MainWindow::dateDuJour()
 
     return dateDuJour;
 }
+
+void MainWindow::on_actionA_props_triggered()
+{
+    QMessageBox::about(this, "A propos", "Logiciel developpé par Cédric BANNELIER \n"
+                       "Créé avec QT 5.10 \r\n"
+                       "QT Creator 4.10");
+}
+
+void MainWindow::on_actionCouper_triggered()
+{
+    ui->tabWidget->setCurrentIndex(0);
+}
+
+void MainWindow::on_actionColler_triggered()
+{
+    //ui->tabWidget->setCurrentIndex(1);
+    ui->toolBox->setCurrentIndex(3);
+}
