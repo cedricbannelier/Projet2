@@ -20,11 +20,14 @@ public:
 
     bool autorisation();
     Utilisateur user;
+    void lireFichier();
 
 private:
     Ui::Login *ui;
 
     Database bdd;
+
+    void enregistrementLogin();
 
 };
 

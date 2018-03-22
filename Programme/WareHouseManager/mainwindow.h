@@ -34,6 +34,10 @@ public:
        ADMINISTRATEUR = 2,
      };
 
+
+public slots:
+    int on_actionSe_deconnecter_triggered();
+
 private slots:
 
     //Bouton permettant de valider l'ajout d'un article
@@ -78,15 +82,14 @@ private slots:
 
     void on_actionQuitter_triggered();
 
-    void on_actionSe_deconnecter_triggered();
-
     void on_tabWidget_currentChanged();
 
-    void CreationTableView();
 private:
 
     //Permet de vider les lineEdit
     void ViderLineEdit();
+
+    QString dateDuJour();
 
     //Création d'un pointeur ui
     Ui::MainWindow *ui;

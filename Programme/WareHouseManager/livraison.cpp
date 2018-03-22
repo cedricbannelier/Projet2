@@ -5,7 +5,7 @@ Livraison::Livraison()
 
 }
 
-Livraison::Livraison(int qteLivree, QString numeroLivraison, int dateLivraison, int idArticle, int idFournisseur)
+Livraison::Livraison(int qteLivree, QString numeroLivraison, QString dateLivraison, int idArticle, int idFournisseur)
 {
     this->qteLivree = qteLivree;
     this->numeroLivraison = numeroLivraison;
@@ -25,7 +25,7 @@ QString Livraison::GetNumeroLivraison()
     return this->numeroLivraison;
 }
 
-int Livraison::GetDateLivraison()
+QString Livraison::GetDateLivraison()
 {
     return this->dateLivraison;
 }

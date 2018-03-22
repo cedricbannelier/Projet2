@@ -25,13 +25,13 @@ void Database::CloseDatabase()
 void Database::CreateDatabase()
 {
     //Création du répertoire si non créer pour la base de données
-    QString chemin("c:/warehousebd");
+/*    QString chemin("c:/warehousebd");
     QDir dir = QDir::root();
     dir.mkdir(chemin);
-
+*/
     //Création de la base de données
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");
-    m_bdd.setDatabaseName("c:/warehousebd/warehousedb.db");
+    m_bdd.setDatabaseName("./warehousedb.db");
     m_bdd.open();
     QSqlQuery query(m_bdd);
 
@@ -78,7 +78,7 @@ void Database::CreateDatabase()
                "idLivrer INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "qteLivree INTEGER NOT NULL, "
                "numeroLivraison TEXT NOT NULL, "
-               "dateLivraison INTEGER NOT NULL, "
+               "dateLivraison TEXT NOT NULL, "
                "idArticle INTEGER NOT NULL, "
                "idFournisseur INTEGER NOT NULL, "
                "FOREIGN KEY(`idFournisseur`) REFERENCES `fournisseur`(`idFournisseur`),"
@@ -234,6 +234,7 @@ Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
     query.bindValue(":loginEntreParUtilisateur", nouvelUtilisateur->GetLogin());
     query.bindValue(":motDePasseUtilisateur", nouvelUtilisateur->GetMotDePasse());
     query.exec();
+
     do
     {
         if(query.next())
@@ -244,6 +245,8 @@ Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
             return user;
         }
     }while(query.next());
+
+    return new Utilisateur();
 }
 
 //Permet de récuperer la table complete ARTICLE
@@ -440,16 +443,17 @@ void Database::VuStockModal(QSqlQueryModel *modal)
 {
     QSqlQuery query(m_bdd);
 
-    query.prepare("SELECT "
-                  "SUM(livrer.qteLivree - expedition.qteExpedition) AS 'Qte Phy Totale', "
+    query.prepare("WITH E AS (SELECT expedition.idArticle,SUM(expedition.qteExpedition) AS EXPEDIE FROM expedition GROUP BY expedition.idArticle), "
+                  "L AS (SELECT livrer.idArticle,SUM(livrer.qteLivree) AS LIVRE FROM LIVRER GROUP BY livrer.idArticle) "
+                  "SELECT  COALESCE(L.Livre,0) - COALESCE(E.EXPEDIE,0) AS 'Qte Phy Totale', "
+                  "L.Livre AS 'Qte Livrée', "
+                  "E.Expedie AS 'Qte Exp', "
                   "article.codeArticle as Référence, "
                   "article.designationArticle as Libelle, "
-                  "article.poidsArticle as Poids, "
-                  "article.emplacementArticle as Empl "
+                  "article.poidsArticle as Poids "
                   "FROM article "
-                  "LEFT JOIN livrer ON article.idArticle = livrer.idArticle "
-                  "LEFT JOIN expedition ON article.idArticle = expedition.idArticle "
-                  "GROUP BY article.idArticle");
+                  "LEFT JOIN L ON article.idArticle = L.idArticle "
+                  "LEFT JOIN E ON article.idArticle = E.idArticle");
     query.exec();
     modal->setQuery(query);
 }

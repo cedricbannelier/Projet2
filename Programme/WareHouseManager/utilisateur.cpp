@@ -2,7 +2,7 @@
 
 Utilisateur::Utilisateur()
 {
-
+    this->droit = 0;
 }
 
 Utilisateur::Utilisateur(QString login, QString motDePasse)

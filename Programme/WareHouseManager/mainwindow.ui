@@ -32,21 +32,6 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Page</string>
-     </attribute>
-     <widget class="QTableView" name="tableViewTest">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>861</width>
-        <height>451</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -214,7 +199,7 @@ background-color: rgb(255, 255, 255);</string>
                <string/>
               </property>
               <property name="placeholderText">
-               <string>Poids</string>
+               <string>Poids unitaire</string>
               </property>
              </widget>
             </item>
@@ -228,7 +213,7 @@ background-color: rgb(255, 255, 255);</string>
             <item row="2" column="0">
              <widget class="QLabel" name="labelAjouterPoidsArticle">
               <property name="text">
-               <string>Poids</string>
+               <string>Poids unitaire</string>
               </property>
              </widget>
             </item>
@@ -311,8 +296,8 @@ background-color: rgb(255, 255, 255);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>881</width>
+         <height>400</height>
         </rect>
        </property>
        <attribute name="label">
@@ -469,8 +454,8 @@ background-color: rgb(255, 255, 255);</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>881</width>
+         <height>400</height>
         </rect>
        </property>
        <attribute name="label">
@@ -530,6 +515,9 @@ background-color: rgb(255, 255, 255);</string>
         <width>571</width>
         <height>281</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="title">
        <string>Supprimer article</string>
@@ -959,16 +947,6 @@ background-color: rgb(255, 255, 255);</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="2">
-           <widget class="QLineEdit" name="lineEditDateLivraison">
-            <property name="inputMask">
-             <string>00/00/0000</string>
-            </property>
-            <property name="placeholderText">
-             <string>Date de livraison jj/mm/aaaa</string>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0">
            <widget class="QLabel" name="labelNumeroLivraison">
             <property name="text">
@@ -1016,6 +994,9 @@ background-color: rgb(255, 255, 255);</string>
           </item>
           <item row="0" column="2">
            <widget class="QComboBox" name="comboBoxCodeArticleReceptionCommande"/>
+          </item>
+          <item row="3" column="2">
+           <widget class="QDateEdit" name="dateEdit"/>
           </item>
          </layout>
         </item>

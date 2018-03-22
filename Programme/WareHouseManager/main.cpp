@@ -17,9 +17,12 @@ int main(int argc, char *argv[])
 
     Login fenetreDeLogin;
 
+    fenetreDeLogin.lireFichier();
+
     while(fenetreDeLogin.exec() == QDialog::Accepted)
     {
         std::cout << "Dans le main" << std::endl;
+
         if(fenetreDeLogin.autorisation())
         {
             mainWindow.user.SetDroit(fenetreDeLogin.user.GetDroit());
@@ -34,5 +37,7 @@ int main(int argc, char *argv[])
             application.quit();
         }
     }
+
+    application.quit();
     return 0;
 }

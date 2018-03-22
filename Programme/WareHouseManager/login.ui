@@ -53,35 +53,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEditLogin">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>110</y>
-     <width>301</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Login</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEditMDP">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>150</y>
-     <width>301</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="echoMode">
-    <enum>QLineEdit::Password</enum>
-   </property>
-   <property name="placeholderText">
-    <string>Mot de passe</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="icone">
    <property name="geometry">
     <rect>
@@ -95,11 +66,46 @@
     <string>TextLabel</string>
    </property>
   </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>90</y>
+     <width>301</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="lineEditLogin">
+      <property name="placeholderText">
+       <string>Login</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEditMDP">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>Mot de passe</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="seSouvenir">
+      <property name="text">
+       <string>Se souvenir</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <zorder>icone</zorder>
   <zorder>buttonBox</zorder>
   <zorder>labelFenetreLoginBienvenue</zorder>
-  <zorder>lineEditLogin</zorder>
-  <zorder>lineEditMDP</zorder>
+  <zorder>verticalLayoutWidget</zorder>
  </widget>
  <resources/>
  <connections>

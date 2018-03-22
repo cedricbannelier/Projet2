@@ -17,9 +17,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    CreationTableView();
-
+    ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 }
 
 MainWindow::~MainWindow()
@@ -223,7 +221,7 @@ void MainWindow::on_BoutonValiderReception_clicked()
     int idFournisseur = bdd.RecupererIdFournisseur(ui->comboBoxFournisseur->currentText());
     int qteSaisie = ui->lineEditQteLivree->text().toInt();
 
-    if(ui->lineEditDateLivraison->text() == NULL ||
+    if(ui->dateEdit->text() == NULL ||
        ui->lineEditNumeroLivraison->text() == NULL ||
        ui->lineEditQteLivree->text() == NULL ||
        ui->comboBoxCodeArticleReceptionCommande->currentText() == NULL ||
@@ -240,7 +238,7 @@ void MainWindow::on_BoutonValiderReception_clicked()
     {
         Livraison * nouvelleLivraison = new Livraison(ui->lineEditQteLivree->text().toInt(),
                                                       ui->lineEditNumeroLivraison->text(),
-                                                      ui->lineEditDateLivraison->text().toInt(),
+                                                      ui->dateEdit->text(),
                                                       idArticle,
                                                       idFournisseur);
 
@@ -256,15 +254,18 @@ void MainWindow::on_BoutonExportExcel_clicked()
 {
     on_ButonAfficheStockComplet_clicked();
 
-    QFile csvFile("test.csv");
+    QFile csvFile("exportStock.csv");
 
-    if(!(csvFile.open(QIODevice::WriteOnly | QIODevice::Append)))
-        return; //TODO: message utilisateur
+    if(!(csvFile.open(QIODevice::WriteOnly)))
+        return;
 
     QTextStream out(&csvFile);
 
     int lignes = modal.rowCount();
     int colonnes = modal.columnCount();
+
+    out << "Qte Phy Total;" << "Qte Livree;" << "Qte Exp;" << "Reference;"
+        << "Libelle;" << "Poids unitaire;" << "\n";
 
     for (int i = 0; i < lignes; i++)
     {
@@ -317,9 +318,10 @@ void MainWindow::on_actionQuitter_triggered()
 }
 
 //En cours de dev
-void MainWindow::on_actionSe_deconnecter_triggered()
+int MainWindow::on_actionSe_deconnecter_triggered()
 {
-
+    int a = 1;
+    return a;
 }
 
 void MainWindow::on_tabWidget_currentChanged()
@@ -331,6 +333,7 @@ void MainWindow::on_tabWidget_currentChanged()
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
     }
+
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
     ui->comboBoxCodeArticle->setModel(&this->modalArticle);
     ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
@@ -342,19 +345,9 @@ void MainWindow::on_tabWidget_currentChanged()
     ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
 }
 
-void MainWindow::CreationTableView()
+QString MainWindow::dateDuJour()
 {
-    QStandardItemModel *model = new QStandardItemModel(2,3,this);
+    QString dateDuJour = QDateTime::currentDateTime().toString("dddd dd MMMM yyyy");
 
-    model->setHorizontalHeaderItem(0, new QStandardItem(QString("Code article")));
-    model->setHorizontalHeaderItem(1, new QStandardItem(QString("Désignation")));
-    model->setHorizontalHeaderItem(2, new QStandardItem(QString("Quantité total")));
-
-    QStandardItem *premiereLigne = new QStandardItem(QString("10"));
-    model->setItem(0,0,premiereLigne);
-    QStandardItem *deuxiemeLigne = new QStandardItem(QString("20"));
-    model->setItem(1,0,deuxiemeLigne);
-
-    ui->tableViewTest->setModel(model);
+    return dateDuJour;
 }
-

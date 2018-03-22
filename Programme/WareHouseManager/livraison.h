@@ -7,11 +7,11 @@ class Livraison
 {
 public:
     Livraison();
-    Livraison(int qteLivree, QString numeroLivraison, int dateLivraison, int idArticle, int idFournisseur);
+    Livraison(int qteLivree, QString numeroLivraison, QString dateLivraison, int idArticle, int idFournisseur);
 
     int GetQteLivree();
     QString GetNumeroLivraison();
-    int GetDateLivraison();
+    QString GetDateLivraison();
     int GetIdArticle();
     int GetIdFournisseur();
 
@@ -19,7 +19,7 @@ private:
 
     int qteLivree;
     QString numeroLivraison;
-    int dateLivraison;
+    QString dateLivraison;
     int idArticle;
     int idFournisseur;
 
