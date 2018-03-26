@@ -8,7 +8,7 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
-    ui->icone->setPixmap(QPixmap(":/icones/warehouse.png"));
+    ui->icone->setPixmap(QPixmap(":/warehouse.png"));
     ui->lineEditLogin->setFocus();
     this->setWindowTitle("Login");
 }

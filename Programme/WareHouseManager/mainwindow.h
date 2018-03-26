@@ -78,6 +78,9 @@ private slots:
     void on_BoutonExportExcel_clicked();
 
 
+    /**
+     * @brief on_BoutonExpedition_clicked
+     */
     void on_BoutonExpedition_clicked();
 
     void on_actionQuitter_triggered();
@@ -86,9 +89,15 @@ private slots:
 
     void on_actionA_props_triggered();
 
-    void on_actionCouper_triggered();
+    void on_actionAfficheStock_triggered();
 
-    void on_actionColler_triggered();
+    void on_actionAjouter_triggered();
+
+    void on_actionArticle_triggered();
+
+    void on_actionEmballage_triggered();
+
+    void on_actionFournisseur_triggered();
 
 private:
 

@@ -11,77 +11,188 @@
 #include "fournisseur.h"
 #include "livraison.h"
 
+/**
+ * @brief Classe Database permettant de gerer les requetes SQL.
+ */
 class Database
 {
 public:
+    /**
+     * @brief Database
+     */
     Database();
 
-    //Création de m_bdd
-    QSqlDatabase m_bdd;
-
+    /**
+     * @brief CreationAdministrateur
+     */
     void CreationAdministrateur();
 
+    /**
+     * @brief VuStockModal
+     * @param modal
+     */
     void VuStockModal(QSqlQueryModel *modal);
 
-    //Création de la base de donnée
+    /**
+     * @brief CreateDatabase
+     */
     void CreateDatabase();
 
-    //Ouverture de la base de donnée
+    /**
+     * @brief OpenDatabase
+     */
     void OpenDatabase();
 
-    //Fermeture de la base de donnée
+    /**
+     * @brief CloseDatabase
+     */
     void CloseDatabase();
 
-    //Permet d'inserer un produit
-    //Param codeArticle, designationArticle, poidsArticle, emplacementArticle
+    /**
+     * @brief InsertProduit
+     * @param produitAInserDansLaBdd
+     */
     void InsertProduit(Article &produitAInserDansLaBdd);
 
+    /**
+     * @brief InsertStockAZeroApresInsertProduit
+     */
     void InsertStockAZeroApresInsertProduit();
 
-    //Permet de supprimer un produit
-    //Param codeArticle
+    /**
+     * @brief DeleteProduit
+     * @param codeArticle
+     * @return
+     */
     bool DeleteProduit(const QString &codeArticle);
 
+    /**
+     * @brief DroitUtilisateur
+     * @return
+     */
     int DroitUtilisateur();
 
-    //Permet de mettre à jour un produit (en cours de dev)
+    /**
+     * @brief UpdateProduit
+     * @param produit
+     * @return
+     */
     bool UpdateProduit(Article &produit);
 
-    //Création d'un vecteur de vecteur de produit
-    //Param nom
+    /**
+     * @brief AfficheUnProduit
+     * @param codeArticle
+     * @return
+     */
     QVector<Article*>* AfficheUnProduit(QString codeArticle);
 
-    //Création d'un vecteur de vecteur d'utilisateur
+    /**
+     * @brief GetDroitUtilisateur
+     * @param nouvelUtilisateur
+     * @return
+     */
     Utilisateur *GetDroitUtilisateur(Utilisateur *nouvelUtilisateur);
 
-    //Permet d'ajouter un utilistateur
-    //En cours de dev il manque les droits !!
+    /**
+     * @brief AjoutUtilisateur
+     * @param user
+     */
     void AjoutUtilisateur(Utilisateur& user);
 
+    /**
+     * @brief RecupererIdArticle
+     * @param codeArticle
+     * @return
+     */
     int RecupererIdArticle(QString codeArticle);
 
+    /**
+     * @brief RecupererIdFournisseur
+     * @param nomFournisseur
+     * @return
+     */
     int RecupererIdFournisseur(QString nomFournisseur);
 
+    /**
+     * @brief AjoutEmballage
+     * @param nouvelEmballage
+     * @return
+     */
     bool AjoutEmballage(Emballage& nouvelEmballage);
 
+    /**
+     * @brief AfficheLeStock
+     */
     void AfficheLeStock();
 
+    /**
+     * @brief ArticlePresentDansLaBddAvecId
+     * @param codeArticle
+     * @return
+     */
     bool ArticlePresentDansLaBddAvecId(QString codeArticle);
+
+    /**
+     * @brief ArticlePresentDansLaBddAvecLeCodeArticle
+     * @param codeArticle
+     * @return
+     */
     bool ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle);
 
+    /**
+     * @brief AjoutFournisseur
+     * @param nouvelFournisseur
+     * @return
+     */
     bool AjoutFournisseur(Fournisseur & nouvelFournisseur);
 
+    /**
+     * @brief ReceptionLivraison
+     * @param nouvelleLivraionsDansBdd
+     */
     void ReceptionLivraison(Livraison & nouvelleLivraionsDansBdd);
 
+    /**
+     * @brief FournisseurPresentDansLaBdd
+     * @param nomFournisseur
+     * @return
+     */
     bool FournisseurPresentDansLaBdd(QString nomFournisseur);
 
+    /**
+     * @brief NouvelleExpedition
+     * @param quantiteExpedition
+     * @param numeroExpedition
+     * @param idArticle
+     */
     void NouvelleExpedition(int quantiteExpedition, QString numeroExpedition, int idArticle);
 
+    /**
+     * @brief ListeDesArticlesEnBdd
+     * @param modal
+     */
     void ListeDesArticlesEnBdd(QSqlQueryModel *modal);
 
+    /**
+     * @brief ListeDesFournisseursEnBdd
+     * @param modal
+     */
     void ListeDesFournisseursEnBdd(QSqlQueryModel *modal);
 
+    /**
+     * @brief QantiteTotal
+     * @param idArticle
+     * @return
+     */
+    int QantiteTotal(int idArticle);
+
 private:
+
+
+    /**
+     * @brief m_bdd
+     */
+    QSqlDatabase m_bdd;
 
 
 

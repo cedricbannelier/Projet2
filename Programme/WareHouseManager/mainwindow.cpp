@@ -18,6 +18,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 {
     ui->setupUi(this);
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
+
+    bdd.ListeDesArticlesEnBdd(&this->modalArticle);
+    ui->comboBoxCodeArticle->setModel(&this->modalArticle);
+    ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
+    ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
+    ui->comboBoxModifierArticle->setModel(&this->modalArticle);
+    ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
+
+    bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
+    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
 }
 
 MainWindow::~MainWindow()
@@ -291,8 +301,9 @@ void MainWindow::on_BoutonExpedition_clicked()
 {
     int quantiteExpedition = ui->lineEditQuantiteExpedition->text().toInt();
     QString numeroExpedition = ui->lineEditNumeroExpedition->text();
-
     int idArticle = bdd.RecupererIdArticle(ui->comboBoxCodeArticleExpedition->currentText());
+    int quantiteEnStock = bdd.QantiteTotal(idArticle);
+    QString message = QString("La quantité saisie doit être inf. à la quanité en stock. Il reste que : %1 en stock").arg(quantiteEnStock);
 
     if (ui->lineEditQuantiteExpedition->text() == NULL ||
         ui->lineEditNumeroExpedition->text() == NULL ||
@@ -302,7 +313,11 @@ void MainWindow::on_BoutonExpedition_clicked()
     }
     else if (quantiteExpedition <= 0)
     {
-        QMessageBox::warning(this, "Qantité", "La quantité saisie est erronnée",QMessageBox::Ok);
+        QMessageBox::warning(this, "Quantité", "La quantité saisie doit être sup. à 0",QMessageBox::Ok);
+    }
+    else if (quantiteExpedition >= quantiteEnStock)
+    {
+        QMessageBox::warning(this, "Quantité", message ,QMessageBox::Ok);
     }
     else
     {
@@ -333,7 +348,7 @@ void MainWindow::on_tabWidget_currentChanged()
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
     }
-
+/*
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
     ui->comboBoxCodeArticle->setModel(&this->modalArticle);
     ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
@@ -342,7 +357,7 @@ void MainWindow::on_tabWidget_currentChanged()
     ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
 
     bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
-    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
+    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);*/
 }
 
 QString MainWindow::dateDuJour()
@@ -359,13 +374,30 @@ void MainWindow::on_actionA_props_triggered()
                        "QT Creator 4.10");
 }
 
-void MainWindow::on_actionCouper_triggered()
+void MainWindow::on_actionAfficheStock_triggered()
 {
     ui->tabWidget->setCurrentIndex(0);
+    on_ButonAfficheStockComplet_clicked();
 }
 
-void MainWindow::on_actionColler_triggered()
+void MainWindow::on_actionAjouter_triggered()
 {
-    //ui->tabWidget->setCurrentIndex(1);
-    ui->toolBox->setCurrentIndex(3);
+    ui->tabWidget->setCurrentIndex(10);
+}
+
+void MainWindow::on_actionArticle_triggered()
+{
+    ui->tabWidget->setCurrentIndex(1);
+}
+
+// couleur icone : 3469A1
+
+void MainWindow::on_actionEmballage_triggered()
+{
+    ui->tabWidget->setCurrentIndex(3);
+}
+
+void MainWindow::on_actionFournisseur_triggered()
+{
+    ui->tabWidget->setCurrentIndex(2);
 }

@@ -1,7 +1,6 @@
 #include <QtSql/QtSql>
 #include <iostream>
 #include <vector>
-#include <QMessageBox>
  #include <QCoreApplication>
 
 #include "Database.h"
@@ -437,6 +436,30 @@ bool Database::FournisseurPresentDansLaBdd(QString nomFournisseur)
 
         return true;
      }
+}
+
+int Database::QantiteTotal(int idArticle)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("WITH E AS (SELECT expedition.idArticle,SUM(expedition.qteExpedition) AS EXPEDIE FROM expedition GROUP BY expedition.idArticle), "
+                  "L AS (SELECT livrer.idArticle,SUM(livrer.qteLivree) AS LIVRE FROM LIVRER GROUP BY livrer.idArticle) "
+                  "SELECT COALESCE(L.Livre,0) - COALESCE(E.EXPEDIE,0) "
+                  "FROM article "
+                  "LEFT JOIN L ON article.idArticle = L.idArticle "
+                  "LEFT JOIN E ON article.idArticle = E.idArticle "
+                  "WHERE article.idArticle = :idArticle;");
+    query.bindValue(":idArticle", idArticle);
+    query.exec();
+
+    int quantiteTotal;
+
+    while(query.next())
+    {
+        quantiteTotal = query.value(0).toInt();
+    }
+
+    return quantiteTotal;
 }
 
 void Database::VuStockModal(QSqlQueryModel *modal)

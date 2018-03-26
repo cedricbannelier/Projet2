@@ -1,8 +1,13 @@
 <RCC>
-    <qresource prefix="/icones">
+    <qresource prefix="/icones"/>
+    <qresource prefix="/">
+        <file>icones/add.png</file>
+        <file>icones/information.png</file>
+        <file>icones/quitter.png</file>
+        <file>icones/Stock.png</file>
         <file>warehouse.png</file>
-        <file>icone.ico</file>
-        <file>quitter.png</file>
-        <file>apropos.png</file>
+        <file>icones/AddUser.png</file>
+        <file>icones/AddProduct.png</file>
+        <file>icones/AjoutEmballage.png</file>
     </qresource>
 </RCC>

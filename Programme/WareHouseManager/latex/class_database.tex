@@ -1,0 +1,240 @@
+\hypertarget{class_database}{}\section{Database Class Reference}
+\label{class_database}\index{Database@{Database}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_database_a4703c80e6969d33565ea340f768fdadf}\label{class_database_a4703c80e6969d33565ea340f768fdadf}} 
+\mbox{\hyperlink{class_database_a4703c80e6969d33565ea340f768fdadf}{Database}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_database}{Database}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_database_a1c9bb35096041517d19d9ad4a165a271}\label{class_database_a1c9bb35096041517d19d9ad4a165a271}} 
+void {\bfseries Creation\+Administrateur} ()
+\item 
+\mbox{\Hypertarget{class_database_aa27438ff72eb9d7b314538fe01808ba6}\label{class_database_aa27438ff72eb9d7b314538fe01808ba6}} 
+void {\bfseries Vu\+Stock\+Modal} (Q\+Sql\+Query\+Model $\ast$modal)
+\item 
+\mbox{\Hypertarget{class_database_a832119560d0d28b759930f0e25b6d58c}\label{class_database_a832119560d0d28b759930f0e25b6d58c}} 
+void {\bfseries Create\+Database} ()
+\item 
+\mbox{\Hypertarget{class_database_ab9dd492fa985aab34f9994a0c0eaf09e}\label{class_database_ab9dd492fa985aab34f9994a0c0eaf09e}} 
+void {\bfseries Open\+Database} ()
+\item 
+\mbox{\Hypertarget{class_database_ab5f6aae31ad0d80f5b0469237ba28421}\label{class_database_ab5f6aae31ad0d80f5b0469237ba28421}} 
+void {\bfseries Close\+Database} ()
+\item 
+\mbox{\Hypertarget{class_database_a876113e6495199697973a3820d72c744}\label{class_database_a876113e6495199697973a3820d72c744}} 
+void {\bfseries Insert\+Produit} (\mbox{\hyperlink{class_article}{Article}} \&produit\+A\+Inser\+Dans\+La\+Bdd)
+\item 
+\mbox{\Hypertarget{class_database_ac37e765bc5bf40dd4610e3a7a6aa997f}\label{class_database_ac37e765bc5bf40dd4610e3a7a6aa997f}} 
+void {\bfseries Insert\+Stock\+A\+Zero\+Apres\+Insert\+Produit} ()
+\item 
+\mbox{\Hypertarget{class_database_a97706987772bccee67a642049e6d4346}\label{class_database_a97706987772bccee67a642049e6d4346}} 
+bool {\bfseries Delete\+Produit} (const Q\+String \&code\+Article)
+\item 
+\mbox{\Hypertarget{class_database_aed063d82ea503f8c7c30e706b39bea89}\label{class_database_aed063d82ea503f8c7c30e706b39bea89}} 
+int {\bfseries Droit\+Utilisateur} ()
+\item 
+\mbox{\Hypertarget{class_database_a6bfd362538a58b4c35ab538ed89a18eb}\label{class_database_a6bfd362538a58b4c35ab538ed89a18eb}} 
+bool {\bfseries Update\+Produit} (\mbox{\hyperlink{class_article}{Article}} \&produit)
+\item 
+\mbox{\Hypertarget{class_database_ae32742b9f3650989269b1a7fab39a349}\label{class_database_ae32742b9f3650989269b1a7fab39a349}} 
+Q\+Vector$<$ \mbox{\hyperlink{class_article}{Article}} $\ast$ $>$ $\ast$ {\bfseries Affiche\+Un\+Produit} (Q\+String code\+Article)
+\item 
+\mbox{\Hypertarget{class_database_a11db260d702850148645c86c12da3a82}\label{class_database_a11db260d702850148645c86c12da3a82}} 
+\mbox{\hyperlink{class_utilisateur}{Utilisateur}} $\ast$ {\bfseries Get\+Droit\+Utilisateur} (\mbox{\hyperlink{class_utilisateur}{Utilisateur}} $\ast$nouvel\+Utilisateur)
+\item 
+\mbox{\Hypertarget{class_database_ac9215994d89323fa31b0abdb98ab5463}\label{class_database_ac9215994d89323fa31b0abdb98ab5463}} 
+void {\bfseries Ajout\+Utilisateur} (\mbox{\hyperlink{class_utilisateur}{Utilisateur}} \&user)
+\item 
+\mbox{\Hypertarget{class_database_a1f5de294783ac0aec3d44fd6faf4fd7c}\label{class_database_a1f5de294783ac0aec3d44fd6faf4fd7c}} 
+int {\bfseries Recuperer\+Id\+Article} (Q\+String code\+Article)
+\item 
+\mbox{\Hypertarget{class_database_a56ab74f41841b337e2e19e790d524542}\label{class_database_a56ab74f41841b337e2e19e790d524542}} 
+int {\bfseries Recuperer\+Id\+Fournisseur} (Q\+String nom\+Fournisseur)
+\item 
+\mbox{\Hypertarget{class_database_af3a1bf9584c2f39021148f948c1d6bb2}\label{class_database_af3a1bf9584c2f39021148f948c1d6bb2}} 
+bool {\bfseries Ajout\+Emballage} (\mbox{\hyperlink{class_emballage}{Emballage}} \&nouvel\+Emballage)
+\item 
+\mbox{\Hypertarget{class_database_a284a9b6a05cfc9501e4a9f720d09ada8}\label{class_database_a284a9b6a05cfc9501e4a9f720d09ada8}} 
+void {\bfseries Affiche\+Le\+Stock} ()
+\item 
+bool \mbox{\hyperlink{class_database_a84330285ff6131c5d496d9b7d8b277b1}{Article\+Present\+Dans\+La\+Bdd\+Avec\+Id}} (Q\+String code\+Article)
+\begin{DoxyCompactList}\small\item\em Article\+Present\+Dans\+La\+Bdd\+Avec\+Id. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_database_a5965471d637e973abba80f63f6aecb8d}{Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article}} (Q\+String code\+Article)
+\begin{DoxyCompactList}\small\item\em Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_database_a65fc4eaa1a4255b3ae0a5ccff9a24303}{Ajout\+Fournisseur}} (\mbox{\hyperlink{class_fournisseur}{Fournisseur}} \&nouvel\+Fournisseur)
+\begin{DoxyCompactList}\small\item\em Ajout\+Fournisseur. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_database_a0c0cd5c7401905883258019cdd18f6bd}{Reception\+Livraison}} (\mbox{\hyperlink{class_livraison}{Livraison}} \&nouvelle\+Livraions\+Dans\+Bdd)
+\begin{DoxyCompactList}\small\item\em Reception\+Livraison. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_database_a83a103a11c2b982427ffae7eb11ea167}{Fournisseur\+Present\+Dans\+La\+Bdd}} (Q\+String nom\+Fournisseur)
+\begin{DoxyCompactList}\small\item\em Fournisseur\+Present\+Dans\+La\+Bdd. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_database_a6ba85382af93e1bc7cb32e84f6fcea3b}{Nouvelle\+Expedition}} (int quantite\+Expedition, Q\+String numero\+Expedition, int id\+Article)
+\begin{DoxyCompactList}\small\item\em Nouvelle\+Expedition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_database_ab2c30b7afdf7bfd699a142739c66e447}{Liste\+Des\+Articles\+En\+Bdd}} (Q\+Sql\+Query\+Model $\ast$modal)
+\begin{DoxyCompactList}\small\item\em Liste\+Des\+Articles\+En\+Bdd. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_database_addce242de8b2dd4ad9c4f2cde7e8da0a}{Liste\+Des\+Fournisseurs\+En\+Bdd}} (Q\+Sql\+Query\+Model $\ast$modal)
+\begin{DoxyCompactList}\small\item\em Liste\+Des\+Fournisseurs\+En\+Bdd. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_database_a4dcaf727e1e1c241b6f89d398e16c69a}{Qantite\+Total}} (int id\+Article)
+\begin{DoxyCompactList}\small\item\em Qantite\+Total. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_database_a65fc4eaa1a4255b3ae0a5ccff9a24303}\label{class_database_a65fc4eaa1a4255b3ae0a5ccff9a24303}} 
+\index{Database@{Database}!Ajout\+Fournisseur@{Ajout\+Fournisseur}}
+\index{Ajout\+Fournisseur@{Ajout\+Fournisseur}!Database@{Database}}
+\subsubsection{\texorpdfstring{Ajout\+Fournisseur()}{AjoutFournisseur()}}
+{\footnotesize\ttfamily bool Database\+::\+Ajout\+Fournisseur (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_fournisseur}{Fournisseur}} \&}]{nouvel\+Fournisseur }\end{DoxyParamCaption})}
+
+
+
+Ajout\+Fournisseur. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nouvel\+Fournisseur} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_a84330285ff6131c5d496d9b7d8b277b1}\label{class_database_a84330285ff6131c5d496d9b7d8b277b1}} 
+\index{Database@{Database}!Article\+Present\+Dans\+La\+Bdd\+Avec\+Id@{Article\+Present\+Dans\+La\+Bdd\+Avec\+Id}}
+\index{Article\+Present\+Dans\+La\+Bdd\+Avec\+Id@{Article\+Present\+Dans\+La\+Bdd\+Avec\+Id}!Database@{Database}}
+\subsubsection{\texorpdfstring{Article\+Present\+Dans\+La\+Bdd\+Avec\+Id()}{ArticlePresentDansLaBddAvecId()}}
+{\footnotesize\ttfamily bool Database\+::\+Article\+Present\+Dans\+La\+Bdd\+Avec\+Id (\begin{DoxyParamCaption}\item[{Q\+String}]{code\+Article }\end{DoxyParamCaption})}
+
+
+
+Article\+Present\+Dans\+La\+Bdd\+Avec\+Id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code\+Article} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_a5965471d637e973abba80f63f6aecb8d}\label{class_database_a5965471d637e973abba80f63f6aecb8d}} 
+\index{Database@{Database}!Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article@{Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article}}
+\index{Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article@{Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article}!Database@{Database}}
+\subsubsection{\texorpdfstring{Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article()}{ArticlePresentDansLaBddAvecLeCodeArticle()}}
+{\footnotesize\ttfamily bool Database\+::\+Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article (\begin{DoxyParamCaption}\item[{Q\+String}]{code\+Article }\end{DoxyParamCaption})}
+
+
+
+Article\+Present\+Dans\+La\+Bdd\+Avec\+Le\+Code\+Article. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code\+Article} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_a83a103a11c2b982427ffae7eb11ea167}\label{class_database_a83a103a11c2b982427ffae7eb11ea167}} 
+\index{Database@{Database}!Fournisseur\+Present\+Dans\+La\+Bdd@{Fournisseur\+Present\+Dans\+La\+Bdd}}
+\index{Fournisseur\+Present\+Dans\+La\+Bdd@{Fournisseur\+Present\+Dans\+La\+Bdd}!Database@{Database}}
+\subsubsection{\texorpdfstring{Fournisseur\+Present\+Dans\+La\+Bdd()}{FournisseurPresentDansLaBdd()}}
+{\footnotesize\ttfamily bool Database\+::\+Fournisseur\+Present\+Dans\+La\+Bdd (\begin{DoxyParamCaption}\item[{Q\+String}]{nom\+Fournisseur }\end{DoxyParamCaption})}
+
+
+
+Fournisseur\+Present\+Dans\+La\+Bdd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nom\+Fournisseur} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_ab2c30b7afdf7bfd699a142739c66e447}\label{class_database_ab2c30b7afdf7bfd699a142739c66e447}} 
+\index{Database@{Database}!Liste\+Des\+Articles\+En\+Bdd@{Liste\+Des\+Articles\+En\+Bdd}}
+\index{Liste\+Des\+Articles\+En\+Bdd@{Liste\+Des\+Articles\+En\+Bdd}!Database@{Database}}
+\subsubsection{\texorpdfstring{Liste\+Des\+Articles\+En\+Bdd()}{ListeDesArticlesEnBdd()}}
+{\footnotesize\ttfamily void Database\+::\+Liste\+Des\+Articles\+En\+Bdd (\begin{DoxyParamCaption}\item[{Q\+Sql\+Query\+Model $\ast$}]{modal }\end{DoxyParamCaption})}
+
+
+
+Liste\+Des\+Articles\+En\+Bdd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modal} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_database_addce242de8b2dd4ad9c4f2cde7e8da0a}\label{class_database_addce242de8b2dd4ad9c4f2cde7e8da0a}} 
+\index{Database@{Database}!Liste\+Des\+Fournisseurs\+En\+Bdd@{Liste\+Des\+Fournisseurs\+En\+Bdd}}
+\index{Liste\+Des\+Fournisseurs\+En\+Bdd@{Liste\+Des\+Fournisseurs\+En\+Bdd}!Database@{Database}}
+\subsubsection{\texorpdfstring{Liste\+Des\+Fournisseurs\+En\+Bdd()}{ListeDesFournisseursEnBdd()}}
+{\footnotesize\ttfamily void Database\+::\+Liste\+Des\+Fournisseurs\+En\+Bdd (\begin{DoxyParamCaption}\item[{Q\+Sql\+Query\+Model $\ast$}]{modal }\end{DoxyParamCaption})}
+
+
+
+Liste\+Des\+Fournisseurs\+En\+Bdd. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modal} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_database_a6ba85382af93e1bc7cb32e84f6fcea3b}\label{class_database_a6ba85382af93e1bc7cb32e84f6fcea3b}} 
+\index{Database@{Database}!Nouvelle\+Expedition@{Nouvelle\+Expedition}}
+\index{Nouvelle\+Expedition@{Nouvelle\+Expedition}!Database@{Database}}
+\subsubsection{\texorpdfstring{Nouvelle\+Expedition()}{NouvelleExpedition()}}
+{\footnotesize\ttfamily void Database\+::\+Nouvelle\+Expedition (\begin{DoxyParamCaption}\item[{int}]{quantite\+Expedition,  }\item[{Q\+String}]{numero\+Expedition,  }\item[{int}]{id\+Article }\end{DoxyParamCaption})}
+
+
+
+Nouvelle\+Expedition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em quantite\+Expedition} & \\
+\hline
+{\em numero\+Expedition} & \\
+\hline
+{\em id\+Article} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_database_a4dcaf727e1e1c241b6f89d398e16c69a}\label{class_database_a4dcaf727e1e1c241b6f89d398e16c69a}} 
+\index{Database@{Database}!Qantite\+Total@{Qantite\+Total}}
+\index{Qantite\+Total@{Qantite\+Total}!Database@{Database}}
+\subsubsection{\texorpdfstring{Qantite\+Total()}{QantiteTotal()}}
+{\footnotesize\ttfamily int Database\+::\+Qantite\+Total (\begin{DoxyParamCaption}\item[{int}]{id\+Article }\end{DoxyParamCaption})}
+
+
+
+Qantite\+Total. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id\+Article} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_database_a0c0cd5c7401905883258019cdd18f6bd}\label{class_database_a0c0cd5c7401905883258019cdd18f6bd}} 
+\index{Database@{Database}!Reception\+Livraison@{Reception\+Livraison}}
+\index{Reception\+Livraison@{Reception\+Livraison}!Database@{Database}}
+\subsubsection{\texorpdfstring{Reception\+Livraison()}{ReceptionLivraison()}}
+{\footnotesize\ttfamily void Database\+::\+Reception\+Livraison (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_livraison}{Livraison}} \&}]{nouvelle\+Livraions\+Dans\+Bdd }\end{DoxyParamCaption})}
+
+
+
+Reception\+Livraison. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nouvelle\+Livraions\+Dans\+Bdd} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+database.\+h\item 
+database.\+cpp\end{DoxyCompactItemize}

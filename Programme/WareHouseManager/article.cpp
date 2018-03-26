@@ -1,62 +1,118 @@
 #include "article.h"
 
+/**
+ * @brief Article::Article
+ */
 Article::Article()
 {
 
 }
 
-Article::Article(QString codeA, QString designationA, int poidsA, QString emplacementA, QString emballageA)
+/**
+ * @brief Article::Article
+ * @param codeArticle
+ * @param designationArticle
+ * @param poidsArticle
+ * @param emplacementArticle
+ * @param emballageArticle
+ */
+Article::Article(QString codeArticle, QString designationArticle, int poidsArticle, QString emplacementArticle, QString emballageArticle)
 {
-    this->codeArticle = codeA;
-    this->designationArticle = designationA;
-    this->poidsArticle = poidsA;
-    this->emplacementArticle = emplacementA;
-    this->emballageArticle = emballageA;
+    this->codeArticle = codeArticle;
+    this->designationArticle = designationArticle;
+    this->poidsArticle = poidsArticle;
+    this->emplacementArticle = emplacementArticle;
+    this->emballageArticle = emballageArticle;
 }
 
+/**
+ * @brief Article::GetCodeArticle
+ * @return
+ */
 QString Article::GetCodeArticle()
 {
     return this->codeArticle;
 }
+
+/**
+ * @brief Article::GetDesignationArticle
+ * @return
+ */
 
 QString Article::GetDesignationArticle()
 {
     return this->designationArticle;
 }
 
+/**
+ * @brief Article::GetPoidsArticle
+ * @return
+ */
+
 int Article::GetPoidsArticle()
 {
     return this->poidsArticle;
 }
+/**
+ * @brief Article::GetEmplacementArticle
+ * @return
+ */
 
 QString Article::GetEmplacementArticle()
 {
     return this->emplacementArticle;
 }
 
+/**
+ * @brief Article::GetEmballageArticle
+ * @return
+ */
 QString Article::GetEmballageArticle()
 {
     return this->emballageArticle;
 }
 
-void Article::SetCodeArticle(QString codeA)
+/**
+ * @brief Article::SetCodeArticle
+ * @param codeArticle
+ */
+void Article::SetCodeArticle(QString codeArticle)
 {
-    this->codeArticle = codeA;
+    this->codeArticle = codeArticle;
 }
 
-void Article::SetDesignationArticle(QString designationA)
+/**
+ * @brief Article::SetDesignationArticle
+ * @param designationArticle
+ */
+void Article::SetDesignationArticle(QString designationArticle)
 {
-    this->designationArticle = designationA;
+    this->designationArticle = designationArticle;
 }
-void Article::SetPoidsArticle(int poidsA)
+
+/**
+ * @brief Article::SetPoidsArticle
+ * @param poidsArticle
+ */
+void Article::SetPoidsArticle(int poidsArticle)
 {
-    this->poidsArticle = poidsA;
+    this->poidsArticle = poidsArticle;
 }
-void Article::SetEmplacementArticle(QString emplacementA)
+
+/**
+ * @brief Article::SetEmplacementArticle
+ * @param emplacementArticle
+ */
+void Article::SetEmplacementArticle(QString emplacementArticle)
 {
-    this->emplacementArticle = emplacementA;
+    this->emplacementArticle = emplacementArticle;
 }
-void Article::SetEmballageArticle(QString emballageA)
+
+/**
+ * @brief Article::SetEmballageArticle
+ * @param emballageArticle
+ */
+void Article::SetEmballageArticle(QString emballageArticle)
 {
-    this->emballageArticle = emballageA;
+    this->emballageArticle = emballageArticle;
 }
