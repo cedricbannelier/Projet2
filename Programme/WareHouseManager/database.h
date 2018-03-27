@@ -83,7 +83,7 @@ public:
      * @param codeArticle
      * @return
      */
-    bool DeleteProduit(const QString &codeArticle);
+    void DeleteProduit(const QString &codeArticle);
 
     /**
      * @brief UpdateProduit
@@ -94,12 +94,11 @@ public:
     bool UpdateProduit(Article &produit);
 
     /**
-     * @brief AfficheUnProduit
-     * Permet d'afficher un produit
+     * @brief AfficheUnProduit1
      * @param codeArticle
      * @return
      */
-    QVector<Article*>* AfficheUnProduit(QString codeArticle);
+    Article * AfficheUnProduit(QString codeArticle);
 
     /**
      * @brief GetDroitUtilisateur
@@ -209,6 +208,14 @@ public:
      * @return
      */
     int QantiteTotal(int idArticle);
+
+    bool PresenceUtilisateur(QString login);
+
+    void ListeDesUtilisateurs(QSqlQueryModel *modal);
+
+    void ModificationDroitUtilisateur(int nouveauDroitUtilisateur, QString login);
+
+    void RechercheProduit(QSqlQueryModel *modal, QString codeArticle);
 
 private:
     /**

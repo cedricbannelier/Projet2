@@ -37,16 +37,28 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
     std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
 
         QString codeArticle = ui->comboBoxCodeArticle->currentText();
-        QVector<Article*>* articles = bdd.AfficheUnProduit(codeArticle);
 
-        for (int i = 0; i < articles->size(); i++)
-        {
-            ui->afficheCodeArticle->setText((*articles)[i]->GetCodeArticle());
-            ui->afficheDesignationArticle ->setText((*articles)[i]->GetDesignationArticle());
-            ui->affichePoidsArticle->setText(QString::number((*articles)[i]->GetPoidsArticle()));
-            ui->afficheEmplacementArticle->setText((*articles)[i]->GetEmplacementArticle());
-            ui->afficheEmballageArticle->setText((*articles)[i]->GetEmballageArticle());
-        }
+        Article* articleEnBdd = bdd.AfficheUnProduit(codeArticle);
+
+            ui->afficheCodeArticle->setText(articleEnBdd->GetCodeArticle());
+            ui->afficheDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
+            ui->affichePoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
+            ui->afficheEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
+            ui->afficheEmballageArticle->setText(articleEnBdd->GetEmballageArticle());
+}
+
+void MainWindow::on_boutonModifier_clicked()
+{
+    std::cout << "MODE DEBUG : Dans le bouton modifier d'un article mainwindow.CPP" << std::endl;
+    QString codeArticle = ui->comboBoxModifierArticle->currentText();
+
+    Article * articleEnBdd = bdd.AfficheUnProduit(codeArticle);
+
+    ui->lineEditModificationCodeArticle->setText(articleEnBdd->GetCodeArticle());
+    ui->lineEditModificationDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
+    ui->lineEditModificationPoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
+    ui->lineEditModificationEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
+    ui->comboBoxModifierDimensionEmballage->addItem(articleEnBdd->GetEmballageArticle());
 }
 
 void MainWindow::on_boutonAjoutArticle_clicked()
@@ -99,27 +111,6 @@ void MainWindow::on_boutonSupprimerArticle_clicked()
     }
 }
 
-void MainWindow::on_boutonModifier_clicked()
-{
-    std::cout << "MODE DEBUG : Dans le bouton modifier d'un article mainwindow.CPP" << std::endl;
-    QString codeArticle = ui->comboBoxModifierArticle->currentText();
-
-    QVector<Article*>* articles = bdd.AfficheUnProduit(codeArticle);
-
-    for (int i = 0; i < articles->size(); i++)
-    {
-        ui->lineEditModificationCodeArticle->
-                setText((*articles)[i]->GetCodeArticle());
-        ui->lineEditModificationDesignationArticle->
-                setText((*articles)[i]->GetDesignationArticle());
-        ui->lineEditModificationPoidsArticle->
-                setText(QString::number((*articles)[i]->GetPoidsArticle()));
-        ui->lineEditModificationEmplacementArticle->
-                setText((*articles)[i]->GetEmplacementArticle());
-        ui->comboBoxModifierDimensionEmballage->addItem((*articles)[i]->GetEmballageArticle());
-    }
-}
-
 void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 {
      std::cout << "MODE DEBUG : Dans la methode creation utilisateur mainwindow.CPP" << std::endl;
@@ -128,7 +119,19 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
                                                        ui->lineEditeCreationMotDePasse->text(),
                                                        ui->comboBoxChoixDroitUtilisateur->currentIndex()+1);
 
-     bdd.AjoutUtilisateur(*nouvelUtilistateur);
+     if(ui->lineEditeCreationLogin->text().isEmpty() || ui->lineEditeCreationMotDePasse->text().isEmpty())
+     {
+        QMessageBox::warning(this, "Warning", "Veuillez remplir tous les champs",QMessageBox::Ok);
+     }
+     else if(bdd.PresenceUtilisateur(ui->lineEditeCreationLogin->text()))
+     {
+         bdd.AjoutUtilisateur(*nouvelUtilistateur);
+         QMessageBox::information(this, "Information", "L'utilisateur a été crée",QMessageBox::Ok);
+     }
+     else
+     {
+        QMessageBox::warning(this, "Warning", "L'utilisateur est déjà dans la base de données",QMessageBox::Ok);
+     }
 }
 
 void MainWindow::on_pushButtonValidationModification_clicked()
@@ -141,7 +144,17 @@ void MainWindow::on_pushButtonValidationModification_clicked()
                                    ui->lineEditModificationEmplacementArticle->text(),
                                    ui->comboBoxModifierDimensionEmballage->currentText());
 
-    bdd.UpdateProduit(*article);
+    if (ui->lineEditModificationDesignationArticle->text().isEmpty() ||
+        ui->lineEditModificationPoidsArticle->text().isEmpty() ||
+        ui->lineEditModificationEmplacementArticle->text().isEmpty())
+    {
+        QMessageBox::warning(this, "Warning", "Veuillez saisir tous les champs",QMessageBox::Ok);
+    }
+    else
+    {
+         bdd.UpdateProduit(*article);
+         QMessageBox::information(this, "Information", "La modification a été faite",QMessageBox::Ok);
+    }
 }
 
 void MainWindow::on_boutonAjoutEmballage_clicked()
@@ -161,7 +174,6 @@ void MainWindow::on_ButonAfficheStockComplet_clicked()
     ui->tableView->setFont(QFont("Tahoma",ui->spinBoxTaillePolice->value()));
     bdd.VuStockModal(&this->modal);
     ui->tableView->setModel(&this->modal);
-    ui->tableView->resizeColumnsToContents();
 }
 
 //Permet de selectionner tous les types d'emballage et affiche l'ID
@@ -341,6 +353,9 @@ void MainWindow::on_tabWidget_currentChanged()
 
     bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
     ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
+
+    bdd.ListeDesUtilisateurs(&this->modalUtilisateur);
+    ui->comboBoxUtilisateur->setModel(&this->modalUtilisateur);
 }
 
 QString MainWindow::dateDuJour()
@@ -348,6 +363,17 @@ QString MainWindow::dateDuJour()
     QString dateDuJour = QDateTime::currentDateTime().toString("dddd dd MMMM yyyy");
 
     return dateDuJour;
+}
+
+void MainWindow::on_pushButtonModificationDroitUtilisateur_clicked()
+{
+    QString login = ui->comboBoxUtilisateur->currentText();
+    int nouveauDroit = ui->comboBoxChoixDroitUtilisateurModif->currentIndex()+1;
+
+    bdd.ModificationDroitUtilisateur(nouveauDroit, login);
+
+    QMessageBox::information(this, "Modification", "Les droits ont été modifié");
+
 }
 
 void MainWindow::on_actionA_props_triggered()
@@ -383,4 +409,11 @@ void MainWindow::on_actionAjouterEmballage_triggered()
 void MainWindow::on_actionAjouterFournisseur_triggered()
 {
     ui->tabWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_pushButtonRechercher_clicked()
+{
+    QString codeArticle = ui->lineEditRechercheArticle->text();
+    bdd.RechercheProduit(&this->modalRechercheArticle, codeArticle);
+    ui->tableView->setModel(&this->modalRechercheArticle);
 }

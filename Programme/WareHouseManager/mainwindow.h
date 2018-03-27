@@ -195,6 +195,10 @@ private slots:
      */
     void on_actionAjouterFournisseur_triggered();
 
+    void on_pushButtonModificationDroitUtilisateur_clicked();
+
+    void on_pushButtonRechercher_clicked();
+
 private:
 
     /**
@@ -233,6 +237,11 @@ private:
      * Permet la création d'un modal pour les fournisseurs
      */
     QSqlQueryModel modalFournisseur;
+
+    QSqlQueryModel modalUtilisateur;
+
+    QSqlQueryModel modalRechercheArticle;
+
 };
 
 #endif // MAINWINDOW_H

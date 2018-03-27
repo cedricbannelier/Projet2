@@ -100,7 +100,7 @@ void Database::CreationAdministrateur()
     if(presenceDansLaBdd == 0)
      {
         query.exec("INSERT INTO utilisateur(login, motDePasseUtilisateur, droitUtilisateur) "
-                   " VALUES ('administrateur', 'administrateur', 2)");
+                   " VALUES ('ad', 'ad', 2)");
      }
 }
 
@@ -139,7 +139,7 @@ void Database::InsertStockAZeroApresInsertProduit()
     query.exec();
 }
 
-bool Database::DeleteProduit(const QString& codeArticle)
+void Database::DeleteProduit(const QString& codeArticle)
 {
     std::cout << "MODE DEBUG : Dans Delete Produit dans Database.cpp" << std::endl;
 
@@ -147,15 +147,7 @@ bool Database::DeleteProduit(const QString& codeArticle)
     query.prepare("DELETE FROM article "
                   "WHERE codeArticle=:codeArticle;");
     query.bindValue(":codeArticle", codeArticle.toUpper());
-
-    if(query.exec())
-           {
-               return true;
-           }
-     else
-           {
-                return false;
-           }
+    query.exec();
 }
 
 bool Database::UpdateProduit(Article &produit)
@@ -179,33 +171,31 @@ bool Database::UpdateProduit(Article &produit)
     return true;
 }
 
-QVector<Article *> *Database::AfficheUnProduit(QString codeArticle)
+Article * Database::AfficheUnProduit(QString codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans la methode AfficheUnProduit database.CPP" << std::endl;
-
-    QVector<Article*>* articles = new QVector<Article*>;
     QSqlQuery query(m_bdd);
     query.prepare("SELECT codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage "
                   "FROM article "
                   "WHERE codeArticle = :codeArticle;");
     query.bindValue(":codeArticle", codeArticle);
     query.exec();
+
     do
     {
         if(query.next())
         {
-            Article * article = new Article();
-            articles->push_back(article);
-            article->SetCodeArticle(query.value(0).toString());
-            article->SetDesignationArticle(query.value(1).toString());
-            article->SetPoidsArticle(query.value(2).toInt());
-            article->SetEmplacementArticle(query.value(3).toString());
-            article->SetEmballageArticle(query.value(4).toString());
-
+            Article * articleAffiche = new Article();
+            articleAffiche->SetCodeArticle(query.value(0).toString());
+            articleAffiche->SetDesignationArticle(query.value(1).toString());
+            articleAffiche->SetPoidsArticle(query.value(2).toInt());
+            articleAffiche->SetEmplacementArticle(query.value(3).toString());
+            articleAffiche->SetEmballageArticle(query.value(4).toString());
+            return articleAffiche;
         }
-    }while(query.next());
+    }while (query.next());
 
-    return articles;
+    return new Article();
+
 }
 
 Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
@@ -435,6 +425,72 @@ int Database::QantiteTotal(int idArticle)
     }
 
     return quantiteTotal;
+}
+
+bool Database::PresenceUtilisateur(QString login)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("SELECT COUNT(login) FROM utilisateur WHERE login = :login;");
+    query.bindValue(":login", login);
+    query.exec();
+    query.next();
+
+    int presenceDansLaBdd = query.value(0).toInt();
+
+    if(presenceDansLaBdd == 0)
+     {
+        return true;
+     }
+    else
+    {
+        return false;
+    }
+
+}
+
+void Database::ListeDesUtilisateurs(QSqlQueryModel *modal)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("SELECT "
+                  "login "
+                  "FROM utilisateur "
+                  );
+    query.exec();
+    modal->setQuery(query);
+}
+
+void Database::ModificationDroitUtilisateur(int nouveauDroitUtilisateur, QString login)
+{
+    QSqlQuery query(m_bdd);
+
+    query.prepare("UPDATE utilisateur "
+                  "SET droitUtilisateur=:nouveauDroit "
+                  "WHERE login = :login");
+    query.bindValue(":nouveauDroit",nouveauDroitUtilisateur);
+    query.bindValue(":login",login);
+    query.exec();
+}
+
+void Database::RechercheProduit(QSqlQueryModel *modal, QString codeArticle)
+{
+    QSqlQuery query(m_bdd);
+    query.prepare("WITH E AS (SELECT expedition.idArticle,SUM(expedition.qteExpedition) AS EXPEDIE FROM expedition GROUP BY expedition.idArticle), "
+                  "L AS (SELECT livrer.idArticle,SUM(livrer.qteLivree) AS LIVRE FROM LIVRER GROUP BY livrer.idArticle) "
+                  "SELECT  COALESCE(L.Livre,0) - COALESCE(E.EXPEDIE,0) AS 'Qte Phy Totale', "
+                  "L.Livre AS 'Qte Livrée', "
+                  "E.Expedie AS 'Qte Exp', "
+                  "article.codeArticle as Référence, "
+                  "article.designationArticle as Libelle, "
+                  "article.poidsArticle as Poids "
+                  "FROM article "
+                  "LEFT JOIN L ON article.idArticle = L.idArticle "
+                  "LEFT JOIN E ON article.idArticle = E.idArticle "
+                  "WHERE codeArticle LIKE '%:codeArticle%'");
+    query.bindValue(":codeArticle",codeArticle);
+    query.exec();
+    modal->setQuery(query);
 }
 
 void Database::VuStockModal(QSqlQueryModel *modal)
