@@ -1,6 +1,13 @@
 #ifndef LIVRAISON_H
 #define LIVRAISON_H
 
+/**
+  * @file livraison.h
+  * @brief Gestion des livraisons
+  * @author Cédric BANNELIER
+  * @version 0.1b
+**/
+
 #include <QString>
 
 /**

@@ -1,6 +1,13 @@
 #ifndef ARTICLE_H
 #define ARTICLE_H
 
+/**
+  * @file article.h
+  * @brief Gestion des articles
+  * @author Cédric BANNELIER
+  * @version 0.1b
+**/
+
 #include <QString>
 
 /**
@@ -41,19 +48,19 @@ public:
 
     /**
      * @brief GetPoidsArticle
-     * @return int poidsArticle
+     * @return Retourne le poids de l'artciel (Int)
      */
     int GetPoidsArticle();
 
     /**
      * @brief GetEmplacementArticle
-     * @return QString EmplacementArticle
+     * @return Retourne l'emplacement de l'article (QString)
      */
     QString GetEmplacementArticle();
 
     /**
      * @brief GetEmballageArticle
-     * @return QString emballageArticle
+     * @return Retourne les dimensions de l'emballage (QString)
      */
     QString GetEmballageArticle();
 

@@ -1,6 +1,13 @@
 #ifndef UTILISATEUR_H
 #define UTILISATEUR_H
 
+/**
+  * @file utilisateur.h
+  * @brief Gestion des utilisateurs
+  * @author Cédric BANNELIER
+  * @version 0.1b
+**/
+
 #include <QString>
 
 /**

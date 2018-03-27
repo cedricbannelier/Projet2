@@ -18,16 +18,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
 {
     ui->setupUi(this);
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
-
-    bdd.ListeDesArticlesEnBdd(&this->modalArticle);
-    ui->comboBoxCodeArticle->setModel(&this->modalArticle);
-    ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
-    ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
-    ui->comboBoxModifierArticle->setModel(&this->modalArticle);
-    ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
-
-    bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
-    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
 }
 
 MainWindow::~MainWindow()
@@ -59,8 +49,6 @@ void MainWindow::on_boutonConsulterFicheProduit_clicked()
         }
 }
 
-//Ajout d'un article utilisation du constructeur.
-//Appel la méthode insertProduit
 void MainWindow::on_boutonAjoutArticle_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article mainwindow.CPP" << std::endl;
@@ -90,8 +78,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
     }
 }
 
-//Supprime un article dans la base de donnée
-void MainWindow::on_boutonSupprimer_clicked()
+void MainWindow::on_boutonSupprimerArticle_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton supprimer d'un article mainwindow.CPP" << std::endl;
 
@@ -133,7 +120,6 @@ void MainWindow::on_boutonModifier_clicked()
     }
 }
 
-//Création d'un utilisateur
 void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 {
      std::cout << "MODE DEBUG : Dans la methode creation utilisateur mainwindow.CPP" << std::endl;
@@ -145,7 +131,6 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
      bdd.AjoutUtilisateur(*nouvelUtilistateur);
 }
 
-//Mise à jour d'un article
 void MainWindow::on_pushButtonValidationModification_clicked()
 {
     std::cout << "MODE DEBUG : Dans la methode Validation de modification mainwindow.CPP" << std::endl;
@@ -171,7 +156,6 @@ void MainWindow::on_boutonAjoutEmballage_clicked()
     miseAJour();
 }
 
-//Affiche tout le stock meme avec des quantités à NULL ou à zéro
 void MainWindow::on_ButonAfficheStockComplet_clicked()
 {
     ui->tableView->setFont(QFont("Tahoma",ui->spinBoxTaillePolice->value()));
@@ -251,7 +235,6 @@ void MainWindow::on_BoutonValiderReception_clicked()
                                                       ui->dateEdit->text(),
                                                       idArticle,
                                                       idFournisseur);
-
         bdd.ReceptionLivraison(*nouvelleLivraison);
 
         ViderLineEdit();
@@ -296,7 +279,7 @@ void MainWindow::ViderLineEdit()
     }
 
 }
-//En cours de dev
+
 void MainWindow::on_BoutonExpedition_clicked()
 {
     int quantiteExpedition = ui->lineEditQuantiteExpedition->text().toInt();
@@ -348,7 +331,7 @@ void MainWindow::on_tabWidget_currentChanged()
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
     }
-/*
+
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
     ui->comboBoxCodeArticle->setModel(&this->modalArticle);
     ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
@@ -357,7 +340,7 @@ void MainWindow::on_tabWidget_currentChanged()
     ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
 
     bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
-    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);*/
+    ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
 }
 
 QString MainWindow::dateDuJour()
@@ -380,24 +363,24 @@ void MainWindow::on_actionAfficheStock_triggered()
     on_ButonAfficheStockComplet_clicked();
 }
 
-void MainWindow::on_actionAjouter_triggered()
+void MainWindow::on_actionAjouterUtilisateur_triggered()
 {
     ui->tabWidget->setCurrentIndex(10);
 }
 
-void MainWindow::on_actionArticle_triggered()
+void MainWindow::on_actionAjouterArticle_triggered()
 {
     ui->tabWidget->setCurrentIndex(1);
 }
 
 // couleur icone : 3469A1
 
-void MainWindow::on_actionEmballage_triggered()
+void MainWindow::on_actionAjouterEmballage_triggered()
 {
     ui->tabWidget->setCurrentIndex(3);
 }
 
-void MainWindow::on_actionFournisseur_triggered()
+void MainWindow::on_actionAjouterFournisseur_triggered()
 {
     ui->tabWidget->setCurrentIndex(2);
 }

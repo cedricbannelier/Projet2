@@ -5,7 +5,6 @@
 
 #include "Database.h"
 
-//Constructeur
 Database::Database()
 {
 
@@ -23,12 +22,6 @@ void Database::CloseDatabase()
 
 void Database::CreateDatabase()
 {
-    //Création du répertoire si non créer pour la base de données
-/*    QString chemin("c:/warehousebd");
-    QDir dir = QDir::root();
-    dir.mkdir(chemin);
-*/
-    //Création de la base de données
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");
     m_bdd.setDatabaseName("./warehousedb.db");
     m_bdd.open();
@@ -93,7 +86,6 @@ void Database::CreateDatabase()
                ");");
 
     CreationAdministrateur();
-
 }
 
 void Database::CreationAdministrateur()
@@ -147,8 +139,6 @@ void Database::InsertStockAZeroApresInsertProduit()
     query.exec();
 }
 
-//Permet de supprimer un produit
-//En paramètre le nom du produit//
 bool Database::DeleteProduit(const QString& codeArticle)
 {
     std::cout << "MODE DEBUG : Dans Delete Produit dans Database.cpp" << std::endl;
@@ -168,7 +158,6 @@ bool Database::DeleteProduit(const QString& codeArticle)
            }
 }
 
-//Permet de faire un update
 bool Database::UpdateProduit(Article &produit)
 {
     std::cout << "MODE DEBUG : Dans Update un produit" << std::endl;
@@ -190,7 +179,6 @@ bool Database::UpdateProduit(Article &produit)
     return true;
 }
 
-//Permet de récuperer la table des produits
 QVector<Article *> *Database::AfficheUnProduit(QString codeArticle)
 {
     std::cout << "MODE DEBUG : Dans la methode AfficheUnProduit database.CPP" << std::endl;
@@ -246,19 +234,6 @@ Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
     }while(query.next());
 
     return new Utilisateur();
-}
-
-//Permet de récuperer la table complete ARTICLE
-//En cours de dev
-void Database::AfficheLeStock()
-{
-    std::cout << "MODE DEBUG : Dans la methode AfficheUnProduit database.CPP" << std::endl;
-
-    QSqlQueryModel * modal = new QSqlQueryModel();
-
-    QSqlQuery query(m_bdd);
-    query.exec("SELECT * FROM article;");
-    modal->setQuery(query);
 }
 
 void Database::AjoutUtilisateur(Utilisateur &user)
@@ -517,13 +492,3 @@ void Database::ListeDesFournisseursEnBdd(QSqlQueryModel *modal)
     query.exec();
     modal->setQuery(query);
 }
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,13 @@
 #ifndef EMBALLAGE_H
 #define EMBALLAGE_H
+
+/**
+  * @file emballage.h
+  * @brief Gestion des emballages
+  * @author Cédric BANNELIER
+  * @version 0.1b
+**/
+
 #include <QString>
 
 /**

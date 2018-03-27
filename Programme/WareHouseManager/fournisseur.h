@@ -1,6 +1,13 @@
 #ifndef FOURNISSEUR_H
 #define FOURNISSEUR_H
 
+/**
+  * @file fournisseur.h
+  * @brief Gestion des fournisseurs
+  * @author Cédric BANNELIER
+  * @version 0.1b
+**/
+
 #include <QString>
 
 /**

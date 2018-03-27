@@ -1,6 +1,13 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+/**
+  * @file login.h
+  * @brief Gestion des logins
+  * @author Cédric BANNELIER
+  * @version 0.1b
+**/
+
 #include <QDialog>
 #include "database.h"
 #include "mainwindow.h"
