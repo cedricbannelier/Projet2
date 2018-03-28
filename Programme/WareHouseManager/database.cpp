@@ -487,8 +487,28 @@ void Database::RechercheProduit(QSqlQueryModel *modal, QString codeArticle)
                   "FROM article "
                   "LEFT JOIN L ON article.idArticle = L.idArticle "
                   "LEFT JOIN E ON article.idArticle = E.idArticle "
-                  "WHERE codeArticle LIKE '%:codeArticle%'");
-    query.bindValue(":codeArticle",codeArticle);
+                  "WHERE codeArticle LIKE :codeArticle");
+    query.bindValue(":codeArticle", '%'+ codeArticle + '%');
+    query.exec();
+    modal->setQuery(query);
+}
+
+void Database::RechercheProduitLibelle(QSqlQueryModel *modal, QString libelleArticle)
+{
+    QSqlQuery query(m_bdd);
+    query.prepare("WITH E AS (SELECT expedition.idArticle,SUM(expedition.qteExpedition) AS EXPEDIE FROM expedition GROUP BY expedition.idArticle), "
+                  "L AS (SELECT livrer.idArticle,SUM(livrer.qteLivree) AS LIVRE FROM LIVRER GROUP BY livrer.idArticle) "
+                  "SELECT  COALESCE(L.Livre,0) - COALESCE(E.EXPEDIE,0) AS 'Qte Phy Totale', "
+                  "L.Livre AS 'Qte Livrée', "
+                  "E.Expedie AS 'Qte Exp', "
+                  "article.codeArticle as Référence, "
+                  "article.designationArticle as Libelle, "
+                  "article.poidsArticle as Poids "
+                  "FROM article "
+                  "LEFT JOIN L ON article.idArticle = L.idArticle "
+                  "LEFT JOIN E ON article.idArticle = E.idArticle "
+                  "WHERE designationArticle LIKE :designationArticle");
+    query.bindValue(":designationArticle", '%'+ libelleArticle + '%');
     query.exec();
     modal->setQuery(query);
 }

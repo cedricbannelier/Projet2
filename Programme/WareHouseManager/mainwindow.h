@@ -199,6 +199,8 @@ private slots:
 
     void on_pushButtonRechercher_clicked();
 
+    void on_pushButtonRechercherLibelle_clicked();
+
 private:
 
     /**
@@ -241,6 +243,8 @@ private:
     QSqlQueryModel modalUtilisateur;
 
     QSqlQueryModel modalRechercheArticle;
+
+    QSqlQueryModel modalRechercheArticleLibelle;
 
 };
 

@@ -414,6 +414,29 @@ void MainWindow::on_actionAjouterFournisseur_triggered()
 void MainWindow::on_pushButtonRechercher_clicked()
 {
     QString codeArticle = ui->lineEditRechercheArticle->text();
-    bdd.RechercheProduit(&this->modalRechercheArticle, codeArticle);
-    ui->tableView->setModel(&this->modalRechercheArticle);
+    if(codeArticle.isEmpty())
+    {
+       QMessageBox::warning(this, "Code article", "Veuillez saisir une lettre du code article");
+    }
+    else
+    {
+        bdd.RechercheProduit(&this->modalRechercheArticle, codeArticle);
+        ui->tableView->setModel(&this->modalRechercheArticle);
+    }
+
+}
+
+void MainWindow::on_pushButtonRechercherLibelle_clicked()
+{
+    QString libelleArticle = ui->lineEditRechercheLibelle->text();
+    if(libelleArticle.isEmpty())
+    {
+        QMessageBox::warning(this, "Libellé", "Veuillez saisir une lettre du libellé recherché");
+    }
+    else
+    {
+        bdd.RechercheProduitLibelle(&this->modalRechercheArticleLibelle, libelleArticle);
+        ui->tableView->setModel(&this->modalRechercheArticleLibelle);
+    }
+
 }

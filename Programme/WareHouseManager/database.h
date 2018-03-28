@@ -217,11 +217,14 @@ public:
 
     void RechercheProduit(QSqlQueryModel *modal, QString codeArticle);
 
+    void RechercheProduitLibelle(QSqlQueryModel *modal, QString libelleArticle);
+
 private:
     /**
      * @brief m_bdd
      */
     QSqlDatabase m_bdd;
+
 
 };
 
