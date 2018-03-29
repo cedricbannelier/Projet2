@@ -139,18 +139,7 @@ void Database::InsertStockAZeroApresInsertProduit()
     query.exec();
 }
 
-void Database::DeleteProduit(const QString& codeArticle)
-{
-    std::cout << "MODE DEBUG : Dans Delete Produit dans Database.cpp" << std::endl;
-
-    QSqlQuery query(m_bdd);
-    query.prepare("DELETE FROM article "
-                  "WHERE codeArticle=:codeArticle;");
-    query.bindValue(":codeArticle", codeArticle.toUpper());
-    query.exec();
-}
-
-bool Database::UpdateProduit(Article &produit)
+void Database::UpdateProduit(Article &produit)
 {
     std::cout << "MODE DEBUG : Dans Update un produit" << std::endl;
 
@@ -167,8 +156,6 @@ bool Database::UpdateProduit(Article &produit)
     query.bindValue(":emplacementArticle", produit.GetEmplacementArticle());
     query.bindValue(":codeArticle", produit.GetCodeArticle());
     query.exec();
-
-    return true;
 }
 
 Article * Database::AfficheUnProduit(QString codeArticle)
@@ -275,7 +262,7 @@ int Database::RecupererIdFournisseur(QString nomFournisseur)
     return idFournisseur;
 }
 
-bool Database::AjoutEmballage(Emballage&nouvelEmballage)
+void Database::AjoutEmballage(Emballage&nouvelEmballage)
 {
     std::cout << "MODE DEBUG : Dans ajouter nouvel emballage database.CPP" << std::endl;
 
@@ -288,8 +275,6 @@ bool Database::AjoutEmballage(Emballage&nouvelEmballage)
     query.bindValue(":longueurEmballage", nouvelEmballage.GetLongueurEmballage());
 
     query.exec();
-
-    return true;
 }
 
 bool Database::ArticlePresentDansLaBddAvecId(QString codeArticle)
@@ -313,7 +298,6 @@ bool Database::ArticlePresentDansLaBddAvecId(QString codeArticle)
      }
      else
      {
-
         return true;
      }
 }
@@ -342,7 +326,7 @@ bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
      }
 }
 
-bool Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
+void Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
 {
     std::cout << "MODE DEBUG : Dans ajouter nouveau fournisseur database.CPP" << std::endl;
 
@@ -351,14 +335,7 @@ bool Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
                   "VALUES(:nomFournisseur);");
     query.bindValue(":nomFournisseur", nouvelFournisseur.GetNomFournisseur());
 
-    if(query.exec())
-           {
-               return true;
-           }
-     else
-           {
-                return false;
-           }
+    query.exec();
 }
 
 void Database::ReceptionLivraison(Livraison & nouvelleLivraionsDansBdd)
@@ -522,7 +499,7 @@ void Database::VuStockModal(QSqlQueryModel *modal)
                   "SELECT  COALESCE(L.Livre,0) - COALESCE(E.EXPEDIE,0) AS 'Qte Phy Totale', "
                   "L.Livre AS 'Qte Livrée', "
                   "E.Expedie AS 'Qte Exp', "
-                  "article.codeArticle as Référence, "
+                  "article.codeArticle as 'Code article', "
                   "article.designationArticle as Libelle, "
                   "article.poidsArticle as Poids "
                   "FROM article "

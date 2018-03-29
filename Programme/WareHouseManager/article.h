@@ -25,6 +25,7 @@ public:
 
     /**
      * @brief Article
+     * Constructeur permettant de construire un objet article avec les paramètres
      * @param codeArticle
      * @param designationArticle
      * @param poidsArticle

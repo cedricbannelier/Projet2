@@ -10,7 +10,6 @@
 
 #include <QString>
 #include <QtSql/QtSql>
-#include <vector>
 
 #include "article.h"
 #include "utilisateur.h"
@@ -20,12 +19,14 @@
 
 /**
  * @brief Classe Database permettant de gerer les requetes SQL.
+ * Dans cette classe toutes les requetes sont présentes.
  */
 class Database
 {
 public:
     /**
      * @brief Database
+     * Constructeur vide
      */
     Database();
 
@@ -46,7 +47,8 @@ public:
 
     /**
      * @brief CreateDatabase
-     * Permet la création des tables
+     * Permet la création des tables. Les tables seront créées dans le repetoire courant
+     * Lors de l'installation les tables sont créées dès le lancement.
      */
     void CreateDatabase();
 
@@ -71,32 +73,23 @@ public:
 
     /**
      * @brief InsertStockAZeroApresInsertProduit
-     * Récupere la derniere insertion dans la table  article
+     * Récupere la derniere insertion dans la table article
      * Insert à zéro dans la table consulter
      */
     void InsertStockAZeroApresInsertProduit();
 
     /**
-     * @brief DeleteProduit
-     * Permet supprimer un eproduit dans la base de données
-     * En cours de developpement
-     * @param codeArticle
-     * @return
-     */
-    void DeleteProduit(const QString &codeArticle);
-
-    /**
      * @brief UpdateProduit
      * Permet de mettre à jour un produit de la base de données
      * @param produit
-     * @return
      */
-    bool UpdateProduit(Article &produit);
+    void UpdateProduit(Article &produit);
 
     /**
-     * @brief AfficheUnProduit1
+     * @brief AfficheUnProduit
+     * Permet de récuperer les informations d'un article
      * @param codeArticle
-     * @return
+     * @return l'objet article
      */
     Article * AfficheUnProduit(QString codeArticle);
 
@@ -104,7 +97,7 @@ public:
      * @brief GetDroitUtilisateur
      * Permet de récuperer les droits et le login d'un utilisateur
      * @param nouvelUtilisateur
-     * @return
+     * @return l'objet utilisateur
      */
     Utilisateur *GetDroitUtilisateur(Utilisateur *nouvelUtilisateur);
 
@@ -119,7 +112,7 @@ public:
      * @brief RecupererIdArticle
      * Permet de récuperer l'ID d'un article
      * @param codeArticle
-     * @return
+     * @return l'ID de l'article
      */
     int RecupererIdArticle(QString codeArticle);
 
@@ -127,7 +120,7 @@ public:
      * @brief RecupererIdFournisseur
      * Recupere l'ID du fournisseur
      * @param nomFournisseur
-     * @return
+     * @return l'ID du fournisseur
      */
     int RecupererIdFournisseur(QString nomFournisseur);
 
@@ -137,13 +130,13 @@ public:
      * @param nouvelEmballage
      * @return
      */
-    bool AjoutEmballage(Emballage& nouvelEmballage);
+    void AjoutEmballage(Emballage& nouvelEmballage);
 
     /**
      * @brief ArticlePresentDansLaBddAvecId
      * Permet de savoir si l'article est présent dans la base de données
      * @param codeArticle
-     * @return
+     * @return Faux = Présent / Vrai = Non Présent
      */
     bool ArticlePresentDansLaBddAvecId(QString codeArticle);
 
@@ -151,7 +144,7 @@ public:
      * @brief ArticlePresentDansLaBddAvecLeCodeArticle
      * Permet de savoir si l'article est présent dans la base de données
      * @param codeArticle
-     * @return
+     * @return Faux = Non présent / Vrai = Présent
      */
     bool ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle);
 
@@ -159,9 +152,8 @@ public:
      * @brief AjoutFournisseur
      * Permet d'ajout un fournisseur dans la base de données
      * @param nouvelFournisseur
-     * @return
      */
-    bool AjoutFournisseur(Fournisseur & nouvelFournisseur);
+    void AjoutFournisseur(Fournisseur & nouvelFournisseur);
 
     /**
      * @brief ReceptionLivraison
@@ -174,7 +166,7 @@ public:
      * @brief FournisseurPresentDansLaBdd
      * Permet de savoir si le fournisseur est présent dans la base de données
      * @param nomFournisseur
-     * @return
+     * @return Faux = Non Présent / Vrai = Présent
      */
     bool FournisseurPresentDansLaBdd(QString nomFournisseur);
 
@@ -205,23 +197,58 @@ public:
      * @brief QantiteTotal
      * Permet de sélectionner la quantité total en stock (Quantité réceptionnée - Quantité livrée)
      * @param idArticle
-     * @return
+     * @return La quantité total (Quantité livrée - Quantité expédiée)
      */
     int QantiteTotal(int idArticle);
 
+    /**
+     * @brief PresenceUtilisateur
+     * Permet de savoir si un utilisateur est présent.
+     * Si l'utilisateur est déjà présent il ne sera pas créé. Si non présent l'utilisateur sera crée
+     * @param login
+     * @return Faux = Non Présent / Vrai = Présent
+     */
     bool PresenceUtilisateur(QString login);
 
+    /**
+     * @brief ListeDesUtilisateurs
+     * Récupere la liste des utilisateurs
+     * Envoi les données dans un model
+     * @param modal
+     */
     void ListeDesUtilisateurs(QSqlQueryModel *modal);
 
+    /**
+     * @brief ModificationDroitUtilisateur
+     * Permet de modifier les droits d'un utilisateur.
+     * Le choix sera entre Logisiticien ou Administrateur.
+     * @param nouveauDroitUtilisateur
+     * @param login
+     */
     void ModificationDroitUtilisateur(int nouveauDroitUtilisateur, QString login);
 
+    /**
+     * @brief RechercheProduit
+     * Permet de faire une recherche par code article dans la base de données
+     * L'utilisateur peut saisir soit le code article complet soit juste une lettre.
+     * @param modal
+     * @param codeArticle
+     */
     void RechercheProduit(QSqlQueryModel *modal, QString codeArticle);
 
+    /**
+     * @brief RechercheProduitLibelle
+     * Permet de faire une recherche par libellé dans la base de données.
+     * L'utilisateur peut saisir soit le libelle exacte soit une partie ou juste une lettre.
+     * @param modal
+     * @param libelleArticle
+     */
     void RechercheProduitLibelle(QSqlQueryModel *modal, QString libelleArticle);
 
 private:
     /**
      * @brief m_bdd
+     * Création d'une variable de type QSqlDatabase
      */
     QSqlDatabase m_bdd;
 

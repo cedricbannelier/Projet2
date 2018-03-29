@@ -10,7 +10,6 @@
 
 #include <QMainWindow>
 #include <QLineEdit>
-#include <QVBoxLayout>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QMessageBox>
@@ -25,6 +24,9 @@ namespace Ui {
 class MainWindow;
 }
 
+/**
+ * @brief Classe MainWindow qui herite de la QMainWindow. Fenêtre principale de l'application
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -43,11 +45,12 @@ public:
 
      /**
       * @brief The droits enum
-      * @enum Enumération pour 1 = Logisticien (droits restreints) / 2 = Administrateur (Tous les droits)
+      * Enumération pour 1 = Logisticien (droits restreints) / 2 = Administrateur (Tous les droits)
+      * @enum
       */
-     enum droits {
-       LOGISTICIEN = 1,
-       ADMINISTRATEUR = 2,
+     enum droits {           
+       LOGISTICIEN = 1, /*!< 1 -> Droit logisiticien */
+       ADMINISTRATEUR = 2, /*!< 2 -> Droit administrateur */
      };
 
 
@@ -55,6 +58,8 @@ public slots:
 
      /**
      * @brief on_actionSe_deconnecter_triggered
+     * En cours de developpement
+     * Permettra de pouvoir se deconnecter et de revenir à la page de login
      * @return
      */
     int on_actionSe_deconnecter_triggered();
@@ -68,30 +73,12 @@ private slots:
     void on_boutonAjoutArticle_clicked();
 
     /**
-     * @brief on_boutonSupprimer_clicked
-     * Bouton permettant de supprimer une produit de la base de données
-     */
-    void on_boutonSupprimerArticle_clicked();
-
-    /**
-     * @brief on_boutonConsulterFicheProduit_clicked
-     * Bouton permettant d'affiche les caractéristiques d'un produit
-     */
-    void on_boutonConsulterFicheProduit_clicked();
-
-    /**
      * @brief on_pushButtonCreationUtilisateur_clicked
      * Permet la création d'un utilisateur avec des droits
      * Soit administrateur
      * Soit logisticien
      */
     void on_pushButtonCreationUtilisateur_clicked();
-
-    /**
-     * @brief on_boutonModifier_clicked
-     * Permet de rechercher un article pour afficher les resultats
-     */
-    void on_boutonModifier_clicked();
 
     /**
      * @brief on_pushButtonValidationModification_clicked
@@ -138,7 +125,6 @@ private slots:
      * Permet d'exporter le stock dans un fichier CSV
      */
     void on_BoutonExportExcel_clicked();
-
 
     /**
      * @brief on_BoutonExpedition_clicked
@@ -195,11 +181,35 @@ private slots:
      */
     void on_actionAjouterFournisseur_triggered();
 
+    /**
+     * @brief on_pushButtonModificationDroitUtilisateur_clicked
+     * Permet de modifier les droits d'un utilisateur
+     */
     void on_pushButtonModificationDroitUtilisateur_clicked();
 
-    void on_pushButtonRechercher_clicked();
+    /**
+     * @brief on_pushButtonRechercher_clicked
+     * Permet de faire une recherche par code article
+     */
+    void on_pushButtonRechercherArticle_clicked();
 
+    /**
+     * @brief on_pushButtonRechercherLibelle_clicked
+     * Permet de faire une recherche par libelle
+     */
     void on_pushButtonRechercherLibelle_clicked();
+
+    /**
+     * @brief on_comboBoxCodeArticle_currentIndexChanged
+     * Lors de la selection d'un élement dans la combox, les linesedits se remplissent
+     */
+    void on_comboBoxCodeArticle_currentIndexChanged();
+
+    /**
+     * @brief on_comboBoxModifierArticle_currentIndexChanged
+     * Lors de la selection d'un élement dans la combox, les linesedits se remplissent
+     */
+    void on_comboBoxModifierArticle_currentIndexChanged();
 
 private:
 
@@ -212,11 +222,13 @@ private:
     /**
      * @brief dateDuJour
      * Donne la date du jour
-     * @return
+     * @return la date du jour
      */
     QString dateDuJour();
 
-    //Création d'un pointeur ui
+    /**
+     * @brief ui
+     */
     Ui::MainWindow *ui;
 
     //Création de la bdd de type Database
@@ -240,10 +252,19 @@ private:
      */
     QSqlQueryModel modalFournisseur;
 
+    /**
+     * @brief modalUtilisateur
+     */
     QSqlQueryModel modalUtilisateur;
 
+    /**
+     * @brief modalRechercheArticle
+     */
     QSqlQueryModel modalRechercheArticle;
 
+    /**
+     * @brief modalRechercheArticleLibelle
+     */
     QSqlQueryModel modalRechercheArticleLibelle;
 
 };

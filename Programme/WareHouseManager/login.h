@@ -18,6 +18,10 @@ namespace Ui {
 class Login;
 }
 
+/**
+ * @brief Classe Login qui hérite de QDialog permet de gerer la fenetre login
+ */
+
 class Login : public QDialog
 {
     Q_OBJECT

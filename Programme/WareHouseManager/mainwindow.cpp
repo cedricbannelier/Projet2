@@ -31,36 +31,6 @@ void MainWindow::afficheUtilisateur()
                                + "Droit : " + QString::number(user.GetDroit()));
 }
 
-
-void MainWindow::on_boutonConsulterFicheProduit_clicked()
-{
-    std::cout << "MODE DEBUG : Dans consulter une fiche produit mainwindow.CPP" << std::endl;
-
-        QString codeArticle = ui->comboBoxCodeArticle->currentText();
-
-        Article* articleEnBdd = bdd.AfficheUnProduit(codeArticle);
-
-            ui->afficheCodeArticle->setText(articleEnBdd->GetCodeArticle());
-            ui->afficheDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
-            ui->affichePoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
-            ui->afficheEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
-            ui->afficheEmballageArticle->setText(articleEnBdd->GetEmballageArticle());
-}
-
-void MainWindow::on_boutonModifier_clicked()
-{
-    std::cout << "MODE DEBUG : Dans le bouton modifier d'un article mainwindow.CPP" << std::endl;
-    QString codeArticle = ui->comboBoxModifierArticle->currentText();
-
-    Article * articleEnBdd = bdd.AfficheUnProduit(codeArticle);
-
-    ui->lineEditModificationCodeArticle->setText(articleEnBdd->GetCodeArticle());
-    ui->lineEditModificationDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
-    ui->lineEditModificationPoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
-    ui->lineEditModificationEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
-    ui->comboBoxModifierDimensionEmballage->addItem(articleEnBdd->GetEmballageArticle());
-}
-
 void MainWindow::on_boutonAjoutArticle_clicked()
 {
     std::cout << "MODE DEBUG : Dans le bouton ajout d'un article mainwindow.CPP" << std::endl;
@@ -87,27 +57,6 @@ void MainWindow::on_boutonAjoutArticle_clicked()
         bdd.InsertProduit(*article);
         ViderLineEdit();
         QMessageBox::information(this, "Information", "Votre article a bien été ajouté dans la base de données",QMessageBox::Ok);
-    }
-}
-
-void MainWindow::on_boutonSupprimerArticle_clicked()
-{
-    std::cout << "MODE DEBUG : Dans le bouton supprimer d'un article mainwindow.CPP" << std::endl;
-
-    if(ui->comboBoxSupprimerArticle->currentText() == NULL)
-    {
-        QMessageBox::warning(this, "Warning", "Veuillez saisir un code article",QMessageBox::Ok);
-    }
-    else
-    if(bdd.ArticlePresentDansLaBddAvecId(ui->comboBoxSupprimerArticle->currentText()) == false)
-    {
-        QMessageBox::warning(this, "Warning", "Le code article saisi n'est pas dans la base de données",QMessageBox::Ok);
-    }
-    else
-    {
-        bdd.DeleteProduit(ui->comboBoxSupprimerArticle->currentText());
-        QMessageBox::information(this, "Information", "Votre article a été supprimé avec succès",QMessageBox::Ok);
-        on_tabWidget_currentChanged();
     }
 }
 
@@ -339,14 +288,12 @@ void MainWindow::on_tabWidget_currentChanged()
     if(user.GetDroit() == LOGISTICIEN)
     {
         ui->tabModifier->setDisabled(true);
-        ui->tabSupprimer->setDisabled(true);
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
     }
 
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
     ui->comboBoxCodeArticle->setModel(&this->modalArticle);
-    ui->comboBoxSupprimerArticle->setModel(&this->modalArticle);
     ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
     ui->comboBoxModifierArticle->setModel(&this->modalArticle);
     ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
@@ -411,7 +358,7 @@ void MainWindow::on_actionAjouterFournisseur_triggered()
     ui->tabWidget->setCurrentIndex(2);
 }
 
-void MainWindow::on_pushButtonRechercher_clicked()
+void MainWindow::on_pushButtonRechercherArticle_clicked()
 {
     QString codeArticle = ui->lineEditRechercheArticle->text();
     if(codeArticle.isEmpty())
@@ -440,3 +387,31 @@ void MainWindow::on_pushButtonRechercherLibelle_clicked()
     }
 
 }
+
+void MainWindow::on_comboBoxCodeArticle_currentIndexChanged()
+{
+        QString codeArticle = ui->comboBoxCodeArticle->currentText();
+
+        Article* articleEnBdd = bdd.AfficheUnProduit(codeArticle);
+
+            ui->afficheCodeArticle->setText(articleEnBdd->GetCodeArticle());
+            ui->afficheDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
+            ui->affichePoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
+            ui->afficheEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
+            ui->afficheEmballageArticle->setText(articleEnBdd->GetEmballageArticle());
+}
+
+void MainWindow::on_comboBoxModifierArticle_currentIndexChanged()
+{
+     QString codeArticle = ui->comboBoxModifierArticle->currentText();
+
+     Article * articleEnBdd = bdd.AfficheUnProduit(codeArticle);
+
+     ui->lineEditModificationCodeArticle->setText(articleEnBdd->GetCodeArticle());
+     ui->lineEditModificationDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
+     ui->lineEditModificationPoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
+     ui->lineEditModificationEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
+     ui->comboBoxModifierDimensionEmballage->addItem(articleEnBdd->GetEmballageArticle());
+
+}
+
