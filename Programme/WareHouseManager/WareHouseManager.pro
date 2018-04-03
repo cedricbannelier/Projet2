@@ -3,6 +3,7 @@
 # Project created by QtCreator 2018-02-21T17:47:19
 #
 #-------------------------------------------------
+# couleur icone : 3469A1
 
 QT += sql
 

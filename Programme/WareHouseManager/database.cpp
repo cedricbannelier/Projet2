@@ -92,18 +92,22 @@ void Database::CreateDatabase()
 
 void Database::CreationAdministrateur()
 {
-    QSqlQuery query(m_bdd);
-    query.exec("SELECT COUNT(login) FROM utilisateur WHERE login='administrateur'");
 
-    query.next();
+    if (PresenceUtilisateur("ad") == true)
+    {
+        QSqlQuery query(m_bdd);
+        query.exec("SELECT COUNT(login) FROM utilisateur WHERE login='administrateur'");
 
-    int presenceDansLaBdd = query.value(0).toInt();
+        query.next();
 
-    if(presenceDansLaBdd == 0)
-     {
-        query.exec("INSERT INTO utilisateur(login, motDePasseUtilisateur, droitUtilisateur) "
-                   " VALUES ('ad', 'ad', 2)");
-     }
+        int presenceDansLaBdd = query.value(0).toInt();
+
+        if(presenceDansLaBdd == 0)
+         {
+            query.exec("INSERT INTO utilisateur(login, motDePasseUtilisateur, droitUtilisateur) "
+                       " VALUES ('ad', 'ad', 2)");
+         }
+    }
 }
 
 void Database::InsertProduit(Article &produitAInserDansLaBdd)
@@ -118,24 +122,6 @@ void Database::InsertProduit(Article &produitAInserDansLaBdd)
     query.bindValue(":idEmballage", produitAInserDansLaBdd.GetEmballageArticle());
     query.exec();
 
-//    InsertStockAZeroApresInsertProduit();
-}
-
-void Database::InsertStockAZeroApresInsertProduit()
-{
-    QSqlQuery query(m_bdd);
-    query.exec("SELECT seq "
-               "FROM sqlite_sequence "
-               "WHERE name = 'article';");
-
-    query.next();
-
-    QString dernierIdArticle = query.value(0).toString().toUpper();
-
-    query.prepare("INSERT INTO consulter (qteStock, idUtilisateur, idArticle) "
-                  "VALUES (0, 1 , :dernierIdArticle);");
-    query.bindValue(":dernierIdArticle", dernierIdArticle);
-    query.exec();
 }
 
 void Database::UpdateProduit(Article &produit)
@@ -560,5 +546,18 @@ bool Database::LivraisonPresente(int idArticle)
     else
     {
         return false;
+    }
+}
+
+void Database::AjoutFournisseurImport(QVector <QString> listeFournisseursVector)
+{
+    QSqlQuery query(m_bdd);
+
+    for(int i = 0 ; i<listeFournisseursVector.length(); i++)
+    {
+        query.prepare("INSERT INTO fournisseur (nomFournisseur) "
+                      "VALUES (:nomFournisseur)");
+        query.bindValue(":nomFournisseur", listeFournisseursVector[i]);
+        query.exec();
     }
 }

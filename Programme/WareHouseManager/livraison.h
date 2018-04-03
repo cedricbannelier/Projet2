@@ -36,17 +36,56 @@ public:
      * @return
      */
     int GetQteLivree();
+
+    /**
+     * @brief GetNumeroLivraison
+     * @return
+     */
     QString GetNumeroLivraison();
+
+    /**
+     * @brief GetDateLivraison
+     * @return
+     */
     QString GetDateLivraison();
+
+    /**
+     * @brief GetIdArticle
+     * @return
+     */
     int GetIdArticle();
+
+    /**
+     * @brief GetIdFournisseur
+     * @return
+     */
     int GetIdFournisseur();
 
 private:
 
+    /**
+     * @brief qteLivree
+     */
     int qteLivree;
+
+    /**
+     * @brief numeroLivraison
+     */
     QString numeroLivraison;
+
+    /**
+     * @brief dateLivraison
+     */
     QString dateLivraison;
+
+    /**
+     * @brief idArticle
+     */
     int idArticle;
+
+    /**
+     * @brief idFournisseur
+     */
     int idFournisseur;
 
 };

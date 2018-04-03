@@ -72,13 +72,6 @@ public:
     void InsertProduit(Article &produitAInserDansLaBdd);
 
     /**
-     * @brief InsertStockAZeroApresInsertProduit
-     * Récupere la derniere insertion dans la table article
-     * Insert à zéro dans la table consulter
-     */
-    void InsertStockAZeroApresInsertProduit();
-
-    /**
      * @brief UpdateProduit
      * Permet de mettre à jour un produit de la base de données
      * @param produit
@@ -246,9 +239,21 @@ public:
     void RechercheProduitLibelle(QSqlQueryModel *modal, QString libelleArticle);
 
 
+    /**
+     * @brief SupprimerArticle
+     * Permet de supprimer un article de la base données.
+     * L'article ne sera supprimée que si aucune livraison n'a été faite.
+     * @param codeArticle
+     * @return
+     */
     bool SupprimerArticle(QString codeArticle);
 
-    bool LivraisonPresente(int idArticle);
+    /**
+     * @brief AjoutFournisseurImport
+     * Import d'un fichier TEXT de nom de fournisseur
+     * @param listeFournisseursVector
+     */
+    void AjoutFournisseurImport(QVector <QString> listeFournisseursVector);
 
 private:
     /**
@@ -257,6 +262,13 @@ private:
      */
     QSqlDatabase m_bdd;
 
+    /**
+     * @brief LivraisonPresente
+     * Permet de savoir grace à l'ID du code article si une livraison a eu lieu.
+     * @param idArticle
+     * @return
+     */
+    bool LivraisonPresente(int idArticle);
 
 };
 

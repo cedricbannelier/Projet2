@@ -36,13 +36,11 @@ bool Login::autorisation()
 
         if( test->GetDroit() == 1 ||  test->GetDroit() == 2)
         {
-            std::cout << "Access Granted" << std::endl;
             user.SetDroit(test->GetDroit());
             std::cout << user.GetDroit();
         }
         else
         {
-            std::cout << "Acces Denied" << std::endl;
             return false;
         }
     }

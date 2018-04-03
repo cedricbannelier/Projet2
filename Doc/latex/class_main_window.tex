@@ -1,0 +1,202 @@
+\hypertarget{class_main_window}{}\section{Main\+Window Class Reference}
+\label{class_main_window}\index{Main\+Window@{Main\+Window}}
+
+
+Classe \mbox{\hyperlink{class_main_window}{Main\+Window}} qui herite de la Q\+Main\+Window. Fenêtre principale de l\textquotesingle{}application.  
+
+
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Inheritance diagram for Main\+Window\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_window}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800}{droits}} \{ \mbox{\hyperlink{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800aa802020c72c77b378fc0d53e3ba4fd84}{L\+O\+G\+I\+S\+T\+I\+C\+I\+EN}} = 1, 
+\mbox{\hyperlink{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800a5232288d79e5121ccec779e5d348a538}{A\+D\+M\+I\+N\+I\+S\+T\+R\+A\+T\+E\+UR}} = 2
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_main_window_a94d1ec5b18a39e53c1700f907fb1f08e}{on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered En cours de developpement Permettra de pouvoir se deconnecter et de revenir à la page de login \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_main_window_a8b244be8b7b7db1b08de2a2acb9409db}\label{class_main_window_a8b244be8b7b7db1b08de2a2acb9409db}} 
+{\bfseries Main\+Window} (Q\+Widget $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_main_window_ac600bafb6e03043944197a8eb6cf3cdb}\label{class_main_window_ac600bafb6e03043944197a8eb6cf3cdb}} 
+void \mbox{\hyperlink{class_main_window_ac600bafb6e03043944197a8eb6cf3cdb}{affiche\+Utilisateur}} ()
+\begin{DoxyCompactList}\small\item\em affiche\+Utilisateur Permet d\textquotesingle{}afficher qui est connecté avec quel droit. L\textquotesingle{}affichage est fait dans la status bar \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_main_window_a6d37265ebccf5d8891e033be9348133e}\label{class_main_window_a6d37265ebccf5d8891e033be9348133e}} 
+\mbox{\hyperlink{class_utilisateur}{Utilisateur}} {\bfseries user}
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_main_window_abad6799f81cc7f64285e9536602587d4}\label{class_main_window_abad6799f81cc7f64285e9536602587d4}} 
+void \mbox{\hyperlink{class_main_window_abad6799f81cc7f64285e9536602587d4}{on\+\_\+bouton\+Ajout\+Article\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+bouton\+Ajout\+Article\+\_\+clicked Bouton permettant l\textquotesingle{}ajout d\textquotesingle{}un article en base de données \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_aadd36eb49a354cb717cb7adfe99551a1}\label{class_main_window_aadd36eb49a354cb717cb7adfe99551a1}} 
+void \mbox{\hyperlink{class_main_window_aadd36eb49a354cb717cb7adfe99551a1}{on\+\_\+push\+Button\+Creation\+Utilisateur\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+push\+Button\+Creation\+Utilisateur\+\_\+clicked Permet la création d\textquotesingle{}un utilisateur avec des droits Soit administrateur Soit logisticien \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a52e694f16838cbd270e9ffb9e1a042f8}\label{class_main_window_a52e694f16838cbd270e9ffb9e1a042f8}} 
+void \mbox{\hyperlink{class_main_window_a52e694f16838cbd270e9ffb9e1a042f8}{on\+\_\+push\+Button\+Validation\+Modification\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+push\+Button\+Validation\+Modification\+\_\+clicked Permet de valider les modidifications et de les envoyes dans la base de données Modification possible \+: Emplacement, Désignation, Poids \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a5f1afed7f100f21648663d205ded5af9}\label{class_main_window_a5f1afed7f100f21648663d205ded5af9}} 
+void \mbox{\hyperlink{class_main_window_a5f1afed7f100f21648663d205ded5af9}{on\+\_\+bouton\+Ajout\+Emballage\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+bouton\+Ajout\+Emballage\+\_\+clicked Permet d\textquotesingle{}ajouter un emballage dans la base données \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a47f273a07e54a4c9976185416b27d8ce}\label{class_main_window_a47f273a07e54a4c9976185416b27d8ce}} 
+void \mbox{\hyperlink{class_main_window_a47f273a07e54a4c9976185416b27d8ce}{on\+\_\+\+Buton\+Affiche\+Stock\+Complet\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+\+Buton\+Affiche\+Stock\+Complet\+\_\+clicked Permet d\textquotesingle{}affiche tout le stock de la base de données dans un Tab\+View \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a679b79f7dc85053cd72b3b8994715608}\label{class_main_window_a679b79f7dc85053cd72b3b8994715608}} 
+void \mbox{\hyperlink{class_main_window_a679b79f7dc85053cd72b3b8994715608}{mise\+A\+Jour}} ()
+\begin{DoxyCompactList}\small\item\em mise\+A\+Jour Permet la mise à jour d\textquotesingle{}un combobox Cette méthode est à revoir \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_ab1d5712c5fbe89bf56f3f8ae4f494032}\label{class_main_window_ab1d5712c5fbe89bf56f3f8ae4f494032}} 
+void \mbox{\hyperlink{class_main_window_ab1d5712c5fbe89bf56f3f8ae4f494032}{on\+\_\+buton\+Ajout\+Fournisseur\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+buton\+Ajout\+Fournisseur\+\_\+clicked Permet d\textquotesingle{}ajouter une founisseur dans la base de données Demande uniquement un nom \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_aa8a2a01015fc61d0a72d372524801443}\label{class_main_window_aa8a2a01015fc61d0a72d372524801443}} 
+void \mbox{\hyperlink{class_main_window_aa8a2a01015fc61d0a72d372524801443}{on\+\_\+\+Bouton\+Valider\+Reception\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+\+Bouton\+Valider\+Reception\+\_\+clicked Permet de valider une réception de commande \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a6c79527bd4d4c168e78b980fff0ab088}\label{class_main_window_a6c79527bd4d4c168e78b980fff0ab088}} 
+void \mbox{\hyperlink{class_main_window_a6c79527bd4d4c168e78b980fff0ab088}{on\+\_\+\+Bouton\+Export\+Excel\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+\+Bouton\+Export\+Excel\+\_\+clicked Permet d\textquotesingle{}exporter le stock dans un fichier C\+SV \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a4a590e5fa40398c1c7df3512cfb4c90c}\label{class_main_window_a4a590e5fa40398c1c7df3512cfb4c90c}} 
+void \mbox{\hyperlink{class_main_window_a4a590e5fa40398c1c7df3512cfb4c90c}{on\+\_\+\+Bouton\+Expedition\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+\+Bouton\+Expedition\+\_\+clicked Permet de valider une expédition de stock \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_afe9d9d46e61e2460e636619577a9e8fd}\label{class_main_window_afe9d9d46e61e2460e636619577a9e8fd}} 
+void \mbox{\hyperlink{class_main_window_afe9d9d46e61e2460e636619577a9e8fd}{on\+\_\+action\+Quitter\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+action\+Quitter\+\_\+triggered Permet de quitter l\textquotesingle{}application via le menu-\/$>$quitter \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a56c9b3f6e209838a20cf6f7da29df0a2}\label{class_main_window_a56c9b3f6e209838a20cf6f7da29df0a2}} 
+void \mbox{\hyperlink{class_main_window_a56c9b3f6e209838a20cf6f7da29df0a2}{on\+\_\+tab\+Widget\+\_\+current\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+tab\+Widget\+\_\+current\+Changed Test les droits de connection et grise les fonctionnalités en fonction des droits Permet aussi la mise à jour des combobox \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_ab1682c84d2e179b6e33b79b1506ee0da}\label{class_main_window_ab1682c84d2e179b6e33b79b1506ee0da}} 
+void \mbox{\hyperlink{class_main_window_ab1682c84d2e179b6e33b79b1506ee0da}{on\+\_\+action\+A\+\_\+props\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+action\+A\+\_\+props\+\_\+triggered Permet d\textquotesingle{}afficher une fenetre d\textquotesingle{}information sur le logiciel \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_abd6b33ed53db0030254a2d77d94cc0f6}\label{class_main_window_abd6b33ed53db0030254a2d77d94cc0f6}} 
+void \mbox{\hyperlink{class_main_window_abd6b33ed53db0030254a2d77d94cc0f6}{on\+\_\+push\+Button\+Modification\+Droit\+Utilisateur\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+push\+Button\+Modification\+Droit\+Utilisateur\+\_\+clicked Permet de modifier les droits d\textquotesingle{}un utilisateur \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a996886423dd5853b0d5fb4fd873a1cd9}\label{class_main_window_a996886423dd5853b0d5fb4fd873a1cd9}} 
+void \mbox{\hyperlink{class_main_window_a996886423dd5853b0d5fb4fd873a1cd9}{on\+\_\+push\+Button\+Rechercher\+Article\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+push\+Button\+Rechercher\+\_\+clicked Permet de faire une recherche par code article \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_aea6d363938b2777532153de45aca8727}\label{class_main_window_aea6d363938b2777532153de45aca8727}} 
+void \mbox{\hyperlink{class_main_window_aea6d363938b2777532153de45aca8727}{on\+\_\+push\+Button\+Rechercher\+Libelle\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+push\+Button\+Rechercher\+Libelle\+\_\+clicked Permet de faire une recherche par libelle \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a9d8f9d4996e84cc60843006a3cee3907}\label{class_main_window_a9d8f9d4996e84cc60843006a3cee3907}} 
+void \mbox{\hyperlink{class_main_window_a9d8f9d4996e84cc60843006a3cee3907}{on\+\_\+combo\+Box\+Code\+Article\+\_\+current\+Index\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+combo\+Box\+Code\+Article\+\_\+current\+Index\+Changed Lors de la selection d\textquotesingle{}un élement dans la combox, les linesedits se remplissent \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a9cd255f49dc0d52a8683d87d7c92ab0e}\label{class_main_window_a9cd255f49dc0d52a8683d87d7c92ab0e}} 
+void \mbox{\hyperlink{class_main_window_a9cd255f49dc0d52a8683d87d7c92ab0e}{on\+\_\+combo\+Box\+Modifier\+Article\+\_\+current\+Index\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+combo\+Box\+Modifier\+Article\+\_\+current\+Index\+Changed Lors de la selection d\textquotesingle{}un élement dans la combox, les linesedits se remplissent \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_aee34ae888d6ec7e30d347a4e3a251486}\label{class_main_window_aee34ae888d6ec7e30d347a4e3a251486}} 
+void \mbox{\hyperlink{class_main_window_aee34ae888d6ec7e30d347a4e3a251486}{on\+\_\+push\+Button\+Supprimer\+Article\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+push\+Button\+Supprimer\+Article\+\_\+clicked Permet de supprimer un article \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_af9d4ef882d3b73f923aa837bc90382bd}\label{class_main_window_af9d4ef882d3b73f923aa837bc90382bd}} 
+void \mbox{\hyperlink{class_main_window_af9d4ef882d3b73f923aa837bc90382bd}{on\+\_\+\+Bouton\+Import\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+\+Bouton\+Import\+\_\+clicked Permet de faire l\textquotesingle{}import d\textquotesingle{}un fichier texte de nom de fournisseur en base de données \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_af00de5382b2aa1dc7e726d83235750f7}\label{class_main_window_af00de5382b2aa1dc7e726d83235750f7}} 
+void \mbox{\hyperlink{class_main_window_af00de5382b2aa1dc7e726d83235750f7}{on\+\_\+tab\+Widget\+\_\+tab\+Bar\+Clicked}} ()
+\begin{DoxyCompactList}\small\item\em on\+\_\+tab\+Widget\+\_\+tab\+Bar\+Clicked Lors du clique sur la tabbar, cela permet une mise à jour des combobox ainsi que sur la tabview d\textquotesingle{}affiche le stock directement \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_main_window_a53545f2984068242c673e3c4adb57ac0}\label{class_main_window_a53545f2984068242c673e3c4adb57ac0}} 
+void \mbox{\hyperlink{class_main_window_a53545f2984068242c673e3c4adb57ac0}{Vider\+Line\+Edit}} ()
+\begin{DoxyCompactList}\small\item\em Vider\+Line\+Edit Permet de vider les line\+Edit. \end{DoxyCompactList}\item 
+Q\+String \mbox{\hyperlink{class_main_window_a2910003709af8f8f8f9263bcbb13ed09}{date\+Du\+Jour}} ()
+\begin{DoxyCompactList}\small\item\em date\+Du\+Jour Donne la date du jour \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_main_window_a35466a70ed47252a0191168126a352a5}\label{class_main_window_a35466a70ed47252a0191168126a352a5}} 
+Ui\+::\+Main\+Window $\ast$ \mbox{\hyperlink{class_main_window_a35466a70ed47252a0191168126a352a5}{ui}}
+\begin{DoxyCompactList}\small\item\em ui \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a078ae22635b52ad72e713875fbef3403}\label{class_main_window_a078ae22635b52ad72e713875fbef3403}} 
+\mbox{\hyperlink{class_database}{Database}} {\bfseries bdd}
+\item 
+\mbox{\Hypertarget{class_main_window_ab0a4abc1aa71b1d03de93edffeabb993}\label{class_main_window_ab0a4abc1aa71b1d03de93edffeabb993}} 
+Q\+Sql\+Query\+Model \mbox{\hyperlink{class_main_window_ab0a4abc1aa71b1d03de93edffeabb993}{modal}}
+\begin{DoxyCompactList}\small\item\em modal Permet la création d\textquotesingle{}un modal \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a31dd2cf5140a6482aeb3d23b7131e3c8}\label{class_main_window_a31dd2cf5140a6482aeb3d23b7131e3c8}} 
+Q\+Sql\+Query\+Model \mbox{\hyperlink{class_main_window_a31dd2cf5140a6482aeb3d23b7131e3c8}{modal\+Article}}
+\begin{DoxyCompactList}\small\item\em modal\+Article Permet la création d\textquotesingle{}un modal pour les articles \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a5115743b43273792e16c18b88c53cae8}\label{class_main_window_a5115743b43273792e16c18b88c53cae8}} 
+Q\+Sql\+Query\+Model \mbox{\hyperlink{class_main_window_a5115743b43273792e16c18b88c53cae8}{modal\+Fournisseur}}
+\begin{DoxyCompactList}\small\item\em modal\+Fournisseur Permet la création d\textquotesingle{}un modal pour les fournisseurs \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a75a4302c17bf173dfeb0c8f99bc03073}\label{class_main_window_a75a4302c17bf173dfeb0c8f99bc03073}} 
+Q\+Sql\+Query\+Model \mbox{\hyperlink{class_main_window_a75a4302c17bf173dfeb0c8f99bc03073}{modal\+Utilisateur}}
+\begin{DoxyCompactList}\small\item\em modal\+Utilisateur \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a621e251113eb0b964bcea29fcf4860fb}\label{class_main_window_a621e251113eb0b964bcea29fcf4860fb}} 
+Q\+Sql\+Query\+Model \mbox{\hyperlink{class_main_window_a621e251113eb0b964bcea29fcf4860fb}{modal\+Recherche\+Article}}
+\begin{DoxyCompactList}\small\item\em modal\+Recherche\+Article \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_main_window_a6bd6bb7b4250626cac80040ee468d9dc}\label{class_main_window_a6bd6bb7b4250626cac80040ee468d9dc}} 
+Q\+Sql\+Query\+Model \mbox{\hyperlink{class_main_window_a6bd6bb7b4250626cac80040ee468d9dc}{modal\+Recherche\+Article\+Libelle}}
+\begin{DoxyCompactList}\small\item\em modal\+Recherche\+Article\+Libelle \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classe \mbox{\hyperlink{class_main_window}{Main\+Window}} qui herite de la Q\+Main\+Window. Fenêtre principale de l\textquotesingle{}application. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800}\label{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800}} 
+\index{Main\+Window@{Main\+Window}!droits@{droits}}
+\index{droits@{droits}!Main\+Window@{Main\+Window}}
+\subsubsection{\texorpdfstring{droits}{droits}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800}{Main\+Window\+::droits}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{L\+O\+G\+I\+S\+T\+I\+C\+I\+EN@{L\+O\+G\+I\+S\+T\+I\+C\+I\+EN}!Main\+Window@{Main\+Window}}\index{Main\+Window@{Main\+Window}!L\+O\+G\+I\+S\+T\+I\+C\+I\+EN@{L\+O\+G\+I\+S\+T\+I\+C\+I\+EN}}}\mbox{\Hypertarget{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800aa802020c72c77b378fc0d53e3ba4fd84}\label{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800aa802020c72c77b378fc0d53e3ba4fd84}} 
+L\+O\+G\+I\+S\+T\+I\+C\+I\+EN&1 -\/$>$ Droit logisiticien \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{A\+D\+M\+I\+N\+I\+S\+T\+R\+A\+T\+E\+UR@{A\+D\+M\+I\+N\+I\+S\+T\+R\+A\+T\+E\+UR}!Main\+Window@{Main\+Window}}\index{Main\+Window@{Main\+Window}!A\+D\+M\+I\+N\+I\+S\+T\+R\+A\+T\+E\+UR@{A\+D\+M\+I\+N\+I\+S\+T\+R\+A\+T\+E\+UR}}}\mbox{\Hypertarget{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800a5232288d79e5121ccec779e5d348a538}\label{class_main_window_aa16f311e2d64ddecefd3eb2e17cdf800a5232288d79e5121ccec779e5d348a538}} 
+A\+D\+M\+I\+N\+I\+S\+T\+R\+A\+T\+E\+UR&2 -\/$>$ Droit administrateur \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_main_window_a2910003709af8f8f8f9263bcbb13ed09}\label{class_main_window_a2910003709af8f8f8f9263bcbb13ed09}} 
+\index{Main\+Window@{Main\+Window}!date\+Du\+Jour@{date\+Du\+Jour}}
+\index{date\+Du\+Jour@{date\+Du\+Jour}!Main\+Window@{Main\+Window}}
+\subsubsection{\texorpdfstring{date\+Du\+Jour()}{dateDuJour()}}
+{\footnotesize\ttfamily Q\+String Main\+Window\+::date\+Du\+Jour (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+date\+Du\+Jour Donne la date du jour 
+
+\begin{DoxyReturn}{Returns}
+la date du jour 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_main_window_a94d1ec5b18a39e53c1700f907fb1f08e}\label{class_main_window_a94d1ec5b18a39e53c1700f907fb1f08e}} 
+\index{Main\+Window@{Main\+Window}!on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered@{on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered}}
+\index{on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered@{on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered}!Main\+Window@{Main\+Window}}
+\subsubsection{\texorpdfstring{on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered}{on\_actionSe\_deconnecter\_triggered}}
+{\footnotesize\ttfamily int Main\+Window\+::on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+on\+\_\+action\+Se\+\_\+deconnecter\+\_\+triggered En cours de developpement Permettra de pouvoir se deconnecter et de revenir à la page de login 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/adai01/\+Desktop/\+Ware\+House\+Manager/\mbox{\hyperlink{mainwindow_8h}{mainwindow.\+h}}\item 
+C\+:/\+Users/adai01/\+Desktop/\+Ware\+House\+Manager/mainwindow.\+cpp\end{DoxyCompactItemize}

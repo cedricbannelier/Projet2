@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QInputDialog>
 #include <QFile>
+#include <QFileDialog>
 
 #include "article.h"
 #include "database.h"
@@ -17,7 +18,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 }
 
 MainWindow::~MainWindow()
@@ -39,10 +39,11 @@ void MainWindow::on_boutonAjoutArticle_clicked()
                                    ui->lineEditAjoutEmplacementArticle->text(),
                                    ui->comboBoxDimensionEmballage->currentText());
 
-    if(ui->lineEditAjoutCodeArticle->text() == NULL ||
-       ui->lineEditAjoutDesignationArticle->text() == NULL ||
-       ui->lineEditAjoutPoidsArticle->text() == NULL ||
-       ui->lineEditAjoutEmplacementArticle->text() == NULL)
+    if(ui->lineEditAjoutCodeArticle->text().isEmpty() ||
+       ui->lineEditAjoutDesignationArticle->text().isEmpty() ||
+       ui->lineEditAjoutPoidsArticle->text().isEmpty() ||
+       ui->lineEditAjoutEmplacementArticle->text().isEmpty() ||
+       ui->comboBoxDimensionEmballage->currentText().isEmpty())
     {
         QMessageBox::warning(this, "Warning", "Veuillez remplir tous les champs",QMessageBox::Ok);
     }
@@ -166,11 +167,10 @@ void MainWindow::on_BoutonValiderReception_clicked()
     int idFournisseur = bdd.RecupererIdFournisseur(ui->comboBoxFournisseur->currentText());
     int qteSaisie = ui->lineEditQteLivree->text().toInt();
 
-    if(ui->dateEdit->text() == NULL ||
-       ui->lineEditNumeroLivraison->text() == NULL ||
-       ui->lineEditQteLivree->text() == NULL ||
-       ui->comboBoxCodeArticleReceptionCommande->currentText() == NULL ||
-       ui->comboBoxFournisseur->currentText() == NULL)
+    if(ui->lineEditNumeroLivraison->text().isEmpty() ||
+       ui->lineEditQteLivree->text().isEmpty() ||
+       ui->comboBoxCodeArticleReceptionCommande->currentText().isEmpty() ||
+       ui->comboBoxFournisseur->currentText().isEmpty())
     {
         QMessageBox::warning(this, "Champs", "Veuillez saisir tous les champs",QMessageBox::Ok);
     }
@@ -183,7 +183,7 @@ void MainWindow::on_BoutonValiderReception_clicked()
     {
         Livraison * nouvelleLivraison = new Livraison(ui->lineEditQteLivree->text().toInt(),
                                                       ui->lineEditNumeroLivraison->text(),
-                                                      ui->dateEdit->text(),
+                                                      ui->calendarWidget->selectedDate().toString(),
                                                       idArticle,
                                                       idFournisseur);
         bdd.ReceptionLivraison(*nouvelleLivraison);
@@ -220,6 +220,8 @@ void MainWindow::on_BoutonExportExcel_clicked()
         }
         out << "\n";             // retour à la ligne
     }
+
+    QMessageBox::information(this, "Export", "Export stock OK");
 }
 
 void MainWindow::ViderLineEdit()
@@ -239,9 +241,9 @@ void MainWindow::on_BoutonExpedition_clicked()
     int quantiteEnStock = bdd.QantiteTotal(idArticle);
     QString message = QString("La quantité saisie doit être inf. à la quanité en stock. Il reste que : %1 en stock").arg(quantiteEnStock);
 
-    if (ui->lineEditQuantiteExpedition->text() == NULL ||
-        ui->lineEditNumeroExpedition->text() == NULL ||
-        ui->comboBoxCodeArticleExpedition->currentText() == NULL)
+    if (ui->lineEditQuantiteExpedition->text().isEmpty() ||
+        ui->lineEditNumeroExpedition->text().isEmpty() ||
+        ui->comboBoxCodeArticleExpedition->currentText().isEmpty())
     {
         QMessageBox::warning(this, "Champs", "Veuillez saisir tous les champs",QMessageBox::Ok);
     }
@@ -249,7 +251,7 @@ void MainWindow::on_BoutonExpedition_clicked()
     {
         QMessageBox::warning(this, "Quantité", "La quantité saisie doit être sup. à 0",QMessageBox::Ok);
     }
-    else if (quantiteExpedition >= quantiteEnStock)
+    else if (quantiteExpedition > quantiteEnStock)
     {
         QMessageBox::warning(this, "Quantité", message ,QMessageBox::Ok);
     }
@@ -319,34 +321,6 @@ void MainWindow::on_actionA_props_triggered()
     QMessageBox::about(this, "A propos", "Logiciel developpé par Cédric BANNELIER \n"
                        "Créé avec QT 5.10 \r\n"
                        "QT Creator 4.10");
-}
-
-void MainWindow::on_actionAfficheStock_triggered()
-{
-    ui->tabWidget->setCurrentIndex(0);
-    on_ButonAfficheStockComplet_clicked();
-}
-
-void MainWindow::on_actionAjouterUtilisateur_triggered()
-{
-    ui->tabWidget->setCurrentIndex(10);
-}
-
-void MainWindow::on_actionAjouterArticle_triggered()
-{
-    ui->tabWidget->setCurrentIndex(1);
-}
-
-// couleur icone : 3469A1
-
-void MainWindow::on_actionAjouterEmballage_triggered()
-{
-    ui->tabWidget->setCurrentIndex(3);
-}
-
-void MainWindow::on_actionAjouterFournisseur_triggered()
-{
-    ui->tabWidget->setCurrentIndex(2);
 }
 
 void MainWindow::on_pushButtonRechercherArticle_clicked()
@@ -421,4 +395,27 @@ void MainWindow::on_pushButtonSupprimerArticle_clicked()
         QMessageBox::warning(this, "Suppression", "Vous avez une livraison attachée à cette article, "
                                                   "l'article ne sera pas supprimée");
     }
+}
+
+void MainWindow::on_BoutonImport_clicked()
+{
+   QVector<QString> listeFournisseursVector;
+   QFile listeFournisseurs(QFileDialog::getOpenFileName(this, tr("Selectionnez la liste des fournisseurs")));
+   listeFournisseurs.open(QIODevice::ReadOnly);
+   QTextStream in(&listeFournisseurs);
+   QString ligne;
+   while(!in.atEnd())
+   {
+       ligne = in.readLine();
+       listeFournisseursVector.push_back(ligne);
+   }
+   bdd.AjoutFournisseurImport(listeFournisseursVector);
+
+   QMessageBox::information(this, "Insertion", "Vos fournisseurs ont bien été insérés dans la base de données");
+}
+
+void MainWindow::on_tabWidget_tabBarClicked()
+{
+   on_ButonAfficheStockComplet_clicked();
+   miseAJour();
 }

@@ -30,15 +30,33 @@ public:
     explicit Login(QWidget *parent = 0);
     ~Login();
 
+    /**
+     * @brief autorisation
+     * @return
+     */
     bool autorisation();
+
+    /**
+     * @brief user
+     */
     Utilisateur user;
+
+    /**
+     * @brief lireFichier
+     */
     void lireFichier();
 
 private:
     Ui::Login *ui;
 
+    /**
+     * @brief bdd
+     */
     Database bdd;
 
+    /**
+     * @brief enregistrementLogin
+     */
     void enregistrementLogin();
 
 };

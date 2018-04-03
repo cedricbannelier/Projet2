@@ -152,36 +152,6 @@ private slots:
     void on_actionA_props_triggered();
 
     /**
-     * @brief on_actionAfficheStock_triggered
-     * Permet de sélectionner l'onglet Consulter stock de la tabWidget grace au menu
-     */
-    void on_actionAfficheStock_triggered();
-
-    /**
-     * @brief on_actionAjouter_triggered
-     * Permet de sélectionner l'onglet Ajouter utilisateur de la tabWidget grace au menu
-     */
-    void on_actionAjouterUtilisateur_triggered();
-
-    /**
-     * @brief on_actionArticle_triggered
-     * Permet de sélectionner l'onglet Ajouter article de la tabWidget grace au menu
-     */
-    void on_actionAjouterArticle_triggered();
-
-    /**
-     * @brief on_actionEmballage_triggered
-     * Permet de sélectionner l'onglet Ajouter emballage de la tabWidget grace au menu
-     */
-    void on_actionAjouterEmballage_triggered();
-
-    /**
-     * @brief on_actionAjouterFournisseur_triggered
-     * Permet de sélectionner l'onglet Ajouter fournisseur de la tabWidget grace au menu
-     */
-    void on_actionAjouterFournisseur_triggered();
-
-    /**
      * @brief on_pushButtonModificationDroitUtilisateur_clicked
      * Permet de modifier les droits d'un utilisateur
      */
@@ -211,7 +181,24 @@ private slots:
      */
     void on_comboBoxModifierArticle_currentIndexChanged();
 
+    /**
+     * @brief on_pushButtonSupprimerArticle_clicked
+     * Permet de supprimer un article
+     */
     void on_pushButtonSupprimerArticle_clicked();
+
+    /**
+     * @brief on_BoutonImport_clicked
+     * Permet de faire l'import d'un fichier texte de nom de fournisseur en base de données
+     */
+    void on_BoutonImport_clicked();
+
+    /**
+     * @brief on_tabWidget_tabBarClicked
+     * Lors du clique sur la tabbar, cela permet une mise à jour des combobox ainsi que
+     * sur la tabview d'affiche le stock directement
+     */
+    void on_tabWidget_tabBarClicked();
 
 private:
 
