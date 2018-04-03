@@ -245,6 +245,11 @@ public:
      */
     void RechercheProduitLibelle(QSqlQueryModel *modal, QString libelleArticle);
 
+
+    bool SupprimerArticle(QString codeArticle);
+
+    bool LivraisonPresente(int idArticle);
+
 private:
     /**
      * @brief m_bdd

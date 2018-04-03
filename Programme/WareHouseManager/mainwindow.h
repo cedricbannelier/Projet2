@@ -211,6 +211,8 @@ private slots:
      */
     void on_comboBoxModifierArticle_currentIndexChanged();
 
+    void on_pushButtonSupprimerArticle_clicked();
+
 private:
 
     /**

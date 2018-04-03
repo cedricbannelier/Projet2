@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(244, 244, 244);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>7</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -873,101 +873,6 @@ background-color: rgb(255, 255, 255);</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="tabExpedition">
-     <attribute name="title">
-      <string>Expédition</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>571</width>
-        <height>281</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="title">
-       <string>Expédition commande</string>
-      </property>
-      <widget class="QWidget" name="verticalLayoutWidget_7">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>40</y>
-         <width>501</width>
-         <height>211</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <layout class="QGridLayout" name="gridLayout_8">
-          <item row="0" column="0">
-           <widget class="QLabel" name="labelCodeArticleExpedition">
-            <property name="text">
-             <string>Code article</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditQuantiteExpedition">
-            <property name="placeholderText">
-             <string>Quantité expédiée</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="labelQuantiteExpedition">
-            <property name="text">
-             <string>Quantite</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelNumeroExpedition">
-            <property name="text">
-             <string>Numero expédition</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="lineEditNumeroExpedition">
-            <property name="placeholderText">
-             <string>Numéro d'expédition</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="comboBoxCodeArticleExpedition"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="BoutonExpedition">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(34, 86, 131);
-background-color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string>Valider</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </widget>
     <widget class="QWidget" name="tabReceptionCommande">
      <attribute name="title">
       <string>Réception commande</string>
@@ -1076,6 +981,101 @@ background-color: rgb(255, 255, 255);</string>
             <weight>75</weight>
             <bold>true</bold>
             <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Valider</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabExpedition">
+     <attribute name="title">
+      <string>Expédition</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>571</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="title">
+       <string>Expédition commande</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>40</y>
+         <width>501</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelCodeArticleExpedition">
+            <property name="text">
+             <string>Code article</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="lineEditQuantiteExpedition">
+            <property name="placeholderText">
+             <string>Quantité expédiée</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelQuantiteExpedition">
+            <property name="text">
+             <string>Quantite</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelNumeroExpedition">
+            <property name="text">
+             <string>Numero expédition</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="lineEditNumeroExpedition">
+            <property name="placeholderText">
+             <string>Numéro d'expédition</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBoxCodeArticleExpedition"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="BoutonExpedition">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -1281,6 +1281,59 @@ background-color: rgb(255, 255, 255);</string>
         </widget>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tabSupprimerArticle">
+     <attribute name="title">
+      <string>Supprimer article</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>291</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Supprimer Article</string>
+      </property>
+      <widget class="QWidget" name="horizontalLayoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>271</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLabel" name="labelArtcileSupprimer">
+          <property name="text">
+           <string>Article</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxArticleSupprimer"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButtonSupprimerArticle">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>271</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Supprimer</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

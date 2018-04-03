@@ -20,8 +20,6 @@ Login::~Login()
 
 bool Login::autorisation()
 {
-    std::cout << "Dans la methode OK du bouton login.cpp" << std::endl;
-
     user.SetLogin(ui->lineEditLogin->text());
     user.SetMotDePasse(ui->lineEditMDP->text());
 

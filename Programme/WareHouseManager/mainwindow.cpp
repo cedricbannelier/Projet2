@@ -33,8 +33,6 @@ void MainWindow::afficheUtilisateur()
 
 void MainWindow::on_boutonAjoutArticle_clicked()
 {
-    std::cout << "MODE DEBUG : Dans le bouton ajout d'un article mainwindow.CPP" << std::endl;
-
     Article* article = new Article(ui->lineEditAjoutCodeArticle->text().toUpper(),
                                    ui->lineEditAjoutDesignationArticle->text(),
                                    ui->lineEditAjoutPoidsArticle->text().toInt(),
@@ -62,8 +60,6 @@ void MainWindow::on_boutonAjoutArticle_clicked()
 
 void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 {
-     std::cout << "MODE DEBUG : Dans la methode creation utilisateur mainwindow.CPP" << std::endl;
-
      Utilisateur* nouvelUtilistateur = new Utilisateur(ui->lineEditeCreationLogin->text(),
                                                        ui->lineEditeCreationMotDePasse->text(),
                                                        ui->comboBoxChoixDroitUtilisateur->currentIndex()+1);
@@ -85,8 +81,6 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
 
 void MainWindow::on_pushButtonValidationModification_clicked()
 {
-    std::cout << "MODE DEBUG : Dans la methode Validation de modification mainwindow.CPP" << std::endl;
-
     Article* article = new Article(ui->lineEditModificationCodeArticle->text().toUpper(),
                                    ui->lineEditModificationDesignationArticle->text(),
                                    ui->lineEditModificationPoidsArticle->text().toInt(),
@@ -108,8 +102,6 @@ void MainWindow::on_pushButtonValidationModification_clicked()
 
 void MainWindow::on_boutonAjoutEmballage_clicked()
 {
-    std::cout << "MODE DEBUG : Dans la methode ajouter emballage mainwindow.CPP" << std::endl;
-
     Emballage* nouvelEmballage = new Emballage(ui->comboBoxTypeEmballage->currentText(),
                                                ui->comboBoxHauteurEmballage->currentText().toInt(),
                                                ui->comboBoxLargeurEmballage->currentText().toInt(),
@@ -170,8 +162,6 @@ void MainWindow::on_butonAjoutFournisseur_clicked()
 
 void MainWindow::on_BoutonValiderReception_clicked()
 {
-    std::cout << "MODE DEBUG : Dans la methode reception commande mainwindow.CPP" << std::endl;
-
     int idArticle = bdd.RecupererIdArticle(ui->comboBoxCodeArticleReceptionCommande->currentText());
     int idFournisseur = bdd.RecupererIdFournisseur(ui->comboBoxFournisseur->currentText());
     int qteSaisie = ui->lineEditQteLivree->text().toInt();
@@ -290,6 +280,7 @@ void MainWindow::on_tabWidget_currentChanged()
         ui->tabModifier->setDisabled(true);
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
+        ui->tabSupprimerArticle->setDisabled(true);
     }
 
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
@@ -297,6 +288,7 @@ void MainWindow::on_tabWidget_currentChanged()
     ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
     ui->comboBoxModifierArticle->setModel(&this->modalArticle);
     ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
+    ui->comboBoxArticleSupprimer->setModel(&this->modalArticle);
 
     bdd.ListeDesFournisseursEnBdd(&this->modalFournisseur);
     ui->comboBoxFournisseur->setModel(&this->modalFournisseur);
@@ -308,7 +300,6 @@ void MainWindow::on_tabWidget_currentChanged()
 QString MainWindow::dateDuJour()
 {
     QString dateDuJour = QDateTime::currentDateTime().toString("dddd dd MMMM yyyy");
-
     return dateDuJour;
 }
 
@@ -390,15 +381,15 @@ void MainWindow::on_pushButtonRechercherLibelle_clicked()
 
 void MainWindow::on_comboBoxCodeArticle_currentIndexChanged()
 {
-        QString codeArticle = ui->comboBoxCodeArticle->currentText();
+    QString codeArticle = ui->comboBoxCodeArticle->currentText();
 
-        Article* articleEnBdd = bdd.AfficheUnProduit(codeArticle);
+    Article* articleEnBdd = bdd.AfficheUnProduit(codeArticle);
 
-            ui->afficheCodeArticle->setText(articleEnBdd->GetCodeArticle());
-            ui->afficheDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
-            ui->affichePoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
-            ui->afficheEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
-            ui->afficheEmballageArticle->setText(articleEnBdd->GetEmballageArticle());
+    ui->afficheCodeArticle->setText(articleEnBdd->GetCodeArticle());
+    ui->afficheDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
+    ui->affichePoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
+    ui->afficheEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
+    ui->afficheEmballageArticle->setText(articleEnBdd->GetEmballageArticle());
 }
 
 void MainWindow::on_comboBoxModifierArticle_currentIndexChanged()
@@ -415,3 +406,19 @@ void MainWindow::on_comboBoxModifierArticle_currentIndexChanged()
 
 }
 
+void MainWindow::on_pushButtonSupprimerArticle_clicked()
+{
+    QString articleSaisieUtilisateur = ui->comboBoxArticleSupprimer->currentText();
+
+    bool validationSuppressionArticle = bdd.SupprimerArticle(articleSaisieUtilisateur);
+
+    if(validationSuppressionArticle)
+    {
+        QMessageBox::information(this, "Suppression", "Votre article a été supprimé de la base de données");
+    }
+    else
+    {
+        QMessageBox::warning(this, "Suppression", "Vous avez une livraison attachée à cette article, "
+                                                  "l'article ne sera pas supprimée");
+    }
+}

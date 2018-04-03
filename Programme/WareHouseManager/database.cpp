@@ -4,6 +4,8 @@
  #include <QCoreApplication>
 
 #include "Database.h"
+#include "Database.h"
+#include "database.h"
 
 Database::Database()
 {
@@ -106,7 +108,6 @@ void Database::CreationAdministrateur()
 
 void Database::InsertProduit(Article &produitAInserDansLaBdd)
 {
-    std::cout << "MODE DEBUG : Dans insertproduit" << std::endl;
     QSqlQuery query(m_bdd);
     query.prepare("INSERT INTO article (codeArticle, designationArticle, poidsArticle, emplacementArticle, idEmballage)"
                   "VALUES(:codeArticle, :designationArticle, :poisArticle, :emplacementArticle, :idEmballage);");
@@ -117,13 +118,11 @@ void Database::InsertProduit(Article &produitAInserDansLaBdd)
     query.bindValue(":idEmballage", produitAInserDansLaBdd.GetEmballageArticle());
     query.exec();
 
-    InsertStockAZeroApresInsertProduit();
+//    InsertStockAZeroApresInsertProduit();
 }
 
 void Database::InsertStockAZeroApresInsertProduit()
 {
-    std::cout << "MODE DEBUG : Dans inserer un stock a zero apres l'inssert d'un produit" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.exec("SELECT seq "
                "FROM sqlite_sequence "
@@ -141,8 +140,6 @@ void Database::InsertStockAZeroApresInsertProduit()
 
 void Database::UpdateProduit(Article &produit)
 {
-    std::cout << "MODE DEBUG : Dans Update un produit" << std::endl;
-
     QSqlQuery query(m_bdd);
 
     query.prepare("UPDATE article "
@@ -182,13 +179,10 @@ Article * Database::AfficheUnProduit(QString codeArticle)
     }while (query.next());
 
     return new Article();
-
 }
 
 Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
 {
-    std::cout << "MODE DEBUG : Droit utilisateur dans database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
 
     query.prepare("SELECT login, droitUtilisateur "
@@ -215,13 +209,6 @@ Utilisateur * Database::GetDroitUtilisateur(Utilisateur * nouvelUtilisateur)
 
 void Database::AjoutUtilisateur(Utilisateur &user)
 {
-    std::cout << "MODE DEBUG : Dans ajout utilisateur" << std::endl;
-
-    /* //Hach du mot de passe
-    QString chaine=user.GetMotDePasse();
-    QByteArray motDePasseHache = QCryptographicHash::hash(chaine.toUtf8(), QCryptographicHash::Sha1);
-    */
-
     QSqlQuery query(m_bdd);
     query.prepare("INSERT INTO utilisateur (login, motDePasseUtilisateur, droitUtilisateur)"
                   "VALUES(:login, :motDePasseUtilisateur, :droit);");
@@ -234,8 +221,6 @@ void Database::AjoutUtilisateur(Utilisateur &user)
 
 int Database::RecupererIdArticle(QString codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans Recuperer ID article database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("SELECT idArticle FROM article WHERE codeArticle=:codeArticle");
     query.bindValue(":codeArticle", codeArticle);
@@ -249,8 +234,6 @@ int Database::RecupererIdArticle(QString codeArticle)
 
 int Database::RecupererIdFournisseur(QString nomFournisseur)
 {
-    std::cout << "MODE DEBUG : Dans Recuperer ID Fournisseur database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("SELECT idFournisseur FROM fournisseur WHERE nomFournisseur=:nomFournisseur");
     query.bindValue(":nomFournisseur", nomFournisseur);
@@ -264,8 +247,6 @@ int Database::RecupererIdFournisseur(QString nomFournisseur)
 
 void Database::AjoutEmballage(Emballage&nouvelEmballage)
 {
-    std::cout << "MODE DEBUG : Dans ajouter nouvel emballage database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("INSERT INTO emballage (typeEmballage, hauteurEmballage, largeurEmballage, longueurEmballage)"
                   "VALUES(:typeEmballage, :hauteurEmballage, :largeurEmballage, :longueurEmballage);");
@@ -279,8 +260,6 @@ void Database::AjoutEmballage(Emballage&nouvelEmballage)
 
 bool Database::ArticlePresentDansLaBddAvecId(QString codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans Verification si article present dans la BDD database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("SELECT idArticle "
                   "FROM article "
@@ -304,8 +283,6 @@ bool Database::ArticlePresentDansLaBddAvecId(QString codeArticle)
 
 bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
 {
-    std::cout << "MODE DEBUG : Dans Verification si article present dans la BDD database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("SELECT COUNT(idArticle) as 'nb' "
                   "FROM article "
@@ -328,9 +305,7 @@ bool Database::ArticlePresentDansLaBddAvecLeCodeArticle(QString codeArticle)
 
 void Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
 {
-    std::cout << "MODE DEBUG : Dans ajouter nouveau fournisseur database.CPP" << std::endl;
-
-    QSqlQuery query(m_bdd);
+   QSqlQuery query(m_bdd);
     query.prepare("INSERT INTO fournisseur (nomFournisseur)"
                   "VALUES(:nomFournisseur);");
     query.bindValue(":nomFournisseur", nouvelFournisseur.GetNomFournisseur());
@@ -340,8 +315,6 @@ void Database::AjoutFournisseur(Fournisseur & nouvelFournisseur)
 
 void Database::ReceptionLivraison(Livraison & nouvelleLivraionsDansBdd)
 {
-    std::cout << "MODE DEBUG : Dans reception commande database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("INSERT INTO livrer (qteLivree, numeroLivraison, dateLivraison, idArticle, idFournisseur)"
                   "VALUES(:qteLivree, :numeroLivraison, :dateLivraison, :idArticle, :idFournisseur);");
@@ -356,8 +329,6 @@ void Database::ReceptionLivraison(Livraison & nouvelleLivraionsDansBdd)
 
 bool Database::FournisseurPresentDansLaBdd(QString nomFournisseur)
 {
-    std::cout << "MODE DEBUG : Dans Verification si fournisseur est present dans la BDD database.CPP" << std::endl;
-
     QSqlQuery query(m_bdd);
     query.prepare("SELECT nomFournisseur "
                   "FROM fournisseur "
@@ -408,7 +379,9 @@ bool Database::PresenceUtilisateur(QString login)
 {
     QSqlQuery query(m_bdd);
 
-    query.prepare("SELECT COUNT(login) FROM utilisateur WHERE login = :login;");
+    query.prepare("SELECT COUNT(login) "
+                  "FROM utilisateur "
+                  "WHERE login = :login;");
     query.bindValue(":login", login);
     query.exec();
     query.next();
@@ -544,4 +517,48 @@ void Database::ListeDesFournisseursEnBdd(QSqlQueryModel *modal)
                   );
     query.exec();
     modal->setQuery(query);
+}
+
+bool Database::SupprimerArticle(QString codeArticle)
+{
+
+    int idArticle = RecupererIdArticle(codeArticle);
+
+    if (LivraisonPresente(idArticle) == true)
+    {
+        QSqlQuery query(m_bdd);
+
+        query.prepare("DELETE FROM article "
+                      "WHERE idArticle = :idArticle");
+        query.bindValue(":idArticle", idArticle);
+        query.exec();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Database::LivraisonPresente(int idArticle)
+{
+    QSqlQuery query(m_bdd);
+    query.prepare("SELECT COUNT(idLivrer) "
+                  "FROM livrer "
+                  "WHERE idArticle = :idArticle");
+    query.bindValue(":idArticle", idArticle);
+    query.exec();
+
+    query.next();
+
+    int presenceDansLaBdd = query.value(0).toInt();
+
+    if(presenceDansLaBdd == 0)
+     {
+        return true;
+     }
+    else
+    {
+        return false;
+    }
 }
