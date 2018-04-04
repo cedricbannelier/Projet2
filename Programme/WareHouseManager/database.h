@@ -19,7 +19,7 @@
 
 /**
  * @brief Classe Database permettant de gerer les requetes SQL.
- * Dans cette classe toutes les requetes sont présentes.
+ * Toutes les requetes SQL sont ici. Cela permet une meilleure gestion
  */
 class Database
 {
@@ -33,6 +33,9 @@ public:
     /**
      * @brief CreationAdministrateur
      * Permet l'insertion d'un utilisateur par défaut dans la base de données
+     * Le login est : ad
+     * Le mot de passe est : ad
+     * Il sera crée au premier démarrage de l'application
      */
     void CreationAdministrateur();
 
@@ -48,21 +51,10 @@ public:
     /**
      * @brief CreateDatabase
      * Permet la création des tables. Les tables seront créées dans le repetoire courant
-     * Lors de l'installation les tables sont créées dès le lancement.
+     * Les tables sont créées dès le premier lancement.
+     * Le fichier est nommé : warehousedb.db
      */
     void CreateDatabase();
-
-    /**
-     * @brief OpenDatabase
-     * Permet d'ouvrir la base données
-     */
-    void OpenDatabase();
-
-    /**
-     * @brief CloseDatabase
-     * Permet de fermer la base données
-     */
-    void CloseDatabase();
 
     /**
      * @brief InsertProduit
@@ -199,7 +191,7 @@ public:
      * Permet de savoir si un utilisateur est présent.
      * Si l'utilisateur est déjà présent il ne sera pas créé. Si non présent l'utilisateur sera crée
      * @param login
-     * @return Faux = Non Présent / Vrai = Présent
+     * @return Faux = Non Présent / Vrai = Présent (Bool)
      */
     bool PresenceUtilisateur(QString login);
 

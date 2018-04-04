@@ -12,16 +12,6 @@ Database::Database()
 
 }
 
-void Database::OpenDatabase()
-{
-    m_bdd.open();
-}
-
-void Database::CloseDatabase()
-{
-    m_bdd.close();
-}
-
 void Database::CreateDatabase()
 {
     m_bdd = QSqlDatabase::addDatabase("QSQLITE");

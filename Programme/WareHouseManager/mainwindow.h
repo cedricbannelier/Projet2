@@ -200,6 +200,14 @@ private slots:
      */
     void on_tabWidget_tabBarClicked();
 
+    /**
+     * @brief on_spinBoxTaillePolice_valueChanged
+     * Permet de changer en temps réel la taille de la tableview
+     */
+    void on_spinBoxTaillePolice_valueChanged();
+
+    void on_pushButtonModifier_clicked();
+
 private:
 
     /**
@@ -220,7 +228,10 @@ private:
      */
     Ui::MainWindow *ui;
 
-    //Création de la bdd de type Database
+    /**
+     * @brief bdd
+     * Création de la variable bdd pour pouvoir appeler les fonctions de la classe database
+     */
     Database bdd;
 
     /**

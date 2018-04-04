@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1008</width>
+    <width>986</width>
     <height>575</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(244, 244, 244);</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -61,7 +61,7 @@
         <height>25</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <layout class="QHBoxLayout" name="horizontalLayoutConsulterStock">
        <item>
         <widget class="QLabel" name="labelTaillePoliceTableView">
          <property name="text">
@@ -100,7 +100,7 @@ background-color: rgb(255, 255, 255);</string>
         <height>451</height>
        </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_13">
+      <layout class="QVBoxLayout" name="verticalLayoutConsulterStockDroite">
        <item>
         <widget class="QGroupBox" name="groupBoxRechercheParArticle">
          <property name="font">
@@ -121,7 +121,7 @@ background-color: rgb(255, 255, 255);</string>
             <height>80</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
+          <layout class="QVBoxLayout" name="verticalLayoutConsulterStockRart">
            <item>
             <widget class="QLineEdit" name="lineEditRechercheArticle">
              <property name="placeholderText">
@@ -170,7 +170,7 @@ background-color: rgb(255, 255, 255);</string>
             <height>80</height>
            </rect>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_12">
+          <layout class="QVBoxLayout" name="verticalLayoutConsulterStockRlib">
            <item>
             <widget class="QLineEdit" name="lineEditRechercheLibelle">
              <property name="placeholderText">
@@ -608,7 +608,7 @@ background-color: rgb(255, 255, 255);</string>
        <rect>
         <x>20</x>
         <y>10</y>
-        <width>481</width>
+        <width>471</width>
         <height>331</height>
        </rect>
       </property>
@@ -751,7 +751,7 @@ background-color: rgb(255, 255, 255);</string>
        <rect>
         <x>20</x>
         <y>20</y>
-        <width>471</width>
+        <width>551</width>
         <height>241</height>
        </rect>
       </property>
@@ -871,13 +871,26 @@ background-color: rgb(255, 255, 255);</string>
         </item>
        </layout>
       </widget>
+      <widget class="QPushButton" name="pushButtonModifier">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>30</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Modifier</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="tabReceptionCommande">
      <attribute name="title">
       <string>Réception commande</string>
      </attribute>
-     <widget class="QGroupBox" name="groupBox_2">
+     <widget class="QGroupBox" name="groupBoxReceptionCommande">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -963,7 +976,118 @@ background-color: rgb(255, 255, 255);</string>
            </widget>
           </item>
           <item row="4" column="2">
-           <widget class="QCalendarWidget" name="calendarWidget"/>
+           <widget class="QCalendarWidget" name="calendarWidget">
+            <property name="palette">
+             <palette>
+              <active>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </active>
+              <inactive>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </inactive>
+              <disabled>
+               <colorrole role="Button">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Base">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+               <colorrole role="Window">
+                <brush brushstyle="SolidPattern">
+                 <color alpha="255">
+                  <red>150</red>
+                  <green>150</green>
+                  <blue>150</blue>
+                 </color>
+                </brush>
+               </colorrole>
+              </disabled>
+             </palette>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(150, 150, 150);</string>
+            </property>
+            <property name="minimumDate">
+             <date>
+              <year>2017</year>
+              <month>9</month>
+              <day>14</day>
+             </date>
+            </property>
+            <property name="gridVisible">
+             <bool>true</bool>
+            </property>
+            <property name="navigationBarVisible">
+             <bool>true</bool>
+            </property>
+            <property name="dateEditEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2">
            <widget class="QComboBox" name="comboBoxFournisseur">
@@ -1392,7 +1516,7 @@ background-color: rgb(255, 255, 255);
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1008</width>
+     <width>986</width>
      <height>21</height>
     </rect>
    </property>

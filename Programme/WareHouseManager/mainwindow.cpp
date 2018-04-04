@@ -80,27 +80,6 @@ void MainWindow::on_pushButtonCreationUtilisateur_clicked()
      }
 }
 
-void MainWindow::on_pushButtonValidationModification_clicked()
-{
-    Article* article = new Article(ui->lineEditModificationCodeArticle->text().toUpper(),
-                                   ui->lineEditModificationDesignationArticle->text(),
-                                   ui->lineEditModificationPoidsArticle->text().toInt(),
-                                   ui->lineEditModificationEmplacementArticle->text(),
-                                   ui->comboBoxModifierDimensionEmballage->currentText());
-
-    if (ui->lineEditModificationDesignationArticle->text().isEmpty() ||
-        ui->lineEditModificationPoidsArticle->text().isEmpty() ||
-        ui->lineEditModificationEmplacementArticle->text().isEmpty())
-    {
-        QMessageBox::warning(this, "Warning", "Veuillez saisir tous les champs",QMessageBox::Ok);
-    }
-    else
-    {
-         bdd.UpdateProduit(*article);
-         QMessageBox::information(this, "Information", "La modification a été faite",QMessageBox::Ok);
-    }
-}
-
 void MainWindow::on_boutonAjoutEmballage_clicked()
 {
     Emballage* nouvelEmballage = new Emballage(ui->comboBoxTypeEmballage->currentText(),
@@ -139,8 +118,6 @@ void MainWindow::miseAJour()
 
 void MainWindow::on_butonAjoutFournisseur_clicked()
 {
-    std::cout << "MODE DEBUG : Dans la methode ajouter un fournisseur mainwindow.CPP" << std::endl;
-
     Fournisseur* nouvelFournisseur = new Fournisseur(ui->lineEditAjoutFournisseur->text().toUpper());
 
     if(ui->lineEditAjoutFournisseur->text().toUpper() == NULL)
@@ -280,6 +257,7 @@ void MainWindow::on_tabWidget_currentChanged()
     if(user.GetDroit() == LOGISTICIEN)
     {
         ui->tabModifier->setDisabled(true);
+        ui->pushButtonModifier->setDisabled(true);
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
         ui->tabSupprimerArticle->setDisabled(true);
@@ -297,6 +275,9 @@ void MainWindow::on_tabWidget_currentChanged()
 
     bdd.ListeDesUtilisateurs(&this->modalUtilisateur);
     ui->comboBoxUtilisateur->setModel(&this->modalUtilisateur);
+
+    ui->calendarWidget->setMaximumDate(QDate::currentDate());
+    ui->calendarWidget->setGridVisible(true);
 }
 
 QString MainWindow::dateDuJour()
@@ -418,4 +399,53 @@ void MainWindow::on_tabWidget_tabBarClicked()
 {
    on_ButonAfficheStockComplet_clicked();
    miseAJour();
+   ui->afficheDesignationArticle->setReadOnly(true);
+   ui->afficheEmballageArticle->setReadOnly(true);
+   ui->afficheEmplacementArticle->setReadOnly(true);
+   ui->affichePoidsArticle->setReadOnly(true);
+
+   ui->afficheDesignationArticle->setStyleSheet("background: #f4f4f4");
+   ui->afficheEmballageArticle->setStyleSheet("background: #f4f4f4");
+   ui->afficheEmplacementArticle->setStyleSheet("background: #f4f4f4");
+   ui->affichePoidsArticle->setStyleSheet("background: #f4f4f4");
+}
+
+void MainWindow::on_spinBoxTaillePolice_valueChanged()
+{
+    on_ButonAfficheStockComplet_clicked();
+}
+
+void MainWindow::on_pushButtonModifier_clicked()
+{
+    ui->afficheDesignationArticle->setReadOnly(false);
+    ui->afficheEmballageArticle->setReadOnly(false);
+    ui->afficheEmplacementArticle->setReadOnly(false);
+    ui->affichePoidsArticle->setReadOnly(false);
+
+    ui->afficheDesignationArticle->setStyleSheet("background: lightgreen");
+    ui->afficheEmballageArticle->setStyleSheet("background: lightgreen");
+    ui->afficheEmplacementArticle->setStyleSheet("background: lightgreen");
+    ui->affichePoidsArticle->setStyleSheet("background: lightgreen");
+
+}
+
+void MainWindow::on_pushButtonValidationModification_clicked()
+{
+    Article* article = new Article(ui->lineEditModificationCodeArticle->text().toUpper(),
+                                   ui->lineEditModificationDesignationArticle->text(),
+                                   ui->lineEditModificationPoidsArticle->text().toInt(),
+                                   ui->lineEditModificationEmplacementArticle->text(),
+                                   ui->comboBoxModifierDimensionEmballage->currentText());
+
+    if (ui->lineEditModificationDesignationArticle->text().isEmpty() ||
+        ui->lineEditModificationPoidsArticle->text().isEmpty() ||
+        ui->lineEditModificationEmplacementArticle->text().isEmpty())
+    {
+        QMessageBox::warning(this, "Warning", "Veuillez saisir tous les champs",QMessageBox::Ok);
+    }
+    else
+    {
+         bdd.UpdateProduit(*article);
+         QMessageBox::information(this, "Information", "La modification a été faite",QMessageBox::Ok);
+    }
 }
