@@ -51,7 +51,7 @@ public:
     /**
      * @brief CreateDatabase
      * Permet la création des tables. Les tables seront créées dans le repetoire courant
-     * Les tables sont créées dès le premier lancement.
+     * Les tables sont créées dès le premier lancement dans le répertoire de l'exécutable.
      * Le fichier est nommé : warehousedb.db
      */
     void CreateDatabase();

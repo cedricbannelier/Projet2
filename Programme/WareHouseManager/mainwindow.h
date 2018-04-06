@@ -122,7 +122,7 @@ private slots:
 
     /**
      * @brief on_BoutonExportExcel_clicked
-     * Permet d'exporter le stock dans un fichier CSV
+     * Permet d'exporter le stock dans un fichier CSV qui sera dans le répertoire de l'exécutable
      */
     void on_BoutonExportExcel_clicked();
 
@@ -176,12 +176,6 @@ private slots:
     void on_comboBoxCodeArticle_currentIndexChanged();
 
     /**
-     * @brief on_comboBoxModifierArticle_currentIndexChanged
-     * Lors de la selection d'un élement dans la combox, les linesedits se remplissent
-     */
-    void on_comboBoxModifierArticle_currentIndexChanged();
-
-    /**
      * @brief on_pushButtonSupprimerArticle_clicked
      * Permet de supprimer un article
      */
@@ -206,6 +200,10 @@ private slots:
      */
     void on_spinBoxTaillePolice_valueChanged();
 
+    /**
+     * @brief on_pushButtonModifier_clicked
+     * Permet de deverouiller les champs suivant les droits pour la modification
+     */
     void on_pushButtonModifier_clicked();
 
 private:

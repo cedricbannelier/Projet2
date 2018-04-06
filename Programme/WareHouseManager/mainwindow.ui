@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(244, 244, 244);</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -599,152 +599,9 @@ background-color: rgb(255, 255, 255);</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="tabModifier">
-     <attribute name="title">
-      <string>Modifier</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBoxModifier">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>471</width>
-        <height>331</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="title">
-       <string>Modifier</string>
-      </property>
-      <widget class="QWidget" name="gridLayoutWidget_2">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>20</y>
-         <width>441</width>
-         <height>44</height>
-        </rect>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="QLabel" name="labelCodeArticleModifier">
-          <property name="text">
-           <string>Code article</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QComboBox" name="comboBoxModifierArticle">
-          <property name="editable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="verticalLayoutWidget_5">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>70</y>
-         <width>441</width>
-         <height>241</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <layout class="QGridLayout" name="gridLayout_7">
-          <item row="1" column="0">
-           <widget class="QLabel" name="ModificationDesignation">
-            <property name="text">
-             <string>Désignation</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEditModificationDesignationArticle"/>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="ModificationPoids">
-            <property name="text">
-             <string>Poids</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineEditModificationPoidsArticle">
-            <property name="inputMask">
-             <string/>
-            </property>
-            <property name="frame">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEditModificationEmplacementArticle"/>
-          </item>
-          <item row="5" column="1">
-           <widget class="QComboBox" name="comboBoxModifierDimensionEmballage"/>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="ModificationEmplacement">
-            <property name="text">
-             <string>Emplacement</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="labelModifierDimensionEmballage">
-            <property name="text">
-             <string>Dimension L * l * h</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="ModificationCodeArticle">
-            <property name="text">
-             <string>Code article</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineEditModificationCodeArticle"/>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButtonValidationModification">
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(34, 86, 131);
-background-color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string>Valider</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </widget>
     <widget class="QWidget" name="tabConsulterFicheArticle">
      <attribute name="title">
-      <string>Consulter fiche article</string>
+      <string>Consulter/Modifier fiche article</string>
      </attribute>
      <widget class="QGroupBox" name="groupBoxConsulterArticle">
       <property name="geometry">
@@ -752,7 +609,7 @@ background-color: rgb(255, 255, 255);</string>
         <x>20</x>
         <y>20</y>
         <width>551</width>
-        <height>241</height>
+        <height>271</height>
        </rect>
       </property>
       <property name="font">
@@ -880,8 +737,43 @@ background-color: rgb(255, 255, 255);</string>
          <height>23</height>
         </rect>
        </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <italic>true</italic>
+         <bold>true</bold>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+       </property>
        <property name="text">
         <string>Modifier</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonValidationModification">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>240</y>
+         <width>431</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(34, 86, 131);
+background-color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Valider Modification</string>
        </property>
       </widget>
      </widget>
@@ -1122,7 +1014,7 @@ background-color: rgb(255, 255, 255);</string>
     </widget>
     <widget class="QWidget" name="tabExpedition">
      <attribute name="title">
-      <string>Expédition</string>
+      <string>Expédition commande</string>
      </attribute>
      <widget class="QGroupBox" name="groupBox_3">
       <property name="geometry">
@@ -1632,17 +1524,55 @@ background-color: rgb(255, 255, 255);
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>tabWidget</tabstop>
-  <tabstop>tableView</tabstop>
-  <tabstop>lineEditModificationDesignationArticle</tabstop>
-  <tabstop>lineEditModificationPoidsArticle</tabstop>
-  <tabstop>lineEditModificationEmplacementArticle</tabstop>
-  <tabstop>comboBoxModifierDimensionEmballage</tabstop>
-  <tabstop>pushButtonValidationModification</tabstop>
+  <tabstop>spinBoxTaillePolice</tabstop>
+  <tabstop>ButonAfficheStockComplet</tabstop>
+  <tabstop>lineEditRechercheArticle</tabstop>
+  <tabstop>pushButtonRechercherArticle</tabstop>
+  <tabstop>lineEditRechercheLibelle</tabstop>
+  <tabstop>pushButtonRechercherLibelle</tabstop>
+  <tabstop>BoutonExportExcel</tabstop>
+  <tabstop>comboBoxTypeEmballage</tabstop>
+  <tabstop>comboBoxHauteurEmballage</tabstop>
+  <tabstop>comboBoxLargeurEmballage</tabstop>
+  <tabstop>comboBoxLongueurEmballage</tabstop>
+  <tabstop>boutonAjoutEmballage</tabstop>
+  <tabstop>lineEditAjoutCodeArticle</tabstop>
+  <tabstop>lineEditAjoutDesignationArticle</tabstop>
+  <tabstop>lineEditAjoutPoidsArticle</tabstop>
+  <tabstop>lineEditAjoutEmplacementArticle</tabstop>
+  <tabstop>comboBoxDimensionEmballage</tabstop>
+  <tabstop>boutonAjoutArticle</tabstop>
+  <tabstop>lineEditAjoutFournisseur</tabstop>
+  <tabstop>butonAjoutFournisseur</tabstop>
+  <tabstop>comboBoxCodeArticle</tabstop>
   <tabstop>afficheCodeArticle</tabstop>
   <tabstop>afficheDesignationArticle</tabstop>
   <tabstop>affichePoidsArticle</tabstop>
   <tabstop>afficheEmplacementArticle</tabstop>
   <tabstop>afficheEmballageArticle</tabstop>
+  <tabstop>pushButtonModifier</tabstop>
+  <tabstop>pushButtonValidationModification</tabstop>
+  <tabstop>comboBoxCodeArticleReceptionCommande</tabstop>
+  <tabstop>lineEditQteLivree</tabstop>
+  <tabstop>lineEditNumeroLivraison</tabstop>
+  <tabstop>comboBoxFournisseur</tabstop>
+  <tabstop>calendarWidget</tabstop>
+  <tabstop>BoutonValiderReception</tabstop>
+  <tabstop>comboBoxCodeArticleExpedition</tabstop>
+  <tabstop>lineEditQuantiteExpedition</tabstop>
+  <tabstop>lineEditNumeroExpedition</tabstop>
+  <tabstop>BoutonExpedition</tabstop>
+  <tabstop>lineEditeCreationLogin</tabstop>
+  <tabstop>lineEditeCreationMotDePasse</tabstop>
+  <tabstop>comboBoxChoixDroitUtilisateur</tabstop>
+  <tabstop>pushButtonCreationUtilisateur</tabstop>
+  <tabstop>comboBoxUtilisateur</tabstop>
+  <tabstop>comboBoxChoixDroitUtilisateurModif</tabstop>
+  <tabstop>pushButtonModificationDroitUtilisateur</tabstop>
+  <tabstop>comboBoxArticleSupprimer</tabstop>
+  <tabstop>pushButtonSupprimerArticle</tabstop>
+  <tabstop>BoutonImport</tabstop>
+  <tabstop>tableView</tabstop>
  </tabstops>
  <resources>
   <include location="icone.qrc"/>

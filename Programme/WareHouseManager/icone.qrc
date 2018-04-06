@@ -9,5 +9,6 @@
         <file>icones/AddUser.png</file>
         <file>icones/AddProduct.png</file>
         <file>icones/AjoutEmballage.png</file>
+        <file>icones/crayon.png</file>
     </qresource>
 </RCC>

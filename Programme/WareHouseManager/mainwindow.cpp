@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->pushButtonModifier->setIcon(QIcon(":/icones/crayon.png"));
 }
 
 MainWindow::~MainWindow()
@@ -186,7 +187,7 @@ void MainWindow::on_BoutonExportExcel_clicked()
     int colonnes = modal.columnCount();
 
     out << "Qte Phy Total;" << "Qte Livree;" << "Qte Exp;" << "Reference;"
-        << "Libelle;" << "Poids unitaire;" << "\n";
+        << "Libelle;" << "Poids unitaire;" << "Emplacement;" << "\n";
 
     for (int i = 0; i < lignes; i++)
     {
@@ -256,7 +257,6 @@ void MainWindow::on_tabWidget_currentChanged()
 {
     if(user.GetDroit() == LOGISTICIEN)
     {
-        ui->tabModifier->setDisabled(true);
         ui->pushButtonModifier->setDisabled(true);
         ui->tabCreationUtilisateur->setDisabled(true);
         ui->tabAjouter->setDisabled(true);
@@ -266,7 +266,6 @@ void MainWindow::on_tabWidget_currentChanged()
     bdd.ListeDesArticlesEnBdd(&this->modalArticle);
     ui->comboBoxCodeArticle->setModel(&this->modalArticle);
     ui->comboBoxCodeArticleReceptionCommande->setModel(&this->modalArticle);
-    ui->comboBoxModifierArticle->setModel(&this->modalArticle);
     ui->comboBoxCodeArticleExpedition->setModel(&this->modalArticle);
     ui->comboBoxArticleSupprimer->setModel(&this->modalArticle);
 
@@ -275,6 +274,8 @@ void MainWindow::on_tabWidget_currentChanged()
 
     bdd.ListeDesUtilisateurs(&this->modalUtilisateur);
     ui->comboBoxUtilisateur->setModel(&this->modalUtilisateur);
+
+//    ui->comboBoxModifierDimensionEmballage->setModel(&this->modalArticle);
 
     ui->calendarWidget->setMaximumDate(QDate::currentDate());
     ui->calendarWidget->setGridVisible(true);
@@ -347,20 +348,6 @@ void MainWindow::on_comboBoxCodeArticle_currentIndexChanged()
     ui->afficheEmballageArticle->setText(articleEnBdd->GetEmballageArticle());
 }
 
-void MainWindow::on_comboBoxModifierArticle_currentIndexChanged()
-{
-     QString codeArticle = ui->comboBoxModifierArticle->currentText();
-
-     Article * articleEnBdd = bdd.AfficheUnProduit(codeArticle);
-
-     ui->lineEditModificationCodeArticle->setText(articleEnBdd->GetCodeArticle());
-     ui->lineEditModificationDesignationArticle->setText(articleEnBdd->GetDesignationArticle());
-     ui->lineEditModificationPoidsArticle->setText(QString::number(articleEnBdd->GetPoidsArticle()));
-     ui->lineEditModificationEmplacementArticle->setText(articleEnBdd->GetEmplacementArticle());
-     ui->comboBoxModifierDimensionEmballage->addItem(articleEnBdd->GetEmballageArticle());
-
-}
-
 void MainWindow::on_pushButtonSupprimerArticle_clicked()
 {
     QString articleSaisieUtilisateur = ui->comboBoxArticleSupprimer->currentText();
@@ -418,12 +405,10 @@ void MainWindow::on_spinBoxTaillePolice_valueChanged()
 void MainWindow::on_pushButtonModifier_clicked()
 {
     ui->afficheDesignationArticle->setReadOnly(false);
-    ui->afficheEmballageArticle->setReadOnly(false);
     ui->afficheEmplacementArticle->setReadOnly(false);
     ui->affichePoidsArticle->setReadOnly(false);
 
     ui->afficheDesignationArticle->setStyleSheet("background: lightgreen");
-    ui->afficheEmballageArticle->setStyleSheet("background: lightgreen");
     ui->afficheEmplacementArticle->setStyleSheet("background: lightgreen");
     ui->affichePoidsArticle->setStyleSheet("background: lightgreen");
 
@@ -431,15 +416,15 @@ void MainWindow::on_pushButtonModifier_clicked()
 
 void MainWindow::on_pushButtonValidationModification_clicked()
 {
-    Article* article = new Article(ui->lineEditModificationCodeArticle->text().toUpper(),
-                                   ui->lineEditModificationDesignationArticle->text(),
-                                   ui->lineEditModificationPoidsArticle->text().toInt(),
-                                   ui->lineEditModificationEmplacementArticle->text(),
-                                   ui->comboBoxModifierDimensionEmballage->currentText());
+    Article* article = new Article(ui->comboBoxCodeArticle->currentText(),
+                                   ui->afficheDesignationArticle->text(),
+                                   ui->affichePoidsArticle->text().toInt(),
+                                   ui->afficheEmplacementArticle->text(),
+                                   ui->afficheEmballageArticle->text());
 
-    if (ui->lineEditModificationDesignationArticle->text().isEmpty() ||
-        ui->lineEditModificationPoidsArticle->text().isEmpty() ||
-        ui->lineEditModificationEmplacementArticle->text().isEmpty())
+    if (ui->afficheDesignationArticle->text().isEmpty() ||
+        ui->affichePoidsArticle->text().isEmpty() ||
+        ui->afficheEmplacementArticle->text().isEmpty())
     {
         QMessageBox::warning(this, "Warning", "Veuillez saisir tous les champs",QMessageBox::Ok);
     }
