@@ -41,4 +41,3 @@ void Emballage::SetLongueurEmballage(int longueurEmballage)
 {
     this->longueurEmballage = longueurEmballage;
 }
-

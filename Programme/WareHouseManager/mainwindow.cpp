@@ -17,6 +17,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    this->setWindowIcon(QIcon(":/warehouse.png"));
     ui->setupUi(this);
     ui->pushButtonModifier->setIcon(QIcon(":/icones/crayon.png"));
 }
@@ -99,6 +100,7 @@ void MainWindow::on_ButonAfficheStockComplet_clicked()
 }
 
 //Permet de selectionner tous les types d'emballage et affiche l'ID
+//A revoir
 void MainWindow::miseAJour()
 {
     QSqlQuery query;

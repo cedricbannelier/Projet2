@@ -32,17 +32,21 @@ public:
 
     /**
      * @brief autorisation
+     * Permet de savoir si le login et le mot de passe est dans la base de données.
+     * Si non présent il sera impossible de se connecter
      * @return
      */
     bool autorisation();
 
     /**
      * @brief user
+     * Création de la variable user de type Utilisateur
      */
     Utilisateur user;
 
     /**
      * @brief lireFichier
+     * Permet de lire le fichier pour récuperer le login dans le fichier
      */
     void lireFichier();
 
@@ -51,11 +55,13 @@ private:
 
     /**
      * @brief bdd
+     * Création d'une variable bdd de type database
      */
     Database bdd;
 
     /**
      * @brief enregistrementLogin
+     * Permet de faire l'enregistrement du login si la case est cochée
      */
     void enregistrementLogin();
 
