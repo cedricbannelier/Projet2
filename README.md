@@ -1,5 +1,10 @@
 # Projet 2
-Répertoire Planning : Planning GANTT en version PDF et PNG
+Répertoire
++Analyse : Dossier d'analyse
++Documents : Documents divers
++Doxygen : Documents de l'application
++Planning : Planning GANTT en version PDF et PNG
++Programme : CPP et H du programme
 
 
 
