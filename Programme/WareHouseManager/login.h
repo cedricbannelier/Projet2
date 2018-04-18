@@ -19,7 +19,7 @@ class Login;
 }
 
 /**
- * @brief Classe Login qui hérite de QDialog permet de gerer la fenetre login
+ * @brief Classe Login qui hérite de QDialog permet de gérer la fenêtre login
  */
 
 class Login : public QDialog
@@ -32,7 +32,7 @@ public:
 
     /**
      * @brief autorisation
-     * Permet de savoir si le login et le mot de passe est dans la base de données.
+     * Permet de savoir si le login et le mot de passe sont dans la base de données.
      * Si non présent il sera impossible de se connecter
      * @return
      */
@@ -46,7 +46,7 @@ public:
 
     /**
      * @brief lireFichier
-     * Permet de lire le fichier pour récuperer le login dans le fichier
+     * Permet de lire le fichier pour récupérer le login dans le fichier
      */
     void lireFichier();
 

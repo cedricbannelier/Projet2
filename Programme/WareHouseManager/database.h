@@ -3,7 +3,7 @@
 
 /**
   * @file database.h
-  * @brief Gestion de toutes les requetes SQL
+  * @brief Gestion de toutes les requêtes SQL
   * @author Cédric BANNELIER
   * @version 0.1b
 **/
@@ -18,8 +18,8 @@
 #include "livraison.h"
 
 /**
- * @brief Classe Database permettant de gerer les requetes SQL.
- * Toutes les requetes SQL sont ici. Cela permet une meilleure gestion
+ * @brief Classe Database permettant de gérer les requêtes SQL.
+ * Toutes les requêtes SQL sont ici. Cela permet une meilleure gestion.
  */
 class Database
 {
@@ -32,10 +32,10 @@ public:
 
     /**
      * @brief CreationAdministrateur
-     * Permet l'insertion d'un utilisateur par défaut dans la base de données
+     * Permet l'insertion d'un utilisateur par défaut dans la base de données.
      * Le login est : ad
      * Le mot de passe est : ad
-     * Il sera crée au premier démarrage de l'application
+     * Il sera créé au premier démarrage de l'application.
      */
     void CreationAdministrateur();
 
@@ -43,14 +43,14 @@ public:
      * @brief VuStockModal
      * Permet l'affichage de tout le stock qui est en base données.
      * Affiche la quantité en stock (Quantité livrée - quantité expédiée).
-     * Affiche le code article, la designation, ...
+     * Affiche le code article, la désignation, ...
      * @param modal
      */
     void VuStockModal(QSqlQueryModel *modal);
 
     /**
      * @brief CreateDatabase
-     * Permet la création des tables. Les tables seront créées dans le repetoire courant
+     * Permet la création des tables. Les tables seront créées dans le répertoire courant
      * Les tables sont créées dès le premier lancement dans le répertoire de l'exécutable.
      * Le fichier est nommé : warehousedb.db
      */
@@ -65,14 +65,14 @@ public:
 
     /**
      * @brief UpdateProduit
-     * Permet de mettre à jour un produit de la base de données
+     * Permet de mettre à jour un produit de la base de données.
      * @param produit
      */
     void UpdateProduit(Article &produit);
 
     /**
      * @brief AfficheUnProduit
-     * Permet de récuperer les informations d'un article
+     * Permet de récupérer les informations d'un article.
      * @param codeArticle
      * @return l'objet article
      */
@@ -80,7 +80,7 @@ public:
 
     /**
      * @brief GetDroitUtilisateur
-     * Permet de récuperer les droits et le login d'un utilisateur
+     * Permet de récupérer les droits et le login d'un utilisateur.
      * @param nouvelUtilisateur
      * @return l'objet utilisateur
      */
@@ -95,7 +95,7 @@ public:
 
     /**
      * @brief RecupererIdArticle
-     * Permet de récuperer l'ID d'un article
+     * Permet de récupérer l'ID d'un article
      * @param codeArticle
      * @return l'ID de l'article
      */
@@ -103,7 +103,7 @@ public:
 
     /**
      * @brief RecupererIdFournisseur
-     * Recupere l'ID du fournisseur
+     * Permet de récupérer l'ID du fournisseur
      * @param nomFournisseur
      * @return l'ID du fournisseur
      */
@@ -166,14 +166,14 @@ public:
 
     /**
      * @brief ListeDesArticlesEnBdd
-     * Permet de selectionner les articles en base de données
+     * Permet de sélectionner les articles en base de données
      * @param modal
      */
     void ListeDesArticlesEnBdd(QSqlQueryModel *modal);
 
     /**
      * @brief ListeDesFournisseursEnBdd
-     * Permet de selectionner les fournisseurs en base de données
+     * Permet de sélectionner les fournisseurs en base de données
      * @param modal
      */
     void ListeDesFournisseursEnBdd(QSqlQueryModel *modal);
@@ -182,7 +182,7 @@ public:
      * @brief QantiteTotal
      * Permet de sélectionner la quantité total en stock (Quantité réceptionnée - Quantité livrée)
      * @param idArticle
-     * @return La quantité total (Quantité livrée - Quantité expédiée)
+     * @return La quantité total (Quantité livrée - Quantité expédiée) (int)
      */
     int QantiteTotal(int idArticle);
 
@@ -197,7 +197,7 @@ public:
 
     /**
      * @brief ListeDesUtilisateurs
-     * Récupere la liste des utilisateurs
+     * Permet de récupérer la liste des utilisateurs
      * Envoi les données dans un model
      * @param modal
      */
@@ -234,7 +234,7 @@ public:
     /**
      * @brief SupprimerArticle
      * Permet de supprimer un article de la base données.
-     * L'article ne sera supprimée que si aucune livraison n'a été faite.
+     * L'article ne sera supprimé que si aucune livraison n'a été faite.
      * @param codeArticle
      * @return
      */
@@ -242,7 +242,7 @@ public:
 
     /**
      * @brief AjoutFournisseurImport
-     * Import d'un fichier TEXT de nom de fournisseur
+     * Permet de faire un import d'un fichier en format TEXT de nom de fournisseur
      * @param listeFournisseursVector
      */
     void AjoutFournisseurImport(QVector <QString> listeFournisseursVector);

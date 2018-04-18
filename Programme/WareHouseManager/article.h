@@ -11,7 +11,7 @@
 #include <QString>
 
 /**
- * @brief Classe Article permettant de gerer les articles
+ * @brief Classe Article permettant de gérer les articles
  */
 class Article
 {
@@ -43,13 +43,13 @@ public:
 
     /**
      * @brief GetDesignationArticle
-     * @return Retourne la designation de l'article (QString)
+     * @return Retourne la désignation de l'article (QString)
      */
     QString GetDesignationArticle();
 
     /**
      * @brief GetPoidsArticle
-     * @return Retourne le poids de l'artciel (Int)
+     * @return Retourne le poids de l'article (Int)
      */
     int GetPoidsArticle();
 

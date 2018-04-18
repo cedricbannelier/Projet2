@@ -11,7 +11,7 @@
 #include <QString>
 
 /**
- * @brief Classe Utilisateur permettant de gerer les utilisateurs
+ * @brief Classe Utilisateur permettant de gérer les utilisateurs
  */
 class Utilisateur
 {

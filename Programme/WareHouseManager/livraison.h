@@ -11,7 +11,7 @@
 #include <QString>
 
 /**
- * @brief Classe Livraison permettant de gerer les livraisons
+ * @brief Classe Livraison permettant de gérer les livraisons
  */
 class Livraison
 {

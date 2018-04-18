@@ -11,7 +11,7 @@
 #include <QString>
 
 /**
- * @brief Classe Fournisseur permettant de gerer les fournisseurs
+ * @brief Classe Fournisseur permettant de gérer les fournisseurs
  */
 class Fournisseur
 {
