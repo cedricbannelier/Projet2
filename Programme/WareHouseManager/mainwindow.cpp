@@ -218,7 +218,7 @@ void MainWindow::on_BoutonExpedition_clicked()
     int quantiteExpedition = ui->lineEditQuantiteExpedition->text().toInt();
     QString numeroExpedition = ui->lineEditNumeroExpedition->text();
     int idArticle = bdd.RecupererIdArticle(ui->comboBoxCodeArticleExpedition->currentText());
-    int quantiteEnStock = bdd.QantiteTotal(idArticle);
+    int quantiteEnStock = bdd.QuantiteTotal(idArticle);
     QString message = QString("La quantité saisie doit être inf. à la quanité en stock. Il reste que : %1 en stock").arg(quantiteEnStock);
 
     if (ui->lineEditQuantiteExpedition->text().isEmpty() ||

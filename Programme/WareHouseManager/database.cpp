@@ -327,7 +327,7 @@ bool Database::FournisseurPresentDansLaBdd(QString nomFournisseur)
      }
 }
 
-int Database::QantiteTotal(int idArticle)
+int Database::QuantiteTotal(int idArticle)
 {
     QSqlQuery query(m_bdd);
 
