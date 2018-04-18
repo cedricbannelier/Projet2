@@ -37,7 +37,7 @@ void MainWindow::on_boutonAjoutArticle_clicked()
 {
     Article* article = new Article(ui->lineEditAjoutCodeArticle->text().toUpper(),
                                    ui->lineEditAjoutDesignationArticle->text(),
-                                   ui->lineEditAjoutPoidsArticle->text().toInt(),
+                                   ui->lineEditAjoutPoidsArticle->text().toFloat(),
                                    ui->lineEditAjoutEmplacementArticle->text(),
                                    ui->comboBoxDimensionEmballage->currentText());
 
@@ -392,6 +392,7 @@ void MainWindow::on_tabWidget_tabBarClicked()
    ui->afficheEmballageArticle->setReadOnly(true);
    ui->afficheEmplacementArticle->setReadOnly(true);
    ui->affichePoidsArticle->setReadOnly(true);
+   ui->affichePoidsArticle->setText("");
 
    ui->afficheDesignationArticle->setStyleSheet("background: #f4f4f4");
    ui->afficheEmballageArticle->setStyleSheet("background: #f4f4f4");
@@ -420,7 +421,7 @@ void MainWindow::on_pushButtonValidationModification_clicked()
 {
     Article* article = new Article(ui->comboBoxCodeArticle->currentText(),
                                    ui->afficheDesignationArticle->text(),
-                                   ui->affichePoidsArticle->text().toInt(),
+                                   ui->affichePoidsArticle->text().toFloat(),
                                    ui->afficheEmplacementArticle->text(),
                                    ui->afficheEmballageArticle->text());
 

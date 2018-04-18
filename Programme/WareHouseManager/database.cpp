@@ -30,7 +30,7 @@ void Database::CreateDatabase()
                "idArticle INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
                "codeArticle TEXT NOT NULL,"
                "designationArticle TEXT NOT NULL,"
-               "poidsArticle REAL NOT NULL,"
+               "poidsArticle FLOAT NOT NULL,"
                "emplacementArticle TEXT NOT NULL,"
                "idEmballage INTEGER,"
                "FOREIGN KEY(`idEmballage`) REFERENCES `emballage`(`idEmballage`)"

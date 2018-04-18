@@ -11,7 +11,7 @@
 #include <QString>
 
 /**
- * @brief Classe Emballage permettant de gerer les emballages
+ * @brief Classe Emballage permettant de gérer les emballages
  */
 
 class Emballage

@@ -3,7 +3,7 @@
 
 /**
   * @file mainwindow.h
-  * @brief fenetre principale de l'application
+  * @brief fenêtre principale de l'application
   * @author Cédric BANNELIER
   * @version 0.1b
 **/
@@ -58,8 +58,8 @@ public slots:
 
      /**
      * @brief on_actionSe_deconnecter_triggered
-     * En cours de developpement
-     * Permettra de pouvoir se deconnecter et de revenir à la page de login
+     * En cours de développement
+     * Permettra de pouvoir se déconnecter et de revenir à la page de login
      * @return
      */
     int on_actionSe_deconnecter_triggered();
@@ -82,7 +82,7 @@ private slots:
 
     /**
      * @brief on_pushButtonValidationModification_clicked
-     * Permet de valider les modidifications et de les envoyes dans la base de données
+     * Permet de valider les modidifications et de les envoyer dans la base de données
      * Modification possible :
      * Emplacement, Désignation, Poids
      */
@@ -96,7 +96,7 @@ private slots:
 
     /**
      * @brief on_ButonAfficheStockComplet_clicked
-     * Permet d'affiche tout le stock de la base de données dans un TabView
+     * Permet d'afficher tout le stock de la base de données dans un TabView
      */
     void on_ButonAfficheStockComplet_clicked();
 
@@ -109,7 +109,7 @@ private slots:
 
     /**
      * @brief on_butonAjoutFournisseur_clicked
-     * Permet d'ajouter une founisseur dans la base de données
+     * Permet d'ajouter un fournisseur dans la base de données
      * Demande uniquement un nom
      */
     void on_butonAjoutFournisseur_clicked();
@@ -140,14 +140,14 @@ private slots:
 
     /**
      * @brief on_tabWidget_currentChanged
-     * Test les droits de connection et grise les fonctionnalités en fonction des droits
+     * Teste les droits de connection et grise les fonctionnalités en fonction des droits
      * Permet aussi la mise à jour des combobox
      */
     void on_tabWidget_currentChanged();
 
     /**
      * @brief on_actionA_props_triggered
-     * Permet d'afficher une fenetre d'information sur le logiciel
+     * Permet d'afficher une fenêtre d'information sur le logiciel
      */
     void on_actionA_props_triggered();
 
@@ -165,13 +165,13 @@ private slots:
 
     /**
      * @brief on_pushButtonRechercherLibelle_clicked
-     * Permet de faire une recherche par libelle
+     * Permet de faire une recherche par libellé
      */
     void on_pushButtonRechercherLibelle_clicked();
 
     /**
      * @brief on_comboBoxCodeArticle_currentIndexChanged
-     * Lors de la selection d'un élement dans la combox, les linesedits se remplissent
+     * Lors de la sélection d'un élement dans la combox, les linesedits se remplissent
      */
     void on_comboBoxCodeArticle_currentIndexChanged();
 
@@ -189,7 +189,7 @@ private slots:
 
     /**
      * @brief on_tabWidget_tabBarClicked
-     * Lors du clique sur la tabbar, cela permet une mise à jour des combobox ainsi que
+     * Lors du clic sur la tabbar, cela permet une mise à jour des combobox ainsi que
      * sur la tabview d'affiche le stock directement
      */
     void on_tabWidget_tabBarClicked();
@@ -202,7 +202,7 @@ private slots:
 
     /**
      * @brief on_pushButtonModifier_clicked
-     * Permet de deverouiller les champs suivant les droits pour la modification
+     * Permet de déverouiller les champs suivants les droits pour la modification
      */
     void on_pushButtonModifier_clicked();
 

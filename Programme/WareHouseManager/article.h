@@ -11,7 +11,7 @@
 #include <QString>
 
 /**
- * @brief Classe Article permettant de gerer les articles
+ * @brief Classe Article permettant de gérer les articles
  */
 class Article
 {
@@ -32,7 +32,7 @@ public:
      * @param emplacementArticle
      * @param emballageArticle
      */
-    Article(QString codeArticle, QString designationArticle, int poidsArticle,
+    Article(QString codeArticle, QString designationArticle, float poidsArticle,
             QString emplacementArticle, QString emballageArticle);
 
     /**
@@ -43,15 +43,15 @@ public:
 
     /**
      * @brief GetDesignationArticle
-     * @return Retourne la designation de l'article (QString)
+     * @return Retourne la désignation de l'article (QString)
      */
     QString GetDesignationArticle();
 
     /**
      * @brief GetPoidsArticle
-     * @return Retourne le poids de l'artciel (Int)
+     * @return Retourne le poids de l'article (Int)
      */
-    int GetPoidsArticle();
+    float GetPoidsArticle();
 
     /**
      * @brief GetEmplacementArticle
@@ -81,7 +81,7 @@ public:
      * @brief SetPoidsArticle
      * @param poidsArticle
      */
-    void SetPoidsArticle(int poidsArticle);
+    void SetPoidsArticle(float poidsArticle);
     /**
      * @brief SetEmplacementArticle
      * @param emplacementArticle
@@ -107,7 +107,7 @@ private:
     /**
      * @brief poidsArticle
      */
-    int poidsArticle;
+    float poidsArticle;
     /**
      * @brief emplacementArticle
      */

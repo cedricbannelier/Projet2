@@ -30,7 +30,7 @@
      <string notr="true">background-color: rgb(244, 244, 244);</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tabConsulter">
      <property name="toolTip">
@@ -289,10 +289,10 @@ background-color: rgb(255, 255, 255);
           <item row="2" column="1">
            <widget class="QLineEdit" name="lineEditAjoutPoidsArticle">
             <property name="inputMask">
-             <string>0000,00</string>
+             <string>0000.00</string>
             </property>
             <property name="text">
-             <string>,</string>
+             <string>.</string>
             </property>
             <property name="placeholderText">
              <string>Poids unitaire</string>
@@ -680,10 +680,10 @@ background-color: rgb(255, 255, 255);</string>
         <item row="2" column="1">
          <widget class="QLineEdit" name="affichePoidsArticle">
           <property name="inputMask">
-           <string>0000,00</string>
+           <string>0000.00</string>
           </property>
           <property name="text">
-           <string>,</string>
+           <string>.</string>
           </property>
           <property name="readOnly">
            <bool>true</bool>
