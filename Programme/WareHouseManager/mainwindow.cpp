@@ -362,8 +362,8 @@ void MainWindow::on_pushButtonSupprimerArticle_clicked()
     }
     else
     {
-        QMessageBox::warning(this, "Suppression", "Vous avez une livraison attachée à cette article, "
-                                                  "l'article ne sera pas supprimée");
+        QMessageBox::warning(this, "Suppression", "Vous avez une livraison attachée à cet article, "
+                                                  "l'article ne sera pas supprimé");
     }
 }
 
