@@ -32,7 +32,7 @@ public:
      * @param emplacementArticle
      * @param emballageArticle
      */
-    Article(QString codeArticle, QString designationArticle, int poidsArticle,
+    Article(QString codeArticle, QString designationArticle, float poidsArticle,
             QString emplacementArticle, QString emballageArticle);
 
     /**
@@ -51,7 +51,7 @@ public:
      * @brief GetPoidsArticle
      * @return Retourne le poids de l'article (Int)
      */
-    int GetPoidsArticle();
+    float GetPoidsArticle();
 
     /**
      * @brief GetEmplacementArticle
@@ -81,7 +81,7 @@ public:
      * @brief SetPoidsArticle
      * @param poidsArticle
      */
-    void SetPoidsArticle(int poidsArticle);
+    void SetPoidsArticle(float poidsArticle);
     /**
      * @brief SetEmplacementArticle
      * @param emplacementArticle
@@ -107,7 +107,7 @@ private:
     /**
      * @brief poidsArticle
      */
-    int poidsArticle;
+    float poidsArticle;
     /**
      * @brief emplacementArticle
      */

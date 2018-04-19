@@ -7,6 +7,8 @@
 
 QT += sql
 
+RC_FILE = myiconapp.rc
+
 # QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -54,4 +56,5 @@ FORMS += \
 RESOURCES += \
     icone.qrc
 
-DISTFILES +=
+DISTFILES += \
+    myiconapp.rc

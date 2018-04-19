@@ -179,12 +179,12 @@ public:
     void ListeDesFournisseursEnBdd(QSqlQueryModel *modal);
 
     /**
-     * @brief QantiteTotal
+     * @brief QuantiteTotal
      * Permet de sélectionner la quantité total en stock (Quantité réceptionnée - Quantité livrée)
      * @param idArticle
      * @return La quantité total (Quantité livrée - Quantité expédiée) (int)
      */
-    int QantiteTotal(int idArticle);
+    int QuantiteTotal(int idArticle);
 
     /**
      * @brief PresenceUtilisateur

@@ -16,7 +16,7 @@ Article::Article()
  * @param emplacementArticle
  * @param emballageArticle
  */
-Article::Article(QString codeArticle, QString designationArticle, int poidsArticle, QString emplacementArticle, QString emballageArticle)
+Article::Article(QString codeArticle, QString designationArticle, float poidsArticle, QString emplacementArticle, QString emballageArticle)
 {
     this->codeArticle = codeArticle;
     this->designationArticle = designationArticle;
@@ -49,7 +49,7 @@ QString Article::GetDesignationArticle()
  * @return
  */
 
-int Article::GetPoidsArticle()
+float Article::GetPoidsArticle()
 {
     return this->poidsArticle;
 }
@@ -94,7 +94,7 @@ void Article::SetDesignationArticle(QString designationArticle)
  * @brief Article::SetPoidsArticle
  * @param poidsArticle
  */
-void Article::SetPoidsArticle(int poidsArticle)
+void Article::SetPoidsArticle(float poidsArticle)
 {
     this->poidsArticle = poidsArticle;
 }
